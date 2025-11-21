@@ -107,7 +107,7 @@ body {
 
 /* --- FILTER BAR --- */
 #filter-bar {
-    max-width: 1200px; margin: 30px auto; padding: 20px;
+    max-width: 400px; margin: 30px auto; padding: 20px;
     background: var(--glass-bg);
     border-radius: 12px;
     border: 1px solid var(--glass-border);
@@ -162,7 +162,7 @@ body {
 
 .product-info h3 {
     font-size: 1.1rem; margin: 15px 0 5px; color: var(--text-primary);
-    height: 2.4em; overflow: hidden;
+    height: 4.4em; overflow: hidden;
 }
 
 .price { font-size: 1.2rem; color: var(--accent); margin: 10px 0; }
