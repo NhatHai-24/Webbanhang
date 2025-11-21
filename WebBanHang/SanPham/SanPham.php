@@ -169,13 +169,20 @@ $(document).ready(function () {
     const $groups = $('.category-group');
     const $products = $('.product-card');
 
-    $groups.hide();
-    $('.category-group[data-category="Các sản phẩm nổi bật"]').show().find('.product-card').each(function (j) {
-        $(this).delay(j * 100).queue(function (next) {
+    // --- SỬA ĐỔI TẠI ĐÂY ---
+    // 1. Không dùng .hide() lúc đầu nữa
+    // 2. Hiển thị tất cả các nhóm ngay lập tức
+    $groups.show(); 
+
+    // 3. Thêm hiệu ứng hiện ra (class 'show') cho TẤT CẢ sản phẩm
+    $('.product-card').each(function (j) {
+        // Giảm thời gian delay xuống một chút (j * 50) để load nhanh hơn khi hiển thị tất cả
+        $(this).delay(j * 50).queue(function (next) {
             $(this).addClass('show');
             next();
         });
     });
+    // --- KẾT THÚC SỬA ĐỔI ---
 
     $('#category-select').on('change', function () {
         let selected = $(this).val();
@@ -211,7 +218,8 @@ $(document).ready(function () {
     });
 });
 
-    document.addEventListener("DOMContentLoaded", function () {
+// ... (Phần code dropdown user giữ nguyên) ...
+document.addEventListener("DOMContentLoaded", function () {
     const toggleBtn = document.getElementById("user-toggle");
     const dropdownMenu = document.querySelector(".user-dropdown .dropdown-menu");
 
