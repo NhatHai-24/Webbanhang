@@ -84,7 +84,12 @@ body {
 
 #fox-nav ul li a:hover, #fox-nav ul li a.active {
     color: var(--accent);
+    text-align: center;
     text-shadow: 0 0 10px var(--accent-glow);
+}
+
+#services ul li{
+    text-align: center;
 }
 
 /* Dropdown Menu */
