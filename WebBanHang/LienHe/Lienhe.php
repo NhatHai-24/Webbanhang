@@ -5,13 +5,11 @@
   <link rel="stylesheet" href="lienhe.css" />
 </head>
 <body>
-    <div id="preloader"><div class="loader"></div></div>
-<canvas id="tech-canvas"></canvas>
-<div id="fox">
+    <div id="fox">
     <!-- Header -->
     <!-- Navigation -->
     <!-- Navigation -->
-<div id="fox-nav">
+    <div id="fox-nav">
     <ul>
         <li><a href="../index/index.php">Trang chủ</a></li>
         <li><a href="../SanPham/SanPham.php">Sản phẩm</a></li>

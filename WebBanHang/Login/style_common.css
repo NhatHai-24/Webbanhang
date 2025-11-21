@@ -1,0 +1,82 @@
+/* =========================================
+   GLOBAL VARIABLES & RESET
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+:root {
+    --bg-dark: #0a0f1c;
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --accent: #38bdf8; /* Neon Blue */
+    --accent-hover: #0ea5e9;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+    --font-main: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    line-height: 1.6;
+}
+
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+ul { list-style: none; }
+
+#fox { width: 100%; max-width: 100%; overflow-x: hidden; }
+
+/* --- HEADER & NAV --- */
+#fox-header {
+    text-align: center; padding: 20px 0;
+    background: radial-gradient(circle at center, #1e293b 0%, var(--bg-dark) 70%);
+}
+
+#fox-nav {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    position: sticky; top: 0; z-index: 1000;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+#fox-nav ul { display: flex; justify-content: center; padding: 0; margin: 0; }
+
+#fox-nav ul li a {
+    display: block; padding: 15px 25px;
+    color: var(--text-secondary); font-weight: 600;
+}
+#fox-nav ul li a:hover { 
+    color: var(--accent); 
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.4); 
+}
+
+/* Dropdown User */
+.user-dropdown { position: relative; }
+.dropdown-menu {
+    background: #1e293b !important;
+    border: 1px solid var(--glass-border);
+    min-width: 200px;
+    position: absolute; top: 100%; right: 0;
+    box-shadow: var(--card-shadow);
+    display: none; z-index: 9999;
+    border-radius: 0 0 8px 8px;
+}
+.dropdown-menu li a {
+    padding: 12px 20px; text-align: left;
+    color: var(--text-primary); border-bottom: 1px solid var(--glass-border);
+}
+.dropdown-menu li a:hover {
+    background: var(--glass-bg); color: var(--accent);
+}
+
+/* --- FOOTER --- */
+#fox-footer {
+    background: #0f172a; border-top: 1px solid var(--glass-border);
+    color: var(--text-secondary); padding: 40px 20px; text-align: center;
+    margin-top: 60px;
+}
+#fox-footer a { margin: 0 5px; color: var(--text-secondary); }
+#fox-footer a:hover { color: var(--accent); }

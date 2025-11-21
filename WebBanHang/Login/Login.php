@@ -46,15 +46,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["username"], $_POST["p
 <html>
 <head>
     <title>Đăng nhập</title>
+    <link rel="stylesheet" href="style_common.css">
     <link rel="stylesheet" href="Login.css">
+    <link rel="stylesheet" href="register.css">
+    
     <script src="Login.js" defer></script>
 </head>
 <body>
     <div id="fox">
         <!-- Header -->
-        <div id="fox-header">
-            <img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand" />
-        </div>
 
         <!-- Navigation -->
         <div id="fox-nav">
@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["username"], $_POST["p
         <!-- About -->
         <div id="about">
             <h2>Về chúng tôi</h2>
-            <p>Fox Tech cung cấp sản phẩm công nghệ đa dạng: laptop, điện thoại, thiết bị thông minh...</p>
+            <p>TECHNOVA cung cấp sản phẩm công nghệ đa dạng: laptop, điện thoại, thiết bị thông minh...</p>
         </div>
 
         <!-- Modal đăng ký -->
@@ -127,8 +127,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["username"], $_POST["p
 
         <!-- Footer -->
         <div id="fox-footer">
-            <p>© 2025 Fox Tech. All rights reserved.</p>
-            <p>Địa chỉ: 123 Đường Công Nghệ, TP.HCM | Hotline: 0123 456 789 | Email: support@foxtech.vn</p>
+            <p>© 2025 TECHNOVA. All rights reserved.</p>
+            <p>Địa chỉ: 123 Đường Nguyễn Trãi, TP.HCM | Hotline: 0123 456 789 | Email: support@technova.vn</p>
             <p>
             <a href="../index/index.php">Trang chủ</a> | 
             <a href="../SanPham/SanPham.php">Sản phẩm</a> | 
