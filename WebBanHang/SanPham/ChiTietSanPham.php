@@ -277,6 +277,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 </script>
-<script src="sanpham.js"></script>
+<script src="ChiTietSanPham.js"></script>
 </body>
 </html>

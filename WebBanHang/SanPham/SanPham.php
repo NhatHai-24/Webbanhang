@@ -75,8 +75,7 @@ $conn->close();
     </style>
 </head>
 <body>
-    <div id="preloader"><div class="loader"></div></div>
-<canvas id="tech-canvas"></canvas>
+    
 <div id="fox">
     
 
@@ -236,7 +235,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-</script>
-<script src="sanpham.js"></script>
+    </script>
 </body>
 </html>
