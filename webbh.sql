@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 08, 2025 lúc 01:34 PM
+-- Thời gian đã tạo: Th10 21, 2025 lúc 07:05 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -45,7 +45,7 @@ CREATE TABLE `bien_the_san_pham` (
 
 INSERT INTO `bien_the_san_pham` (`id_bien_the`, `id_san_pham`, `mau_sac`, `cau_hinh`, `gia_ban`, `so_luong_ton_kho`, `ma_sku`, `ngay_tao`, `ngay_cap_nhat`) VALUES
 (1, 1, 'Đen', NULL, 900000.00, 120, 'TNA1-DEN', '2025-06-21 10:53:44', '2025-06-23 11:41:32'),
-(2, 2, 'Trắng', NULL, 1200000.00, 80, 'TNMSB2-TRANG', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
+(2, 2, 'Trắng', NULL, 1200000.00, 80, 'TNMSB2-TRANG', '2025-06-21 10:53:44', '2025-11-20 11:57:03'),
 (3, 3, 'Trắng', NULL, 950000.00, 90, 'TNPC3-TRANG', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (4, 4, 'Đen', NULL, 2800000.00, 40, 'TNROG-PELTA-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (5, 5, 'Đen', NULL, 1500000.00, 60, 'TNTUF-H3-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
@@ -56,25 +56,25 @@ INSERT INTO `bien_the_san_pham` (`id_bien_the`, `id_san_pham`, `mau_sac`, `cau_h
 (10, 9, 'Đen', NULL, 4000000.00, 50, 'TNLOGI-PROX2-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (11, 10, 'Đen', NULL, 3500000.00, 40, 'TNROG-DELTA2-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (12, 11, 'Đen', NULL, 900000.00, 64, 'LBAW-RIDE-DEN', '2025-06-21 10:53:44', '2025-07-08 11:27:39'),
-(13, 12, 'Xanh dương', NULL, 350000.00, 100, 'LBAVA-K09-XANH', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
-(14, 13, 'Xanh dương', NULL, 700000.00, 69, 'LBREZO-K118-XANH', '2025-06-21 10:53:44', '2025-07-08 11:19:30'),
-(15, 14, 'Đen', NULL, 1200000.00, 110, 'LBJBL-GO4-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
-(16, 15, 'Đỏ', NULL, 4000000.00, 48, 'LBJBL-CHARGE6-DO', '2025-06-21 10:53:44', '2025-07-03 11:18:49'),
+(13, 12, 'Xanh dương', NULL, 350000.00, 97, 'LBAVA-K09-XANH', '2025-06-21 10:53:44', '2025-11-21 05:08:09'),
+(14, 13, 'Xanh dương', NULL, 700000.00, 68, 'LBREZO-K118-XANH', '2025-06-21 10:53:44', '2025-11-21 04:16:34'),
+(15, 14, 'Đen', NULL, 1200000.00, 103, 'LBJBL-GO4-DEN', '2025-06-21 10:53:44', '2025-11-21 05:08:09'),
+(16, 15, 'Đỏ', NULL, 4000000.00, 43, 'LBJBL-CHARGE6-DO', '2025-06-21 10:53:44', '2025-11-20 11:39:01'),
 (17, 16, 'Đen', NULL, 600000.00, 90, 'LBXM-POCKET-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
-(18, 17, 'Xanh', NULL, 800000.00, 75, 'LBREZO-E21-XANH', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
+(18, 17, 'Xanh', NULL, 800000.00, 74, 'LBREZO-E21-XANH', '2025-06-21 10:53:44', '2025-11-20 11:07:37'),
 (19, 18, 'Đen', NULL, 1500000.00, 64, 'LBJBL-CLIP5-DEN', '2025-06-21 10:53:44', '2025-07-08 11:23:16'),
 (20, 19, 'Đen', NULL, 900000.00, 50, 'LVT-ENKOR-E700-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
-(21, 20, 'Đen', NULL, 3000000.00, 20, 'LBK-NANO-S820-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
+(21, 20, 'Đen', NULL, 3000000.00, 19, 'LBK-NANO-S820-DEN', '2025-06-21 10:53:44', '2025-11-20 11:19:31'),
 (22, 21, 'Đen', NULL, 4000000.00, 50, 'TVXM-A32-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (23, 22, 'Đen', NULL, 8000000.00, 40, 'TVSS-CU8000-43-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
-(24, 23, 'Đen', NULL, 10000000.00, 9, 'TVTCL-55P635-DEN', '2025-06-21 10:53:44', '2025-07-08 11:18:59'),
+(24, 23, 'Đen', NULL, 10000000.00, 5, 'TVTCL-55P635-DEN', '2025-06-21 10:53:44', '2025-11-20 05:47:29'),
 (25, 24, 'Đen', NULL, 15000000.00, 30, 'TVSS-CU8000-65-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (26, 25, 'Đen', NULL, 35000000.00, 15, 'TVSS-QLED-85-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
-(27, 26, 'Đen', NULL, 25000000.00, 20, 'TVLG-OLED-55-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
+(27, 26, 'Đen', NULL, 25000000.00, 19, 'TVLG-OLED-55-DEN', '2025-06-21 10:53:44', '2025-11-20 11:19:19'),
 (28, 27, 'Đen', NULL, 10000000.00, 40, 'TVLG-NANOCELL-43-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (29, 28, 'Đen', NULL, 13000000.00, 30, 'TVLG-NANOCELL-55-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
-(30, 29, 'Đen', NULL, 18000000.00, 25, 'TVLG-65UT8050PSB-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
-(31, 30, 'Đen', NULL, 6000000.00, 57, 'TVAQUA-43-DEN', '2025-06-21 10:53:44', '2025-07-08 11:17:10'),
+(30, 29, 'Đen', NULL, 18000000.00, 25, 'TVLG-65UT8050PSB-DEN', '2025-06-21 10:53:44', '2025-11-20 11:54:57'),
+(31, 30, 'Đen', NULL, 6000000.00, 43, 'TVAQUA-43-DEN', '2025-06-21 10:53:44', '2025-11-20 11:41:13'),
 (32, 31, 'Xanh dương', NULL, 600000.00, 80, 'TCS-TMT-A14D2B1-XANH', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (33, 32, 'Đen', NULL, 550000.00, 90, 'TCS-TMT-A45-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (34, 33, 'Đen', NULL, 400000.00, 70, 'TCS-JINYA-156-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
@@ -89,7 +89,7 @@ INSERT INTO `bien_the_san_pham` (`id_bien_the`, `id_san_pham`, `mau_sac`, `cau_h
 (43, 42, 'Hồng', NULL, 250000.00, 90, 'QCT-HYD-JF79-HONG', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (44, 43, 'Đen', NULL, 280000.00, 80, 'QCT-HYD-F15-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (45, 44, 'Hồng', NULL, 350000.00, 70, 'QDB-HYD-JF96-HONG', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
-(46, 45, 'Trắng', NULL, 400000.00, 80, 'DBH-DQLDL06-TRANG', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
+(46, 45, 'Trắng', NULL, 400000.00, 79, 'DBH-DQLDL06-TRANG', '2025-06-21 10:53:44', '2025-11-21 05:08:09'),
 (47, 46, 'Trắng', NULL, 4500000.00, 35, 'MICA-LBP246DW-TRANG', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (48, 47, 'Trắng', NULL, 9000000.00, 25, 'MIHP-M428FDW-TRANG', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (49, 48, 'Đen', NULL, 6000000.00, 30, 'MIBRO-T720DW-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
@@ -105,16 +105,16 @@ INSERT INTO `bien_the_san_pham` (`id_bien_the`, `id_san_pham`, `mau_sac`, `cau_h
 (59, 56, 'Đen', NULL, 1600000.00, 40, 'TCDS-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (60, 56, 'Xanh', NULL, 1600000.00, 30, 'TCDS-XANH', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (61, 56, 'Hồng', NULL, 1600000.00, 20, 'TCDS-HONG', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
-(62, 57, 'Đen', NULL, 1000000.00, 60, 'CHL-G502-HERO-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
-(63, 58, 'Đen', NULL, 2500000.00, 40, 'BPR-BWV3-DEN', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
+(62, 57, 'Đen', NULL, 1000000.00, 58, 'CHL-G502-HERO-DEN', '2025-06-21 10:53:44', '2025-11-20 11:39:27'),
+(63, 58, 'Đen', NULL, 2500000.00, 39, 'BPR-BWV3-DEN', '2025-06-21 10:53:44', '2025-11-20 11:56:59'),
 (64, 58, 'Trắng', NULL, 2500000.00, 30, 'BPR-BWV3-TRANG', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (65, 59, 'Trắng', NULL, 3000000.00, 15, 'MCG-RETPK3P-TRANG', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
-(66, 59, 'Xanh mint', NULL, 3000000.00, 8, 'MCG-RETPK3P-XANH', '2025-06-21 10:53:44', '2025-06-26 11:20:59'),
+(66, 59, 'Xanh mint', NULL, 3000000.00, 7, 'MCG-RETPK3P-XANH', '2025-06-21 10:53:44', '2025-11-20 11:20:06'),
 (67, 60, 'Xanh Iceblue', '8GB RAM + 128GB ROM', 9000000.00, 70, 'SSA55-XB-128', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
-(68, 60, 'Tím Lilac', '8GB RAM + 256GB ROM', 9500000.00, 60, 'SSA55-TL-256', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
-(69, 60, 'Vàng Lemon', '12GB RAM + 256GB ROM', 10500000.00, 50, 'SSA55-VL-256', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
-(70, 61, 'Xanh dương', '128GB', 15000000.00, 50, 'IP13-XD-128', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
-(71, 61, 'Hồng', '256GB', 17000000.00, 40, 'IP13-HONG-256', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
+(68, 60, 'Tím Lilac', '8GB RAM + 256GB ROM', 9500000.00, 59, 'SSA55-TL-256', '2025-06-21 10:53:44', '2025-07-10 09:05:23'),
+(69, 60, 'Vàng Lemon', '12GB RAM + 256GB ROM', 10500000.00, 49, 'SSA55-VL-256', '2025-06-21 10:53:44', '2025-07-11 01:46:25'),
+(70, 61, 'Xanh dương', '128GB', 15000000.00, 48, 'IP13-XD-128', '2025-06-21 10:53:44', '2025-07-10 09:03:27'),
+(71, 61, 'Hồng', '256GB', 17000000.00, 39, 'IP13-HONG-256', '2025-06-21 10:53:44', '2025-07-11 00:08:06'),
 (72, 61, 'Đen', '512GB', 19000000.00, 30, 'IP13-DEN-512', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (73, 62, 'Đen', '6GB RAM + 128GB ROM', 4500000.00, 80, 'OPPO-A58-DEN-128-6G', '2025-06-21 10:53:45', '2025-06-21 10:53:45'),
 (74, 62, 'Xanh lá', '8GB RAM + 128GB ROM', 4800000.00, 70, 'OPPO-A58-XANHLA-128-8G', '2025-06-21 10:53:45', '2025-06-21 10:53:45'),
@@ -123,6 +123,44 @@ INSERT INTO `bien_the_san_pham` (`id_bien_the`, `id_san_pham`, `mau_sac`, `cau_h
 (77, 64, 'Xanh lá', '4GB RAM + 128GB ROM', 3000000.00, 100, 'RM13C-XANHLA-128-4G', '2025-06-21 10:53:45', '2025-06-21 10:53:45'),
 (78, 64, 'Đen', '6GB RAM + 128GB ROM', 3300000.00, 90, 'RM13C-DEN-128-6G', '2025-06-21 10:53:45', '2025-06-21 10:53:45'),
 (79, 64, 'Xanh dương', '8GB RAM + 256GB ROM', 3800000.00, 70, 'RM13C-XANHDUONG-256-8G', '2025-06-21 10:53:45', '2025-06-21 10:53:45');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chi_tiet_don_hang`
+--
+
+CREATE TABLE `chi_tiet_don_hang` (
+  `id_chi_tiet` int(11) NOT NULL,
+  `id_don_hang` int(11) NOT NULL,
+  `id_san_pham` int(11) NOT NULL,
+  `id_bien_the` int(11) NOT NULL,
+  `so_luong` int(11) NOT NULL,
+  `don_gia` decimal(15,2) NOT NULL,
+  `ten_san_pham` varchar(255) NOT NULL,
+  `phan_loai` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `chi_tiet_don_hang`
+--
+
+INSERT INTO `chi_tiet_don_hang` (`id_chi_tiet`, `id_don_hang`, `id_san_pham`, `id_bien_the`, `so_luong`, `don_gia`, `ten_san_pham`, `phan_loai`) VALUES
+(1, 1, 14, 15, 1, 1200000.00, 'Loa Bluetooth JBL Go 4', 'Đen'),
+(2, 2, 17, 18, 1, 800000.00, 'Loa Bluetooth Rezo Pulse E21', 'Xanh'),
+(3, 3, 15, 16, 1, 4000000.00, 'Loa Bluetooth JBL Charge 6', 'Đỏ'),
+(4, 4, 26, 27, 1, 25000000.00, 'Smart Tivi OLED LG AI 4K 55 inch 55B4PSA', 'Đen'),
+(5, 5, 20, 21, 1, 3000000.00, 'Loa kéo karaoke Nanomax S-820 400W', 'Đen'),
+(6, 6, 15, 16, 1, 4000000.00, 'Loa Bluetooth JBL Charge 6', 'Đỏ'),
+(7, 7, 15, 16, 1, 4000000.00, 'Loa Bluetooth JBL Charge 6', 'Đỏ'),
+(8, 8, 57, 62, 1, 1000000.00, 'Logitech G502 HERO', 'Đen'),
+(9, 8, 30, 31, 1, 6000000.00, 'Android Tivi Aqua FHD 43 inch AQT43K800FG', 'Đen'),
+(10, 9, 30, 31, 1, 6000000.00, 'Android Tivi Aqua FHD 43 inch AQT43K800FG', 'Đen'),
+(15, 13, 12, 13, 1, 350000.00, 'Loa Bluetooth AVA+ Led K09', 'Xanh dương'),
+(16, 14, 13, 14, 1, 700000.00, 'Loa Bluetooth Rezo Light Motion K118', 'Xanh dương'),
+(17, 15, 45, 46, 1, 400000.00, 'Đèn bàn học Điện Quang ĐQ LDL06', 'Trắng'),
+(18, 15, 12, 13, 1, 350000.00, 'Loa Bluetooth AVA+ Led K09', 'Xanh dương'),
+(19, 15, 14, 15, 2, 1200000.00, 'Loa Bluetooth JBL Go 4', 'Đen');
 
 -- --------------------------------------------------------
 
@@ -146,7 +184,8 @@ CREATE TABLE `danh_gia_san_pham` (
 INSERT INTO `danh_gia_san_pham` (`id_danh_gia`, `id_san_pham`, `ten_nguoi_dung`, `diem_danh_gia`, `noi_dung_binh_luan`, `ngay_danh_gia`) VALUES
 (64, 15, 'heo1056', 5, 'Bền Nghe tốt', '2025-06-26 17:00:00'),
 (66, 23, 'heo1056', 5, 'Đẹp tốt', '2025-06-28 17:00:00'),
-(67, 30, 'heo2910', 4, 'hay bền đẹp tốt', '2025-07-02 17:00:00');
+(67, 30, 'heo2910', 4, 'hay bền đẹp tốt', '2025-07-02 17:00:00'),
+(68, 14, 'hai', 3, 'loa nghe hay', '2025-11-20 17:00:00');
 
 --
 -- Bẫy `danh_gia_san_pham`
@@ -197,6 +236,57 @@ CREATE TRIGGER `sau_khi_xoa_danh_gia` AFTER DELETE ON `danh_gia_san_pham` FOR EA
 END
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `don_hang`
+--
+
+CREATE TABLE `don_hang` (
+  `id_don_hang` int(11) NOT NULL,
+  `id_nguoi_dung` int(11) NOT NULL,
+  `ngay_dat` datetime NOT NULL DEFAULT current_timestamp(),
+  `tong_tien` decimal(15,2) NOT NULL,
+  `ho_ten_nguoi_nhan` varchar(100) NOT NULL,
+  `sdt_nguoi_nhan` varchar(20) NOT NULL,
+  `dia_chi_giao_hang` text NOT NULL,
+  `phuong_thuc_thanh_toan` varchar(50) NOT NULL DEFAULT 'COD',
+  `trang_thai` varchar(50) NOT NULL DEFAULT 'Cho_xac_nhan'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `don_hang`
+--
+
+INSERT INTO `don_hang` (`id_don_hang`, `id_nguoi_dung`, `ngay_dat`, `tong_tien`, `ho_ten_nguoi_nhan`, `sdt_nguoi_nhan`, `dia_chi_giao_hang`, `phuong_thuc_thanh_toan`, `trang_thai`) VALUES
+(1, 12, '2025-11-20 18:07:04', 1200000.00, 'hai', '0255115661', 'p25', 'COD', 'Cho_xac_nhan'),
+(2, 12, '2025-11-20 18:07:37', 800000.00, 'hai', '0255115661', 'p25', 'COD', 'Cho_xac_nhan'),
+(3, 12, '2025-11-20 18:09:15', 4000000.00, 'hai', '0255115661', 'p25', 'COD', 'Cho_xac_nhan'),
+(4, 12, '2025-11-20 18:19:19', 25000000.00, 'hai', '0255115661', 'p25', 'COD', 'Cho_xac_nhan'),
+(5, 12, '2025-11-20 18:19:31', 3000000.00, 'hai', '0255115661', 'p25', 'COD', 'Cho_xac_nhan'),
+(6, 12, '2025-11-20 18:36:00', 4000000.00, 'hai', '0255115661', 'p25', 'COD', 'Cho_xac_nhan'),
+(7, 12, '2025-11-20 18:39:01', 4000000.00, 'hai', '0255115661', 'p25', 'COD', 'Cho_xac_nhan'),
+(8, 12, '2025-11-20 18:39:27', 7000000.00, 'hai', '0255115661', 'p25', 'COD', 'Cho_xac_nhan'),
+(9, 12, '2025-11-20 18:41:13', 6000000.00, 'hai', '0255115661', 'p25', 'COD', 'Da_giao'),
+(13, 18, '2025-11-20 19:13:47', 350000.00, 'hai2', '0347389473', 'nguyễn gia trí', 'COD', 'Cho_xac_nhan'),
+(14, 12, '2025-11-21 11:16:34', 700000.00, 'hai', '0255115661', 'p25', 'COD', 'Cho_xac_nhan'),
+(15, 12, '2025-11-21 12:08:09', 3150000.00, 'hai', '0255115661', 'p25', 'COD', 'Cho_xac_nhan');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `gio_hang`
+--
+
+CREATE TABLE `gio_hang` (
+  `id_gio_hang` int(11) NOT NULL,
+  `id_nguoi_dung` int(11) NOT NULL,
+  `id_san_pham` int(11) NOT NULL,
+  `id_bien_the` int(11) NOT NULL,
+  `so_luong` int(11) NOT NULL DEFAULT 1,
+  `ngay_them` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -286,6 +376,58 @@ INSERT INTO `hinh_anh_san_pham` (`id_hinh_anh`, `id_san_pham`, `url_hinh_anh`, `
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `id_bien_the` int(11) DEFAULT NULL,
+  `ten_san_pham` varchar(255) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `gia_ban` decimal(10,2) NOT NULL,
+  `status` varchar(50) DEFAULT 'Chờ xử lý',
+  `created_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `product_id`, `id_bien_the`, `ten_san_pham`, `quantity`, `gia_ban`, `status`, `created_at`) VALUES
+(8, 12, 30, 31, 'Android Tivi Aqua FHD 43 inch AQT43K800FG', 1, 6000000.00, 'Đã giao', '2025-07-10 13:43:56'),
+(9, 12, 14, 15, 'Loa Bluetooth JBL Go 4', 2, 2400000.00, 'Đã giao', '2025-07-10 13:45:05'),
+(10, 12, 14, 15, 'Loa Bluetooth JBL Go 4', 2, 2400000.00, 'Đã hủy', '2025-07-10 13:45:16'),
+(11, 12, 23, 24, 'Google Tivi TCL AI 4K 55 inch 55P635', 1, 10000000.00, 'Đã giao', '2025-07-10 13:45:55'),
+(12, 12, 57, 62, 'Logitech G502 HERO', 1, 1000000.00, 'Chờ xử lý', '2025-07-10 14:59:51'),
+(13, 12, 30, 31, 'Android Tivi Aqua FHD 43 inch AQT43K800FG', 1, 6000000.00, 'Chờ xử lý', '2025-07-10 16:00:36'),
+(14, 12, 30, 31, 'Android Tivi Aqua FHD 43 inch AQT43K800FG', 1, 6000000.00, 'Đã giao', '2025-07-10 16:02:01'),
+(15, 12, 61, 70, 'iPhone 13', 1, 15000000.00, 'Đã giao', '2025-07-10 16:02:58'),
+(16, 12, 61, 70, 'iPhone 13', 1, 15000000.00, 'Đang giao', '2025-07-10 16:03:27'),
+(17, 12, 60, 68, 'Samsung Galaxy A55', 1, 9500000.00, 'Đã hủy', '2025-07-10 16:05:23'),
+(18, 12, 61, 71, 'iPhone 13', 1, 17000000.00, 'Đã hủy', '2025-07-11 07:08:06'),
+(19, 12, 60, 69, 'Samsung Galaxy A55', 1, 10500000.00, 'Chờ xử lý', '2025-07-11 08:46:25'),
+(20, 12, 12, 13, 'Loa Bluetooth AVA+ Led K09', 1, 350000.00, 'Đã hủy', '2025-07-11 22:57:36'),
+(21, 12, 30, 31, 'Android Tivi Aqua FHD 43 inch AQT43K800FG', 1, 6000000.00, 'Chờ xử lý', '2025-07-11 22:58:24'),
+(22, 12, 15, 16, 'Loa Bluetooth JBL Charge 6', 1, 4000000.00, 'Đã hủy', '2025-07-11 22:58:33'),
+(23, 12, 30, 31, 'Android Tivi Aqua FHD 43 inch AQT43K800FG', 1, 6000000.00, 'Chờ xử lý', '2025-11-20 11:57:29'),
+(24, 12, 30, 31, 'Android Tivi Aqua FHD 43 inch AQT43K800FG', 1, 6000000.00, 'Chờ xử lý', '2025-11-20 12:34:57'),
+(25, 12, 30, 31, 'Android Tivi Aqua FHD 43 inch AQT43K800FG', 1, 6000000.00, 'Đã hủy', '2025-11-20 12:35:02'),
+(26, 12, 30, 31, 'Android Tivi Aqua FHD 43 inch AQT43K800FG', 1, 6000000.00, 'Đã hủy', '2025-11-20 12:36:51'),
+(27, 12, 30, 31, 'Android Tivi Aqua FHD 43 inch AQT43K800FG', 1, 6000000.00, 'Đã hủy', '2025-11-20 12:38:47'),
+(28, 12, 30, 31, 'Android Tivi Aqua FHD 43 inch AQT43K800FG', 1, 6000000.00, 'Đã hủy', '2025-11-20 12:43:10'),
+(29, 12, 23, 24, 'Google Tivi TCL AI 4K 55 inch 55P635', 1, 10000000.00, 'Đã hủy', '2025-11-20 12:43:39'),
+(30, 12, 23, 24, 'Google Tivi TCL AI 4K 55 inch 55P635', 1, 10000000.00, 'Đã hủy', '2025-11-20 12:46:32'),
+(31, 12, 23, 24, 'Google Tivi TCL AI 4K 55 inch 55P635', 1, 10000000.00, 'Đã hủy', '2025-11-20 12:47:29'),
+(32, 12, 58, 63, 'Razer BlackWidow V3', 1, 2500000.00, 'Đã hủy', '2025-11-20 18:09:58'),
+(33, 12, 59, 66, 'Máy chơi game cầm tay Retroid Pocket 3+', 1, 3000000.00, 'Chờ xử lý', '2025-11-20 18:20:06'),
+(34, 12, 30, 31, 'Android Tivi Aqua FHD 43 inch AQT43K800FG', 1, 6000000.00, 'Chờ xử lý', '2025-11-20 18:33:34'),
+(35, 12, 15, 16, 'Loa Bluetooth JBL Charge 6', 1, 4000000.00, 'Chờ xử lý', '2025-11-20 18:33:56');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `san_pham`
 --
 
@@ -319,7 +461,7 @@ INSERT INTO `san_pham` (`id_san_pham`, `ten_san_pham`, `mo_ta`, `thong_so_ky_thu
 (11, 'Loa Bluetooth Alpha Works AW-Ride', 'Xuất xứ: Trung Quốc', 'Tổng công suất: 20 W, Nguồn: Pin 1200 mAh, Thời gian sử dụng: Dùng khoảng 18 tiếng (với 50% âm lượng), Thời gian sạc: Sạc khoảng 2.5 tiếng', 'https://youtu.be/AOA_cmNDt0A', NULL, '12 tháng', 0.0, 0),
 (12, 'Loa Bluetooth AVA+ Led K09', 'Xuất xứ: Trung Quốc', 'Tổng công suất: 5 W, Nguồn: Pin, Thời gian sử dụng: Dùng khoảng 2.5 - 4 giờ, Thời gian sạc: Sạc khoảng 2 - 3 tiếng', 'https://youtu.be/v-xCAxsHsLI', NULL, '12 tháng', 0.0, 0),
 (13, 'Loa Bluetooth Rezo Light Motion K118', 'Xuất xứ Đài Loan', 'Tổng công suất: 10 W, Nguồn: Pin, Thời gian sử dụng: Dùng khoảng 2 - 3 tiếng, Thời gian sạc: Sạc khoảng 1.5 - 2.5 tiếng, Công nghệ âm thanh: Âm thanh Hi-Fi, Âm thanh 360 độ', 'https://youtu.be/MGYg7Z3ZVcc', NULL, '12 tháng', 0.0, 0),
-(14, 'Loa Bluetooth JBL Go 4', 'Xuất xứ Trung Quốc', 'Tổng công suất: 4.2 W, Nguồn: Pin, Thời gian sử dụng: Dùng khoảng 7 tiếng, Thời gian sạc: Sạc khoảng 3 tiếng, Công nghệ âm thanh: JBL Pro Sound', 'https://youtu.be/aHUeF9waDvM', NULL, '12 tháng', 0.0, 0),
+(14, 'Loa Bluetooth JBL Go 4', 'Xuất xứ Trung Quốc', 'Tổng công suất: 4.2 W, Nguồn: Pin, Thời gian sử dụng: Dùng khoảng 7 tiếng, Thời gian sạc: Sạc khoảng 3 tiếng, Công nghệ âm thanh: JBL Pro Sound', 'https://youtu.be/aHUeF9waDvM', NULL, '12 tháng', 3.0, 1),
 (15, 'Loa Bluetooth JBL Charge 6', 'Xuất xứ: Hàn Quốc', 'Tổng công suất: 45 W, Nguồn: Pin, Thời gian sử dụng: Dùng khoảng 28 tiếng, Thời gian sạc: Sạc khoảng 3 tiếng, Công nghệ âm thanh: Công nghệ AI Sound Boost, JBL Pro Sound', NULL, NULL, '12 tháng', 5.0, 1),
 (16, 'Loa Bluetooth Xiaomi Sound Pocket', 'Xuất xứ Trung Quốc/Malaysia /Đài Loan', 'Tổng công suất: 5 W, Nguồn: Pin 1000 mAh, Thời gian sử dụng: Dùng khoảng 10 tiếng, Thời gian sạc: Sạc khoảng 3 tiếng, Công nghệ âm thanh: True Wireless Stereo', 'https://youtu.be/G6-wSspgdbY', NULL, '60 tháng', 0.0, 0),
 (17, 'Loa Bluetooth Rezo Pulse E21', 'Xuất xứ Trung Quốc/Malaysia /Đài Loan', 'Tổng công suất: 10 W, Nguồn: Pin, Thời gian sử dụng: Dùng khoảng 3 - 7 tiếng, Thời gian sạc: Sạc khoảng 4 tiếng', 'https://youtu.be/HI6Gzt-TPZo', NULL, '12 tháng', 0.0, 0),
@@ -394,7 +536,12 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `user_id`, `password`, `phone`, `address`, `email`, `balance`) VALUES
 (9, 'admin456', 0, '$2y$10$DV6okW3Eyenk.3wX9iubLOMbYLuTr32fpxbzixEB7NRf3veGyzoN6', '0901359647', '432 Mai Chí Thọ', 'ngduckhanh2910@gmail.com', 0),
-(11, 'khanh08', 0, '$2y$10$P1YLkQhWPY6gR3Y0VvpQEOsDB8SJvoSCy3Qhk/8frnXR3kbb5uqGK', '102', '412', '09015', 0);
+(11, 'khanh08', 0, '$2y$10$P1YLkQhWPY6gR3Y0VvpQEOsDB8SJvoSCy3Qhk/8frnXR3kbb5uqGK', '102', '412', '09015', 0),
+(12, 'hai', 0, '$2y$10$fsObzNvfhPxHwUxtA0o4kOTQDwhGyG72cySjGCVhKRt5BggYPuCQu', '0255115661', 'p25', 'ajsdjw@gmail.com', 0),
+(14, 'adminhai', 0, '$2y$10$6EZrlFmIWbiyxwA3lmdrlOR2drY1wwUqa1VDqDB2sl4rbDijbz0hG', '78878979', 'p25', 'qjsdjw@gmail.com', 0),
+(16, 'adminhai1', 0, '$2y$10$GIqXCD0XHChW/ZRUchBWOeJluhy1Isc4Emaqsb8XAHMy5GwQEEo/a', '7887897934', 'p25', 'qjsdjw@gmail.com', 0),
+(17, 'admin123', 0, '$2y$10$YZmhs0VOVF4F8Jhw3j9O9.0kk/A/PvjH5oqVFR2xeBtyur6D5mCBK', '89745', 'p24', 'ajdjw@gmail.com', 0),
+(18, 'hai2', 0, '$2y$10$u0SwD3ZBV8Ogd5W3NMmuHuX2zTbsZtlquLAeMZI0HnP01EwVm5fkS', '0347389473', 'nguyễn gia trí', 'dasdsa23@gmail.com', 0);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -409,6 +556,13 @@ ALTER TABLE `bien_the_san_pham`
   ADD KEY `id_san_pham` (`id_san_pham`);
 
 --
+-- Chỉ mục cho bảng `chi_tiet_don_hang`
+--
+ALTER TABLE `chi_tiet_don_hang`
+  ADD PRIMARY KEY (`id_chi_tiet`),
+  ADD KEY `id_don_hang` (`id_don_hang`);
+
+--
 -- Chỉ mục cho bảng `danh_gia_san_pham`
 --
 ALTER TABLE `danh_gia_san_pham`
@@ -416,11 +570,33 @@ ALTER TABLE `danh_gia_san_pham`
   ADD KEY `id_san_pham` (`id_san_pham`);
 
 --
+-- Chỉ mục cho bảng `don_hang`
+--
+ALTER TABLE `don_hang`
+  ADD PRIMARY KEY (`id_don_hang`),
+  ADD KEY `id_nguoi_dung` (`id_nguoi_dung`);
+
+--
+-- Chỉ mục cho bảng `gio_hang`
+--
+ALTER TABLE `gio_hang`
+  ADD PRIMARY KEY (`id_gio_hang`),
+  ADD KEY `id_nguoi_dung` (`id_nguoi_dung`),
+  ADD KEY `id_san_pham` (`id_san_pham`),
+  ADD KEY `id_bien_the` (`id_bien_the`);
+
+--
 -- Chỉ mục cho bảng `hinh_anh_san_pham`
 --
 ALTER TABLE `hinh_anh_san_pham`
   ADD PRIMARY KEY (`id_hinh_anh`),
   ADD KEY `id_san_pham` (`id_san_pham`);
+
+--
+-- Chỉ mục cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `san_pham`
@@ -446,16 +622,40 @@ ALTER TABLE `bien_the_san_pham`
   MODIFY `id_bien_the` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
+-- AUTO_INCREMENT cho bảng `chi_tiet_don_hang`
+--
+ALTER TABLE `chi_tiet_don_hang`
+  MODIFY `id_chi_tiet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
 -- AUTO_INCREMENT cho bảng `danh_gia_san_pham`
 --
 ALTER TABLE `danh_gia_san_pham`
-  MODIFY `id_danh_gia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id_danh_gia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+
+--
+-- AUTO_INCREMENT cho bảng `don_hang`
+--
+ALTER TABLE `don_hang`
+  MODIFY `id_don_hang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT cho bảng `gio_hang`
+--
+ALTER TABLE `gio_hang`
+  MODIFY `id_gio_hang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `hinh_anh_san_pham`
 --
 ALTER TABLE `hinh_anh_san_pham`
   MODIFY `id_hinh_anh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+
+--
+-- AUTO_INCREMENT cho bảng `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT cho bảng `san_pham`
@@ -467,7 +667,7 @@ ALTER TABLE `san_pham`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -480,10 +680,30 @@ ALTER TABLE `bien_the_san_pham`
   ADD CONSTRAINT `bien_the_san_pham_ibfk_1` FOREIGN KEY (`id_san_pham`) REFERENCES `san_pham` (`id_san_pham`) ON DELETE CASCADE;
 
 --
+-- Các ràng buộc cho bảng `chi_tiet_don_hang`
+--
+ALTER TABLE `chi_tiet_don_hang`
+  ADD CONSTRAINT `chi_tiet_don_hang_ibfk_1` FOREIGN KEY (`id_don_hang`) REFERENCES `don_hang` (`id_don_hang`) ON DELETE CASCADE;
+
+--
 -- Các ràng buộc cho bảng `danh_gia_san_pham`
 --
 ALTER TABLE `danh_gia_san_pham`
   ADD CONSTRAINT `danh_gia_san_pham_ibfk_1` FOREIGN KEY (`id_san_pham`) REFERENCES `san_pham` (`id_san_pham`) ON DELETE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `don_hang`
+--
+ALTER TABLE `don_hang`
+  ADD CONSTRAINT `don_hang_ibfk_1` FOREIGN KEY (`id_nguoi_dung`) REFERENCES `users` (`id`);
+
+--
+-- Các ràng buộc cho bảng `gio_hang`
+--
+ALTER TABLE `gio_hang`
+  ADD CONSTRAINT `gio_hang_ibfk_1` FOREIGN KEY (`id_nguoi_dung`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `gio_hang_ibfk_2` FOREIGN KEY (`id_san_pham`) REFERENCES `san_pham` (`id_san_pham`) ON DELETE CASCADE,
+  ADD CONSTRAINT `gio_hang_ibfk_3` FOREIGN KEY (`id_bien_the`) REFERENCES `bien_the_san_pham` (`id_bien_the`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `hinh_anh_san_pham`
