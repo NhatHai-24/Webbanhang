@@ -14,39 +14,33 @@
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="cursor-outline" id="cursor-outline"></div>
 
-    <nav id="fox-nav">
-        <div class="nav-container">
-            <a href="../Hinh/logo1.png" class="logo">TECH<span>NOVA</span></a>
-            
-            <div class="menu-toggle" id="mobile-menu">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
+    <div id="fox-nav">
+    <ul>
+        <li><a href="../index/index.php">Trang chủ</a></li>
+        <li><a href="../SanPham/SanPham.php">Sản phẩm</a></li>
+        <li><a href="../Gioithieu/Gioithieu.php">Giới thiệu</a></li>
+        <li><a href="../chinhsachbaomat/chinhsachbaomat.php">Chính sách bảo mật</a></li>
+        <li><a href="../LienHe/Lienhe.php">Liên hệ</a></li>
 
-            <ul class="nav-links">
-                <li><a href="../index/index.php" class="nav-link">Trang chủ</a></li>
-                <li><a href="../SanPham/SanPham.php" class="nav-link">Sản phẩm</a></li>
-                <li><a href="#" class="nav-link active">Giới thiệu</a></li>
-                <li><a href="../chinhsachbaomat/chinhsachbaomat.php" class="nav-link">Chính sách</a></li>
-                <li><a href="../LienHe/Lienhe.php" class="nav-link">Liên hệ</a></li>
-
-                <?php if (!isset($_SESSION["user"])): ?>
-                    <li><a href="../Login/Login.php" class="btn-login">Đăng nhập</a></li>
-                <?php else: ?>
-                    <?php $username = htmlspecialchars($_SESSION["user"]["username"]); ?>
-                    <li class="user-dropdown">
-                        <a href="#" id="user-toggle" class="user-name"><?= $username ?> <span class="arrow">▼</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="../User/ThongTinCaNhan.php">Hồ sơ</a></li>
-                            <li><a href="../DonHang/DonHangCuaToi.php">Đơn hàng</a></li>
-                            <li><a href="../Login/logout.php" class="logout">Đăng xuất</a></li>
-                        </ul>
-                    </li>
-                <?php endif; ?>
-            </ul>
-        </div>
-    </nav>
+        <?php if (!isset($_SESSION["user"])): ?>
+            <!-- Chưa đăng nhập -->
+            <li><a href="../Login/Login.php">Đăng nhập</a></li>
+        <?php else: ?>
+            <!-- Đã đăng nhập -->
+            <?php $username = htmlspecialchars($_SESSION["user"]["username"]); ?>
+            <li class="user-dropdown">
+                <a href="#" id="user-toggle"><?= $username ?> ⮟</a>
+                <ul class="dropdown-menu" style="display: none;">
+                    <li><a href="../User/ThongTinCaNhan.php">Thông tin cá nhân</a></li>
+                    <li><a href="../DonHang/Giohang.php">Giỏ hàng của tôi</a></li>
+                    <li><a href="../DonHang/DonHangCuaToi.php">Đơn hàng của tôi</a></li>
+                    <li><a href="../Login/logout.php">Đăng xuất</a></li>
+                    
+                </ul>
+            </li>
+        <?php endif; ?>
+    </ul>
+</div>
 
     <header class="hero-section">
         <div class="hero-content fade-up">

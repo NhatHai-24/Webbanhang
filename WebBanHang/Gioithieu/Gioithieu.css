@@ -37,18 +37,34 @@ body {
 
 /* --- 2. NAVIGATION --- */
 #fox-nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 20px 50px;
-    z-index: 1000;
-    transition: 0.3s ease;
+    background: rgba(15, 23, 42, 0.8);
     backdrop-filter: blur(10px);
-}
-#fox-nav.scrolled {
-    background: rgba(10, 15, 28, 0.85);
-    padding: 15px 50px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     border-bottom: 1px solid var(--glass-border);
+}
+
+#fox-nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+#fox-nav ul li a {
+    display: block;
+    padding: 15px 25px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    position: relative;
+}
+
+#fox-nav ul li a:hover, #fox-nav ul li a.active {
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent-glow);
 }
 
 .nav-container {
