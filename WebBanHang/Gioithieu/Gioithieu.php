@@ -1,261 +1,304 @@
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fox Tech - Giới Thiệu</title>
-    <link rel="stylesheet" href="Gioithieu.css">
+    <title>Về Fox Tech - Tương lai công nghệ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="demo.css">
 </head>
 <body>
-<div id="fox">
-    <!-- Header -->
-    <div id="fox-header">
-        <img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand" />
-    </div>
 
-    <!-- Navigation -->
-   <div id="fox-nav">
-    <ul>
-        <li><a href="../index/index.php">Trang chủ</a></li>
-        <li><a href="../SanPham/SanPham.php">Sản phẩm</a></li>
-        <li><a href="../Gioithieu/Gioithieu.php">Giới thiệu</a></li>
-        <li><a href="../chinhsachbaomat/chinhsachbaomat.php">Chính sách bảo mật</a></li>
-        <li><a href="../LienHe/Lienhe.php">Liên hệ</a></li>
+    <canvas id="tech-canvas"></canvas>
+    
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
 
-        <?php 
-        session_start();
-        if (!isset($_SESSION["user"])): ?>
-            <!-- Chưa đăng nhập -->
-            <li><a href="../Login/Login.php">Đăng nhập</a></li>
-        <?php else: ?>
-            <!-- Đã đăng nhập -->
-            <?php $username = htmlspecialchars($_SESSION["user"]["username"]); ?>
-            <li class="user-dropdown">
-                <a href="#" id="user-toggle"><?= $username ?> ⮟</a>
-                <ul class="dropdown-menu" style="display: none;">
-                    <li><a href="../User/ThongTinCaNhan.php">Thông tin cá nhân</a></li>
-                    <li><a href="../DonHang/Giohang.php">Giỏ hàng của tôi</a></li>
-                    <li><a href="../DonHang/DonHangCuaToi.php">Đơn hàng của tôi</a></li>
-                    <li><a href="../Login/logout.php">Đăng xuất</a></li>
-                </ul>
-            </li>
-        <?php endif; ?>
-    </ul>
-</div>
+    <nav id="fox-nav">
+        <div class="nav-container">
+            <a href="../Hinh/logo1.png" class="logo">TECH<span>NOVA</span></a>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
 
-    <!-- Hero Section -->
-    <div class="intro-hero">
-        <h1>Về Fox Tech</h1>
-        <p>Chúng tôi là <span class="highlight">đơn vị tiên phong</span> trong lĩnh vực thương mại điện tử đồ công nghệ, 
-        mang đến cho khách hàng những sản phẩm chất lượng cao với dịch vụ tận tâm nhất.</p>
-    </div>
+            <ul class="nav-links">
+                <li><a href="../index/index.php" class="nav-link">Trang chủ</a></li>
+                <li><a href="../SanPham/SanPham.php" class="nav-link">Sản phẩm</a></li>
+                <li><a href="#" class="nav-link active">Giới thiệu</a></li>
+                <li><a href="../chinhsachbaomat/chinhsachbaomat.php" class="nav-link">Chính sách</a></li>
+                <li><a href="../LienHe/Lienhe.php" class="nav-link">Liên hệ</a></li>
 
-    <div class="main-content">
-        <!-- Về chúng tôi -->
-        <div class="section about-section">
-            <h2>Câu chuyện của chúng tôi</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p><strong>Fox Tech</strong> sinh ra với tầm nhìn trở thành nền tảng thương mại điện tử hàng đầu Việt Nam trong lĩnh vực công nghệ.</p>
-                    
-                    <p>Với đội ngũ chuyên gia giàu kinh nghiệm và am hiểu sâu sắc về công nghệ, Fox Tech cam kết mang đến cho khách hàng những sản phẩm chính hãng, chất lượng cao từ các thương hiệu uy tín trên thế giới.</p>
-                    
-                    <p>Chúng tôi hiểu rằng công nghệ không chỉ là sản phẩm, mà còn là cầu nối giúp con người kết nối, sáng tạo và phát triển. Vì vậy, sứ mệnh của chúng tôi là democratize technology - làm cho công nghệ trở nên dễ tiếp cận với mọi người.</p>
+                <?php if (!isset($_SESSION["user"])): ?>
+                    <li><a href="../Login/Login.php" class="btn-login">Đăng nhập</a></li>
+                <?php else: ?>
+                    <?php $username = htmlspecialchars($_SESSION["user"]["username"]); ?>
+                    <li class="user-dropdown">
+                        <a href="#" id="user-toggle" class="user-name"><?= $username ?> <span class="arrow">▼</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../User/ThongTinCaNhan.php">Hồ sơ</a></li>
+                            <li><a href="../DonHang/DonHangCuaToi.php">Đơn hàng</a></li>
+                            <li><a href="../Login/logout.php" class="logout">Đăng xuất</a></li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="hero-content fade-up">
+            <span class="badge">2025</span>
+            <h1>Kiến tạo <br><span class="text-gradient">Tương Lai Số</span></h1>
+            <p>Chúng tôi không chỉ bán sản phẩm công nghệ. Chúng tôi cung cấp chìa khóa để mở ra cánh cửa tương lai của bạn.</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <h3 class="counter" data-target="50000">0</h3>
+                    <p>Khách hàng</p>
                 </div>
-                <div class="about-stats">
-                    <div class="stat-card">
-                        <span class="stat-number">50K+</span>
-                        <div class="stat-label">Khách hàng tin tưởng</div>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">5000+</span>
-                        <div class="stat-label">Sản phẩm đa dạng</div>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">99%</span>
-                        <div class="stat-label">Khách hàng hài lòng</div>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">24/7</span>
-                        <div class="stat-label">Hỗ trợ khách hàng</div>
-                    </div>
+                <div class="stat-item">
+                    <h3 class="counter" data-target="5000">0</h3>
+                    <p>Sản phẩm</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="counter" data-target="99"></h3><span>%</span>
+                    <p>Hài lòng</p>
                 </div>
             </div>
         </div>
+        <div class="scroll-indicator">
+            <span>Khám phá</span>
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </header>
 
-        <!-- Lịch sử phát triển -->
-        <div class="section history-section">
-            <h2>Hành trình phát triển</h2>
+    <main class="main-content">
+        <section class="section story-section">
+            <div class="section-header fade-up">
+                <h2>Câu chuyện Fox Tech</h2>
+                <div class="line"></div>
+            </div>
+            <div class="story-grid">
+                <div class="story-card glass-card fade-right">
+                    <div class="icon">🚀</div>
+                    <h3>Sứ Mệnh</h3>
+                    <h4>trả lời cho câu hỏi: TechNova sinh ra để làm gì mỗi ngày?<h44>
+                    <p>"Trao quyền cho con người thông qua công nghệ, bằng cách cung cấp những sản phẩm đổi mới nhất với tốc độ nhanh nhất và sự an tâm tuyệt đối."</p>
+                </div>
+                <div class="story-card glass-card fade-left">
+                    <div class="icon">👁️</div>
+                    <h3>Tầm Nhìn</h3>
+                    <p>"Trở thành Hệ sinh thái Thương mại Công nghệ hàng đầu khu vực, nơi định hình phong cách sống số và xóa nhòa mọi rào cản trong trải nghiệm mua sắm thông minh."</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section history-section">
+            <h2 class="section-title fade-up">Hành Trình Phát Triển</h2>
             <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-year">2019</div>
-                        <div class="timeline-event">Thành lập Fox Tech với 5 nhân viên đầu tiên. Bắt đầu kinh doanh laptop và linh kiện máy tính qua website.</div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                </div>
+                <div class="timeline-line"></div>
                 
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-year">2020</div>
-                        <div class="timeline-event">Mở rộng sang điện thoại thông minh và thiết bị wearable. Đạt 10,000 khách hàng và doanh thu 50 tỷ đồng.</div>
-                    </div>
+                <div class="timeline-item fade-up">
                     <div class="timeline-dot"></div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-year">2021</div>
-                        <div class="timeline-event">Ra mắt ứng dụng mobile Fox Tech App. Thiết lập hệ thống kho bãi và logistics hiện đại tại TP.HCM.</div>
+                    <div class="timeline-content glass-card">
+                        <span class="year">2025</span>
+                        <h3>CÚ HÍCH "ZERO-TOUCH" </h3>
+                        <p>Thị trường TMĐT 2025 bão hòa, người dùng chán ngấy việc chờ đợi ship hàng và lo sợ hàng giả.</p> 
+                        <P> Chiến lược chủ đạo: Tốc độ là vũ khí - Minh bạch là khiên chắn.</p>
                     </div>
-                    <div class="timeline-dot"></div>
                 </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-year">2022</div>
-                        <div class="timeline-event">Mở rộng ra Hà Nội và Đà Nẵng. Trở thành đại lý chính thức của Apple, Samsung, Xiaomi tại Việt Nam.</div>
+                <div class="timeline-item fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <span class="year">2026</span>
+                        <h3>KỶ NGUYÊN "TRUST-CHAIN"</h3>
+                        <p>Hàng dựng tràn lan. Niềm tin vào đồ điện tử online bị lung lay. Chiến lược chủ đạo: Số hóa niềm tin.</p>
                     </div>
-                    <div class="timeline-dot"></div>
                 </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-year">2023</div>
-                        <div class="timeline-event">Đạt mốc 50,000 khách hàng và doanh thu 500 tỷ đồng. Nhận giải thưởng "Thương mại điện tử xuất sắc".</div>
+                <div class="timeline-item fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <span class="year">2027</span>
+                        <h3>CUỘC CÁCH MẠNG AI "NOVABRAIN"</h3>
+                        <p>Khách hàng bị ngợp bởi quá nhiều lựa chọn. Chiến lược chủ đạo: Đừng để khách hàng tìm, hãy đưa đồ đến trước mặt họ.</p>
+                        <p>Sự kiện: Ra mắt trợ lý ảo "Nova AI".</p>
                     </div>
-                    <div class="timeline-dot"></div>
                 </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-year">2024</div>
-                        <div class="timeline-event">Triển khai AI Shopping Assistant và hệ thống giao hàng drone. Mục tiêu mở rộng toàn Đông Nam Á.</div>
+                <div class="timeline-item fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <span class="year">2028</span>
+                        <h3>HỆ SINH THÁI PHYGITAL</h3>
+                        <p>Online đã mạnh, nhưng khách hàng muốn "sờ" sản phẩm cao cấp (High-end Audio, Setup 100 triệu). Chiến lược chủ đạo: Trải nghiệm không điểm chạm.Sự kiện: Khai trương TechNova Hub tại phố đi bộ Nguyễn Huệ (TP.HCM).</p>
                     </div>
-                    <div class="timeline-dot"></div>
                 </div>
+                <div class="timeline-item fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <span class="year">2029</span>
+                        <h3>ĐẾ CHẾ IOT</h3>
+                        <p>2029: Kho hàng Dark Warehouse (Kho tối).
+                        <p>Hệ thống kho vận của TechNova vận hành 100% bằng Robot tự hành (AGV).</p>
+                        <p>Con người chỉ đứng giám sát qua màn hình. Tốc độ xử lý đơn hàng tăng 300%, chi phí nhân sự giảm 70%.</p>
+                    </div>
+                </div>
+                <div class="timeline-item fade-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <span class="year">2030</span>
+                        <h3>The "Smart Living" Subscription</h3>
+                        <p>TechNova không chỉ bán sản phẩm nữa. Chúng ta bán gói "NovaLife".</p>
+                        <p>Mô hình: Với 2 triệu/tháng, khách hàng được TechNova setup toàn bộ Smarthome, Internet vạn vật trong nhà. Hỏng hóc? Hệ thống tự báo về trung tâm, kỹ thuật viên đến sửa trước khi chủ nhà kịp biết là nó hỏng.</p>
+                        <p>Tầm nhìn hoàn tất: TechNova trở thành "Hệ điều hành" cho ngôi nhà của khách hàng, không chỉ là nơi bán cái tivi hay tủ lạnh.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section financial-section">
+    <div class="section-header fade-up">
+        <h2 class="section-title fade-up">Lộ Trình Tài Chính (Dự Kiến)</h2>
+        <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+            Chiến lược tăng trưởng J-Curve: Từ đầu tư công nghệ lõi đến IPO toàn cầu.
+        </p>
+    </div>
+
+    <div class="fin-grid">
+        <div class="fin-card glass-card fade-up" style="transition-delay: 0s">
+            <div class="fin-header">
+                <span class="fin-year">2025</span>
+                <div class="fin-icon">📉</div> </div>
+            <div class="fin-body">
+                <div class="revenue-box">
+                    <span class="currency">$</span>
+                    <span class="counter" data-target="2">0</span>
+                    <span class="unit">M</span>
+                </div>
+                <h4>Xây Dựng Nền Tảng</h4>
+                <p>Tập trung R&D công nghệ lõi. Chấp nhận lỗ ngắn hạn để chiếm lĩnh thị phần.</p>
+                <span class="status-badge warning">Đầu tư</span>
             </div>
         </div>
 
-        <!-- Tầm nhìn & Sứ mệnh -->
-        <div class="section vision-mission">
-            <h2>Tầm nhìn & Sứ mệnh</h2>
-            <div class="vm-grid">
-                <div class="vm-card">
-                    <h3>🎯 Tầm nhìn</h3>
-                    <p>Trở thành nền tảng thương mại điện tử công nghệ hàng đầu Đông Nam Á vào năm 2030, với hệ sinh thái hoàn chỉnh từ bán lẻ, dịch vụ hậu mãi đến giải pháp công nghệ cho doanh nghiệp.</p>
+        <div class="fin-card glass-card fade-up" style="transition-delay: 0.2s">
+            <div class="fin-header">
+                <span class="fin-year">2027</span>
+                <div class="fin-icon">⚖️</div>
+            </div>
+            <div class="fin-body">
+                <div class="revenue-box">
+                    <span class="currency">$</span>
+                    <span class="counter" data-target="15">0</span>
+                    <span class="unit">M</span>
                 </div>
-                <div class="vm-card">
-                    <h3>🚀 Sứ mệnh</h3>
-                    <p>Democratize Technology - Làm cho công nghệ trở nên dễ tiếp cận, giúp mọi người nâng cao chất lượng cuộc sống thông qua những sản phẩm công nghệ chất lượng cao với giá cả hợp lý.</p>
-                </div>
+                <h4>Điểm Hòa Vốn</h4>
+                <p>Tối ưu hóa vận hành. Đạt điểm Break-even và bắt đầu sinh lời bền vững.</p>
+                <span class="status-badge success">Hòa vốn</span>
             </div>
         </div>
 
-        <!-- Giá trị cốt lõi -->
-        <div class="section values-section">
-            <h2>Giá trị cốt lõi</h2>
-            <div class="values-grid">
-                <div class="value-card">
-                    <div class="value-icon">🎯</div>
-                    <div class="value-title">Chất lượng</div>
-                    <div class="value-description">Cam kết chỉ cung cấp sản phẩm chính hãng, chất lượng từ các thương hiệu uy tín hàng đầu thế giới.</div>
+        <div class="fin-card glass-card fade-up" style="transition-delay: 0.4s">
+            <div class="fin-header">
+                <span class="fin-year">2028</span>
+                <div class="fin-icon">🦄</div>
+            </div>
+            <div class="fin-body">
+                <div class="revenue-box">
+                    <span class="currency">$</span>
+                    <span class="counter" data-target="50">0</span>
+                    <span class="unit">M</span>
                 </div>
-                <div class="value-card">
-                    <div class="value-icon">💎</div>
-                    <div class="value-title">Uy tín</div>
-                    <div class="value-description">Xây dựng niềm tin thông qua sự minh bạch, trung thực trong mọi giao dịch với khách hàng.</div>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon">🚀</div>
-                    <div class="value-title">Đổi mới</div>
-                    <div class="value-description">Không ngừng cải tiến công nghệ và dịch vụ để mang lại trải nghiệm tốt nhất cho khách hàng.</div>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon">❤️</div>
-                    <div class="value-title">Tận tâm</div>
-                    <div class="value-description">Đặt khách hàng làm trung tâm, luôn lắng nghe và hỗ trợ tận tình trong mọi tình huống.</div>
-                </div>
+                <h4>Series B - Silicon Valley</h4>
+                <p>Định giá 200 triệu USD. Mở rộng quy mô sang thị trường Đông Nam Á.</p>
+                <span class="status-badge info">Series B</span>
             </div>
         </div>
 
-        <!-- Đội ngũ lãnh đạo -->
-        <div class="section team-section">
-            <h2>Đội ngũ lãnh đạo</h2>
+        <div class="fin-card glass-card fade-up special-card" style="transition-delay: 0.6s">
+            <div class="fin-glow"></div> <div class="fin-header">
+                <span class="fin-year">2030</span>
+                <div class="fin-icon">🔔</div>
+            </div>
+            <div class="fin-body">
+                <div class="revenue-box">
+                    <span class="currency">$</span>
+                    <span class="counter" data-target="150">0</span>
+                    <span class="unit">M</span>
+                </div>
+                <h4>IPO - Go Public</h4>
+                <p>Niêm yết tại HOSE hoặc Singapore. Khẳng định vị thế Tech Unicorn.</p>
+                <span class="status-badge gold">IPO</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <section class="section team-section">
+            <h2 class="section-title fade-up">Những Người Dẫn Đầu</h2>
             <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-avatar">NK</div>
-                    <div class="member-name">Nguyễn Đức Khánh</div>
-                    <div class="member-position">CEO & Founder</div>
-                    <div class="member-description">Với hơn 15 năm kinh nghiệm trong lĩnh vực công nghệ và thương mại điện tử. Tốt nghiệp MBA từ ĐH Stanford và từng làm việc tại các tập đoàn công nghệ lớn.</div>
+                <div class="team-card glass-card fade-up">
+                    <div class="member-img">NH</div>
+                    <div class="member-info">
+                        <h3>LÊ NHẬT HẢI</h3>
+                        <span class="position">Founder & CEO</span>
+                        <p>Stanford MBA. 15 năm kinh nghiệm Tech Lead.</p>
+                    </div>
                 </div>
-                <div class="team-member">
-                    <div class="member-avatar">LA</div>
-                    <div class="member-name">Huỳnh Ngọc Lan Anh</div>
-                    <div class="member-position">CTO</div>
-                    <div class="member-description">Chuyên gia công nghệ với 12 năm kinh nghiệm phát triển hệ thống e-commerce. Tốt nghiệp Thạc sĩ Khoa học Máy tính từ ĐH Bách khoa Hà Nội.</div>
+                <div class="team-card glass-card fade-up" style="transition-delay: 0.1s">
+                    <div class="member-img">VT</div>
+                    <div class="member-info">
+                        <h3>NGUYỄN VÂN THIÊN</h3>
+                        <span class="position">CTO</span>
+                        <p>Thạc sĩ Khoa học máy tính. Kiến trúc sư hệ thống.</p>
+                    </div>
                 </div>
-                <div class="team-member">
-                    <div class="member-avatar">DD</div>
-                    <div class="member-name">Điểu Đinh</div>
-                    <div class="member-position">CMO</div>
-                    <div class="member-description">Chuyên gia marketing số với 10 năm kinh nghiệm trong lĩnh vực thương mại điện tử. Đã xây dựng thành công nhiều thương hiệu công nghệ tại Việt Nam.</div>
+                <div class="team-card glass-card fade-up" style="transition-delay: 0.2s">
+                    <div class="member-img">VT</div>
+                    <div class="member-info">
+                        <h3>NGUYỄN VĂN THI</h3>
+                        <span class="position">CMO</span>
+                        <p>Chuyên gia Growth Hacking & Digital Marketing.</p>
+                    </div>
                 </div>
-                <div class="team-member">
-                    <div class="member-avatar">LH</div>
-                    <div class="member-name">Lê Nhật Hải</div>
-                    <div class="member-position">Thành Viên</div>
-                    <div class="member-description">Chuyên viên phát triển sản phẩm với kinh nghiệm trong việc nghiên cứu thị trường và phân tích xu hướng công nghệ.</div>
+                 <div class="team-card glass-card fade-up" style="transition-delay: 0.3s">
+                    <div class="member-img">HN</div>
+                    <div class="member-info">
+                        <h3>Lê HOÀI NAM</h3>
+                        <span class="position">Product Lead</span>
+                        <p>Nghiên cứu xu hướng và trải nghiệm người dùng.</p>
+                    </div>
                 </div>
-                <div class="team-member">
-                    <div class="member-avatar">LK</div>
-                    <div class="member-name">Lê Trung Kiên</div>
-                    <div class="member-position">Thành Viên</div>
-                    <div class="member-description">Chuyên gia về logistics và chuỗi cung ứng, đảm bảo việc giao hàng nhanh chóng và chất lượng dịch vụ khách hàng.</div>
+                
+                 <div class="team-card glass-card fade-up" style="transition-delay: 0.3s">
+                    <div class="member-img">TT</div>
+                    <div class="member-info">
+                        <h3>NGUYỄN TRUNG THIỆN</h3>
+                        <span class="position">Product Lead</span>
+                        <p>Nghiên cứu xu hướng và trải nghiệm người dùng.</p>
+                    </div>
                 </div>
             </div>
+        </section>
+    </main>
+
+    <footer id="fox-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>TECH<span>NOVA</span></h2>
+                <p>© 2025 All rights reserved.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Facebook</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Instagram</a>
+            </div>
         </div>
-    </div>
+    </footer>
 
-    <!-- Footer -->
-    <div id="fox-footer">
-        <p>© 2025 Fox Tech. All rights reserved.</p>
-        <p>Địa chỉ: 123 Đường Công Nghệ, Quận 1, TP.HCM | Hotline: 0123 456 789 | Email: info@foxtech.vn</p>
-        <p>
-            <a href="../index/index.php">Trang chủ</a> | 
-            <a href="../SanPham/SanPham.php">Sản phẩm</a> | 
-            <a href="#">Giới thiệu</a> | 
-            <a href="../chinhsachbaomat/chinhsachbaomat.html">Chính sách bảo mật</a> |
-            <a href="../LienHe/LienHe.html">Liên hệ</a>
-        </p>
-        <p style="margin-top: 20px;">
-            <strong>Theo dõi chúng tôi:</strong>
-            <a href="#">Facebook</a> | 
-            <a href="#">Instagram</a> | 
-            <a href="#">LinkedIn</a> | 
-            <a href="#">YouTube</a>
-        </p>
-    </div>
-</div>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const toggle = document.getElementById("user-toggle");
-    const menu = document.querySelector(".dropdown-menu");
-
-    if (toggle && menu) {
-        toggle.addEventListener("click", function(e) {
-            e.preventDefault();
-            menu.style.display = (menu.style.display === "none" || menu.style.display === "") ? "block" : "none";
-        });
-
-        // Đóng menu khi click ra ngoài
-        document.addEventListener("click", function(e) {
-            if (!toggle.contains(e.target) && !menu.contains(e.target)) {
-                menu.style.display = "none";
-            }
-        });
-    }
-});
-</script>
-
+    <script src="Gioithieu.js"></script>
 </body>
 </html>

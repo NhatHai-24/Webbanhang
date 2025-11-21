@@ -23,73 +23,10 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Đơn hàng của tôi</title>
-    <link rel="stylesheet" href="../index/index.css">
-    <style>
-        .order-container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 30px;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-        }
-        .order-container h2 {
-            color: #004a80;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 30px;
-        }
-        th, td {
-            padding: 12px;
-            border: 1px solid #ccc;
-            text-align: center;
-            font-size: 14px;
-        }
-        th {
-            background-color: #004a80; /* Màu xanh Fox Tech */
-            color: white;
-        }
-        
-        /* Trạng thái đơn hàng */
-        .status-badge {
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        .st-cho-xac-nhan { background: #fff3cd; color: #856404; }
-        .st-da-giao { background: #d4edda; color: #155724; }
-        .st-dang-giao { background: #cce5ff; color: #004085; }
-        .st-da-huy { background: #f8d7da; color: #721c24; }
-
-        /* Các nút bấm */
-        .btn-action {
-            padding: 6px 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            margin: 2px;
-            font-size: 13px;
-            font-weight: bold;
-        }
-        .btn-view { background-color: #17a2b8; color: white; } /* Màu xanh xem chi tiết */
-        .btn-cancel { background-color: #e53935; color: white; } /* Màu đỏ hủy */
-        
-        /* Dropdown User */
-        .user-dropdown { position: relative; }
-        .user-dropdown .dropdown-menu { display: none; position: absolute; top: 100%; right: 0; background-color: #004a80; border: 1px solid #007acc; min-width: 180px; border-radius: 0 0 6px 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 999; }
-        .user-dropdown .dropdown-menu li a { display: block; padding: 10px 15px; color: white; text-decoration: none; border-bottom: 1px solid #005fa3; font-size: 14px; }
-    </style>
+    <link rel="stylesheet" href="demo.css">
 </head>
 <body>
 <div id="fox">
-    <div id="fox-header"><img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand"></div>
     <div id="fox-nav">
         <ul>
             <li><a href="../index/index.php">Trang chủ</a></li>
@@ -181,7 +118,7 @@ $result = $stmt->get_result();
     </div>
 
     <div id="fox-footer">
-        <p>© 2025 Fox Tech. All rights reserved.</p>
+        <p>© 2025 TECHNOVA. All rights reserved.</p>
     </div>
 </div>
 

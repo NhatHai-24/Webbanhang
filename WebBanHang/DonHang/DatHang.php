@@ -121,37 +121,11 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <title>Đặt hàng thành công</title>
-    <link rel="stylesheet" href="../index/index.css">
-    <style>
-        .success-container { max-width: 800px; margin: 50px auto; background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .success-header { text-align: center; border-bottom: 2px dashed #ddd; padding-bottom: 20px; margin-bottom: 20px; }
-        .success-icon { font-size: 60px; color: #4CAF50; margin-bottom: 10px; }
-        .success-title { font-size: 24px; color: #333; font-weight: bold; }
-        .order-info { margin-bottom: 20px; font-size: 15px; line-height: 1.6; }
-        .item-list { border: 1px solid #eee; border-radius: 5px; overflow: hidden; }
-        .item { display: flex; padding: 15px; border-bottom: 1px solid #eee; align-items: center; }
-        .item:last-child { border-bottom: none; }
-        .item-img img { width: 60px; height: 60px; object-fit: cover; border-radius: 4px; margin-right: 15px; }
-        .item-info { flex: 1; }
-        .item-name { font-weight: bold; color: #333; }
-        .item-price { font-weight: bold; color: #e53935; }
-        .total-section { text-align: right; margin-top: 20px; font-size: 18px; font-weight: bold; }
-        .btn-group { margin-top: 30px; text-align: center; display: flex; gap: 15px; justify-content: center; }
-        .btn { padding: 10px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; }
-        .btn-primary { background: #004a80; color: white; }
-        .btn-outline { border: 1px solid #004a80; color: #004a80; background: white; }
-        .btn:hover { opacity: 0.9; }
-        
-        /* Dropdown User */
-        .user-dropdown { position: relative; }
-        .user-dropdown .dropdown-menu { display: none; position: absolute; top: 100%; right: 0; background-color: #004a80; border: 1px solid #007acc; min-width: 180px; z-index: 999; }
-        .user-dropdown .dropdown-menu li a { display: block; padding: 10px 15px; color: white; text-decoration: none; }
-    </style>
+    <link rel="stylesheet" href="demo.css">
 </head>
 <body>
 
 <div id="fox">
-    <div id="fox-header"><img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand"></div>
     <div id="fox-nav">
         <ul>
             <li><a href="../index/index.php">Trang chủ</a></li>
@@ -213,7 +187,7 @@ if (isset($_GET['id'])) {
     </div>
 
     <div id="fox-footer">
-        <p>© 2025 Fox Tech. All rights reserved.</p>
+        <p>© 2025 TECHNOVA. All rights reserved.</p>
     </div>
 </div>
 

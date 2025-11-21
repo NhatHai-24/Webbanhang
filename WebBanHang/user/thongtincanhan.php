@@ -89,9 +89,6 @@ if (isset($_POST["update"])) {
 <body>
 <div id="fox">
   <!-- Header -->
-  <div id="fox-header">
-    <img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand" />
-  </div>
 
   <!-- Navigation -->
   <div id="fox-nav">
@@ -129,8 +126,8 @@ if (isset($_POST["update"])) {
   </div>
 
   <div id="fox-footer">
-    <p>© 2025 Fox Tech. All rights reserved.</p>
-    <p>Địa chỉ: 123 Đường Công Nghệ, TP.HCM | Hotline: 0123 456 789</p>
+    <p>© 2025 TECHNOVA. All rights reserved.</p>
+    <p>Địa chỉ: 123 Đường Nguyễn Trãi, TP.HCM | Hotline: 0123 456 789</p>
     <p>
       <a href="../index/index.php">Trang chủ</a> |
       <a href="../SanPham/SanPham.php">Sản phẩm</a> |

@@ -2,14 +2,13 @@
 <head>
     <meta charset="UTF-8" />
   <title>Liên hệ chúng tôi</title>
-  <link rel="stylesheet" href="Lienhe.css" />
+  <link rel="stylesheet" href="lienhe.css" />
 </head>
 <body>
+    <div id="preloader"><div class="loader"></div></div>
+<canvas id="tech-canvas"></canvas>
 <div id="fox">
     <!-- Header -->
-    <div id="fox-header">
-        <img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand" />
-    </div>
 
     <!-- Navigation -->
     <!-- Navigation -->
@@ -109,5 +108,6 @@
         this.reset();
     });
 </script>
+<script src="main.js"></script>
 </body>
 </html>

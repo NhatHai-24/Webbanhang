@@ -1,0 +1,544 @@
+/* --- 1. VARIABLES & RESET --- */
+:root {
+    --bg-dark: #0a0f1c; /* Màu nền tối thẫm (Deep Navy) */
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --accent: #38bdf8; /* Xanh Neon công nghệ */
+    --accent-glow: rgba(56, 189, 248, 0.5);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --card-hover: rgba(255, 255, 255, 0.08);
+    --font-main: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Canvas Background */
+#tech-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Nằm dưới cùng */
+}
+
+/* --- 2. NAVIGATION --- */
+#fox-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 50px;
+    z-index: 1000;
+    transition: 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+#fox-nav.scrolled {
+    background: rgba(10, 15, 28, 0.85);
+    padding: 15px 50px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: -1px;
+}
+.logo span { color: var(--accent); }
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0; height: 2px;
+    bottom: -5px; left: 0;
+    background-color: var(--accent);
+    transition: width 0.3s;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--text-primary);
+}
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+}
+
+.btn-login {
+    padding: 8px 20px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.btn-login:hover {
+    background: var(--accent);
+    color: var(--bg-dark);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* Dropdown */
+.user-dropdown { position: relative; }
+.dropdown-menu {
+    position: absolute;
+    top: 150%; right: 0;
+    background: rgba(15, 23, 42, 0.95);
+    list-style: none;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+    min-width: 180px;
+    opacity: 0; visibility: hidden;
+    transform: translateY(10px);
+    transition: 0.3s;
+}
+.user-dropdown:hover .dropdown-menu {
+    opacity: 1; visibility: visible; transform: translateY(0);
+}
+.dropdown-menu li a {
+    display: block;
+    padding: 10px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 4px;
+}
+.dropdown-menu li a:hover {
+    background: var(--glass-bg);
+    color: var(--accent);
+}
+
+/* --- 3. HERO SECTION --- */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 0 20px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+.hero-content h1 {
+    font-size: 4.5rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+.text-gradient {
+    background: linear-gradient(to right, #fff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+.stat-item h3 {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+}
+.stat-item p { color: var(--text-secondary); font-size: 0.9rem; }
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.7;
+}
+.mouse {
+    width: 26px; height: 40px;
+    border: 2px solid var(--text-secondary);
+    border-radius: 20px;
+    position: relative;
+}
+.wheel {
+    width: 4px; height: 6px;
+    background: var(--accent);
+    border-radius: 2px;
+    position: absolute;
+    top: 8px; left: 50%;
+    transform: translateX(-50%);
+    animation: scroll 1.5s infinite;
+}
+@keyframes scroll {
+    0% { top: 8px; opacity: 1; }
+    100% { top: 24px; opacity: 0; }
+}
+
+/* --- 4. COMMON SECTIONS & GLASS CARD --- */
+.section {
+    padding: 100px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+}
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 30px;
+    transition: 0.4s ease;
+}
+.glass-card:hover {
+    background: var(--card-hover);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    border-color: var(--accent);
+}
+
+/* --- 5. STORY SECTION --- */
+.story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+.story-card .icon { font-size: 3rem; margin-bottom: 20px; }
+.story-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--text-primary); }
+.story-card p { color: var(--text-secondary); }
+
+/* --- 6. TIMELINE (VERTICAL) --- */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.timeline-line {
+    position: absolute;
+    left: 50%; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--glass-border);
+    transform: translateX(-50%);
+}
+.timeline-item {
+    margin-bottom: 50px;
+    position: relative;
+    width: 50%;
+}
+.timeline-item:nth-child(odd) { left: 0; padding-right: 40px; text-align: right; }
+.timeline-item:nth-child(even) { left: 50%; padding-left: 40px; text-align: left; }
+
+.timeline-dot {
+    position: absolute;
+    width: 16px; height: 16px;
+    background: var(--accent);
+    border-radius: 50%;
+    top: 20px;
+    box-shadow: 0 0 15px var(--accent);
+}
+.timeline-item:nth-child(odd) .timeline-dot { right: -8px; }
+.timeline-item:nth-child(even) .timeline-dot { left: -8px; }
+
+.timeline-content .year {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+/* --- 7. TEAM SECTION --- */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+.team-card { text-align: center; }
+.member-img {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border: 2px solid var(--accent);
+    margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold; font-size: 1.5rem;
+    color: var(--accent);
+}
+.position {
+    display: block;
+    color: var(--accent);
+    font-size: 0.9rem;
+    margin: 5px 0 15px;
+}
+
+/* --- 8. FOOTER --- */
+#fox-footer {
+    border-top: 1px solid var(--glass-border);
+    padding: 50px 20px;
+    margin-top: 50px;
+    background: rgba(10, 15, 28, 0.8);
+}
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.footer-brand h2 span { color: var(--accent); }
+.footer-links a {
+    color: var(--text-secondary);
+    margin-left: 20px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.footer-links a:hover { color: var(--accent); }
+
+/* --- 9. ANIMATIONS --- */
+.fade-up, .fade-right, .fade-left {
+    opacity: 0;
+    transition: all 0.8s ease-out;
+}
+.fade-up { transform: translateY(50px); }
+.fade-right { transform: translateX(-50px); }
+.fade-left { transform: translateX(50px); }
+
+.visible { opacity: 1; transform: translate(0); }
+
+/* --- 10. RESPONSIVE --- */
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 2.5rem; }
+    .story-grid { grid-template-columns: 1fr; }
+    
+    /* Timeline Mobile */
+    .timeline-line { left: 20px; }
+    .timeline-item { width: 100%; left: 0 !important; padding-left: 50px !important; text-align: left !important; }
+    .timeline-item .timeline-dot { left: 12px !important; }
+    
+    /* Nav */
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background: var(--bg-dark); padding: 20px; border-bottom: 1px solid var(--glass-border); }
+    .nav-links.active { display: flex; }
+    .menu-toggle { display: block; cursor: pointer; }
+    .bar { width: 25px; height: 3px; background: var(--text-primary); margin: 5px 0; }
+}
+@media (min-width: 769px) {
+    .menu-toggle { display: none; }
+}
+
+/* --- 11. CUSTOM SCROLLBAR (Thêm vào cuối file CSS) --- */
+/* Độ rộng của thanh cuộn */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Nền của rãnh cuộn (trùng màu nền web) */
+::-webkit-scrollbar-track {
+    background: var(--bg-dark); 
+}
+
+/* Thanh trượt (Màu xanh neon) */
+::-webkit-scrollbar-thumb {
+    background: var(--accent); 
+    border-radius: 4px;
+    border: 2px solid var(--bg-dark); /* Tạo khoảng cách viền giúp thanh thanh thoát hơn */
+}
+
+/* Khi di chuột vào thanh trượt */
+::-webkit-scrollbar-thumb:hover {
+    background: #0ea5e9; /* Xanh đậm hơn chút */
+}
+
+/* =========================================
+   12. FINANCIAL SECTION (Thêm mới)
+   ========================================= */
+
+.fin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 50px;
+}
+
+.fin-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 320px;
+    overflow: hidden; /* Để chứa hiệu ứng glow */
+}
+
+.fin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 15px;
+}
+
+.fin-year {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-secondary); /* Mặc định màu xám */
+    font-family: monospace; /* Phông chữ số kỹ thuật */
+}
+
+/* Khi hover vào thẻ thì năm sáng lên */
+.fin-card:hover .fin-year {
+    color: var(--text-primary);
+    text-shadow: 0 0 10px var(--accent);
+}
+
+.fin-icon {
+    font-size: 1.5rem;
+}
+
+.revenue-box {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 15px;
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+}
+
+.revenue-box .currency, 
+.revenue-box .unit {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.fin-body h4 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+
+.fin-body p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Badges (Nhãn trạng thái) */
+.status-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status-badge.warning { 
+    background: rgba(255, 99, 71, 0.15); color: #ff6347; border: 1px solid #ff6347; 
+}
+.status-badge.success { 
+    background: rgba(46, 204, 113, 0.15); color: #2ecc71; border: 1px solid #2ecc71; 
+}
+.status-badge.info { 
+    background: rgba(56, 189, 248, 0.15); color: var(--accent); border: 1px solid var(--accent); 
+}
+.status-badge.gold { 
+    background: rgba(255, 215, 0, 0.15); color: #ffd700; border: 1px solid #ffd700; 
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+/* --- Hiệu ứng đặc biệt cho thẻ IPO 2030 --- */
+.special-card {
+    border-color: rgba(255, 215, 0, 0.3);
+}
+.special-card .revenue-box {
+    color: #ffd700; /* Màu vàng kim */
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+.special-card .fin-year {
+    color: #ffd700;
+}
+
+/* Hiệu ứng nền phát sáng xoay tròn cho thẻ IPO */
+.fin-glow {
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 60%);
+    animation: rotateGlow 10s linear infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes rotateGlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive cho Mobile */
+@media (max-width: 768px) {
+    .fin-grid {
+        grid-template-columns: 1fr; /* Xếp chồng lên nhau */
+    }
+    .revenue-box {
+        font-size: 2.5rem;
+    }
+}

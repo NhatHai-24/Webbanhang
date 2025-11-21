@@ -5,11 +5,10 @@
     <link rel="stylesheet" href="chinhsachbaomat.css" />
 </head>
 <body>
+    <div id="preloader"><div class="loader"></div></div>
+<canvas id="tech-canvas"></canvas>
 <div id="fox">
     <!-- Header -->
-    <div id="fox-header">
-        <img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand" />
-    </div>
 
     <!-- Navigation -->
     <!-- Navigation -->
@@ -46,7 +45,7 @@
     <!-- Privacy Policy Content -->
     <div id="fox-body">
         <h1>Chính sách bảo mật</h1>
-        <p>Fox Tech cam kết bảo vệ thông tin cá nhân của khách hàng. Chính sách này giải thích cách chúng tôi thu thập, sử dụng và bảo vệ thông tin của bạn khi truy cập website.</p>
+        <p>TECHNOVA cam kết bảo vệ thông tin cá nhân của khách hàng. Chính sách này giải thích cách chúng tôi thu thập, sử dụng và bảo vệ thông tin của bạn khi truy cập website.</p>
         <h2>1. Thu thập thông tin</h2>
         <p>Chúng tôi có thể thu thập các thông tin như: họ tên, email, số điện thoại, địa chỉ khi bạn đăng ký tài khoản hoặc mua hàng.</p>
         <h2>2. Mục đích sử dụng thông tin</h2>
@@ -62,13 +61,13 @@
         <h2>5. Quyền của khách hàng</h2>
         <p>Bạn có quyền kiểm tra, cập nhật hoặc yêu cầu xóa thông tin cá nhân của mình bất cứ lúc nào bằng cách liên hệ với chúng tôi.</p>
         <h2>6. Liên hệ</h2>
-        <p>Nếu có thắc mắc về chính sách bảo mật, vui lòng liên hệ: <b>support@foxtech.vn</b> hoặc hotline <b>0123 456 789</b>.</p>
+        <p>Nếu có thắc mắc về chính sách bảo mật, vui lòng liên hệ: <b>support@technova.vn</b> hoặc hotline <b>0123 456 789</b>.</p>
     </div>
 
     <!-- Footer -->
     <div id="fox-footer">
-        <p>© 2025 Fox Tech. All rights reserved.</p>
-        <p>Địa chỉ: 123 Đường Công Nghệ, TP.HCM | Hotline: 0123 456 789 | Email: support@foxtech.vn</p>
+        <p>© 2025 TECHNOVA. All rights reserved.</p>
+        <p>Địa chỉ: 123 Đường Nguyễn Trãi, TP.HCM | Hotline: 0123 456 789 | Email: support@technova.vn</p>
         <p>
             <a href="../index/index.php">Trang chủ</a> | 
             <a href="../SanPham/SanPham.php">Sản phẩm</a> | 
@@ -105,6 +104,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 </script>
-
+<script src="chinhsachbaomat.js"></script>
 </body>
 </html>

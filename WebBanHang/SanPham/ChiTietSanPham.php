@@ -56,7 +56,7 @@ if (strpos($videoLink, 'watch?v=') !== false) {
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($product['ten_san_pham'] ?? 'Chi tiết sản phẩm') ?></title>
     <link rel="stylesheet" href="../index/index.css">
-    <link rel="stylesheet" href="ChiTietSanPham.css">
+    <link rel="stylesheet" href="chitTietSanPham.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
     $(document).ready(function() {
@@ -77,8 +77,8 @@ if (strpos($videoLink, 'watch?v=') !== false) {
     </script>
 </head>
 <body>
-<div id="fox">
-    <div id="fox-header"><img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand" /></div>
+    <div id="preloader"><div class="loader"></div></div>
+<canvas id="tech-canvas"></canvas>
     <div id="fox-nav">
         <ul>
             <li><a href="../index/index.php">Trang chủ</a></li>
@@ -135,7 +135,7 @@ if (strpos($videoLink, 'watch?v=') !== false) {
                         <div class="variant-wrapper">
                             <label for="id_bien_the">Chọn biến thể:</label>
                             <select name="id_bien_the" id="id_bien_the" required>
-                                <option value="" disabled selected>-- Chọn biến thể --</option>
+                                <option value="" disabled selected>-- Chọn màu --</option>
                                 <?php foreach ($variants as $v): ?>
                                     <option value="<?= $v['id_bien_the'] ?>"><?= htmlspecialchars($v['mau_sac']) ?> - Kho: <?= $v['so_luong_ton_kho'] ?></option>
                                 <?php endforeach; ?>
@@ -209,7 +209,7 @@ if (strpos($videoLink, 'watch?v=') !== false) {
         <p style="text-align:center; margin: 50px 0; font-size: 18px;">Không tìm thấy sản phẩm.</p>
     <?php endif; ?>
 
-    <div id="fox-footer"><p>© 2025 Fox Tech. All rights reserved.</p></div>
+    <div id="fox-footer"><p>© 2025 TECHNOVA. All rights reserved.</p></div>
 </div>
 
 <div id="successCartMsg" style="display:none; position:fixed; top:30%; left:50%; transform:translate(-50%,-50%); background:#fff; border:2px solid #4CAF50; padding:30px 40px; border-radius:10px; box-shadow:0 4px 16px rgba(0,0,0,0.2); z-index:9999; text-align:center;">
@@ -277,5 +277,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 </script>
+<script src="sanpham.js"></script>
 </body>
 </html>

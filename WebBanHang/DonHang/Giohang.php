@@ -102,70 +102,10 @@ while ($row = $result->fetch_assoc()) { $cart_items[] = $row; }
 <head>
     <meta charset="UTF-8">
     <title>Giỏ hàng của tôi</title>
-    <link rel="stylesheet" href="../index/index.css">
-    <style>
-        /* CSS Gốc của Giỏ hàng */
-        .cart-container { max-width: 1140px; margin: 40px auto; padding: 20px; background: #f7f7f7; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
-        .cart-container h2 { color: #004a80; text-align: center; margin-bottom: 25px; }
-        .cart-header { display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid #ddd; margin-bottom: 15px; font-weight: bold; color: #555; background: #fff; }
-        .col-select { width: 5%; text-align: center; }
-        .col-product { width: 45%; text-align: left; padding-left: 10px; }
-        .col-price { width: 15%; text-align: center; }
-        .col-quantity { width: 15%; text-align: center; }
-        .col-total { width: 15%; text-align: center; color: #e53935; }
-        .col-actions { width: 5%; text-align: center; }
-        .store-item { background-color: #fff; border-radius: 8px; margin-bottom: 15px; padding: 20px; }
-        .product-item { display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid #f0f0f0; }
-        .product-thumb img { width: 80px; height: 80px; object-fit: cover; border-radius: 4px; margin-right: 15px; }
-        .product-details .name { font-weight: 600; color: #333; margin-bottom: 5px; }
-        .quantity-control { display: flex; align-items: center; justify-content: center; }
-        .btn-qty { display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border: 1px solid #ccc; background: #fff; color: #333; text-decoration: none !important; }
-        .quantity-control input { width: 40px; height: 30px; text-align: center; border: 1px solid #ccc; margin: 0; outline: none; }
-        .cart-footer { background: #fff; padding: 20px; margin-top: 20px; display: flex; justify-content: flex-end; align-items: center; position: sticky; bottom: 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
-        .total-price { font-size: 20px; color: #e53935; font-weight: bold; margin: 0 20px 0 10px; }
-        .btn-checkout { padding: 12px 30px; background: #e53935; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; font-weight: bold; }
-        
-        /* === CSS CHO CHECKOUT MODAL (MỚI) === */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
-        .modal-content { background-color: #fefefe; margin: 5% auto; border-radius: 8px; width: 90%; max-width: 900px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: slideDown 0.3s ease-out; }
-        @keyframes slideDown { from {top: -50px; opacity: 0;} to {top: 0; opacity: 1;} }
-        
-        .modal-header { padding: 15px 20px; border-bottom: 1px solid #eee; background: #004a80; color: white; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center; }
-        .modal-header h3 { margin: 0; font-size: 18px; }
-        .close-modal { color: white; font-size: 28px; font-weight: bold; cursor: pointer; }
-        
-        .modal-body { display: flex; flex-wrap: wrap; padding: 20px; gap: 30px; }
-        .col-left { flex: 1; min-width: 300px; border-right: 1px solid #eee; padding-right: 20px; }
-        .col-right { flex: 0.8; min-width: 250px; }
-
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: #333; }
-        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; box-sizing: border-box; }
-        
-        .payment-methods { margin-top: 10px; }
-        .payment-option { display: flex; align-items: center; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; }
-        .payment-option:hover { background: #f9f9f9; border-color: #004a80; }
-        .payment-option input { width: auto; margin-right: 10px; }
-
-        .order-summary-list { max-height: 300px; overflow-y: auto; margin-bottom: 15px; border: 1px solid #eee; padding: 10px; border-radius: 4px; }
-        .summary-item { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; border-bottom: 1px dashed #eee; padding-bottom: 5px; }
-        .summary-total { border-top: 2px solid #ddd; padding-top: 15px; margin-top: 10px; }
-        .row-total { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 15px; }
-        .final-price { color: #e53935; font-size: 22px; font-weight: bold; }
-
-        .modal-footer { padding: 15px 20px; border-top: 1px solid #eee; text-align: right; background: #f9f9f9; border-radius: 0 0 8px 8px; }
-        .btn-cancel { padding: 10px 20px; background: #ccc; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; margin-right: 10px; color: #333; }
-        .btn-confirm { padding: 10px 25px; background: #e53935; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; color: white; }
-        
-        /* Dropdown User (Giữ nguyên) */
-        .user-dropdown { position: relative; }
-        .user-dropdown .dropdown-menu { display: none; position: absolute; top: 100%; right: 0; background-color: #004a80; border: 1px solid #007acc; min-width: 180px; z-index: 999; }
-        .user-dropdown .dropdown-menu li a { display: block; padding: 10px 15px; color: white; text-decoration: none; }
-    </style>
+    <link rel="stylesheet" href="demo.css">
 </head>
 <body>
 <div id="fox">
-    <div id="fox-header"><img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand"></div>
      <div id="fox-nav">
         <ul>
             <li><a href="../index/index.php">Trang chủ</a></li>

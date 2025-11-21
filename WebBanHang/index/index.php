@@ -29,9 +29,7 @@ $result = $conn->query($sql);
 <body>
 <div id="fox">
     <!-- Header -->
-    <div id="fox-header">
-        <img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand" />
-    </div>
+    
 
     <!-- Navigation -->
     <div id="fox-nav">
@@ -63,7 +61,7 @@ $result = $conn->query($sql);
 
     <!-- Hero Section -->
     <div id="fox-body">
-        <h1>Chào mừng đến với Fox Tech</h1>
+        <h1>Chào mừng đến với TECHNOVA</h1>
         <p>Sản phẩm công nghệ chất lượng cao, giá tốt nhất</p>
         <a href="#products" class="btn">Khám phá ngay</a>
     </div>
@@ -71,7 +69,7 @@ $result = $conn->query($sql);
     <!-- About -->
     <div id="about">
         <h2>Về chúng tôi</h2>
-        <p>Fox Tech cung cấp sản phẩm công nghệ đa dạng: laptop, điện thoại, thiết bị thông minh...</p>
+        <p>TECHNOVA cung cấp sản phẩm công nghệ đa dạng: laptop, điện thoại, thiết bị thông minh...</p>
     </div>
 
     <!-- News & Login -->
@@ -82,7 +80,7 @@ $result = $conn->query($sql);
             <div class="news-list">
                 <div class="news-item">
                     <h3>Ra mắt sản phẩm mới</h3>
-                    <p>Fox Tech vừa giới thiệu mẫu laptop thế hệ mới với hiệu năng vượt trội...</p>
+                    <p>TECHNOVA vừa giới thiệu mẫu laptop thế hệ mới với hiệu năng vượt trội...</p>
                     <a href="#" class="btn-detail">Đọc thêm</a>
                 </div>
                 <div class="news-item">
@@ -130,8 +128,8 @@ $result = $conn->query($sql);
 
 <!-- Footer -->
 <div id="fox-footer">
-    <p>© 2025 Fox Tech. All rights reserved.</p>
-    <p>Địa chỉ: 123 Đường Công Nghệ, TP.HCM | Hotline: 0123 456 789 | Email: support@foxtech.vn</p>
+    <p>© 2025 TECHNOVA. All rights reserved.</p>
+    <p>Địa chỉ: 123 Đường Nguyễn Trãi, TP.HCM | Hotline: 0123 456 789 | Email: support@technova.vn</p>
     <p>
             <a href="../index/index.html">Trang chủ</a> |
             <a href="../SanPham/SanPham.php">Sản phẩm</a> |
@@ -168,5 +166,6 @@ $result = $conn->query($sql);
     }
 });
 </script>
+<script src="index.js"></script>
 </body>
 </html>

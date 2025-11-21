@@ -49,7 +49,7 @@ $conn->close();
     <meta charset="UTF-8">
     <title>Sản phẩm - Fox Tech</title>
     <link rel="stylesheet" href="../index/index.css">
-    <link rel="stylesheet" href="SanPham.css">
+    <link rel="stylesheet" href="sanpham.css">
     <script src="../jquery-3.7.1.min.js"></script>
     <style>
         #filter-bar {
@@ -75,10 +75,10 @@ $conn->close();
     </style>
 </head>
 <body>
+    <div id="preloader"><div class="loader"></div></div>
+<canvas id="tech-canvas"></canvas>
 <div id="fox">
-    <div id="fox-header">
-        <img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand">
-    </div>
+    
 
     <div id="fox-nav">
     <ul>
@@ -149,8 +149,8 @@ $conn->close();
     </div>
 
     <div id="fox-footer">
-        <p>© 2025 Fox Tech. All rights reserved.</p>
-        <p>Địa chỉ: 123 Đường Công Nghệ, TP.HCM | Hotline: 0123 456 789 | Email: support@foxtech.vn</p>
+        <p>© 2025 TECHNOVA. All rights reserved.</p>
+        <p>Địa chỉ: 123 Đường Nguyễn Trãi, TP.HCM | Hotline: 0123 456 789 | Email: support@technova.vn</p>
         <p>
             <a href="../index/index.html">Trang chủ</a> |
             <a href="../SanPham/SanPham.php">Sản phẩm</a> |
@@ -229,5 +229,6 @@ $(document).ready(function () {
     }
 });
 </script>
+<script src="sanpham.js"></script>
 </body>
 </html>

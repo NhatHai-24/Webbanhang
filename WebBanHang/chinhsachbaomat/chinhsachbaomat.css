@@ -1,127 +1,169 @@
+/* =========================================
+   GLOBAL VARIABLES & RESET (Dán vào đầu tất cả file CSS)
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
 
-/* ===== Container ===== */
-#fox {
-    margin: auto;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* đổ bóng nhẹ */
+:root {
+    --bg-dark: #0a0f1c;       /* Nền tối chủ đạo */
+    --text-primary: #ffffff;  /* Chữ trắng */
+    --text-secondary: #94a3b8;/* Chữ xám xanh */
+    --accent: #38bdf8;        /* Màu nhấn (Neon Blue) */
+    --accent-glow: rgba(56, 189, 248, 0.5);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --card-hover: rgba(255, 255, 255, 0.08);
+    --font-main: 'Inter', sans-serif;
 }
-/* ===== Header ===== */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    line-height: 1.6;
+}
+
+/* Layout Wrapper */
+#fox {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    background: transparent; /* Bỏ nền trắng cũ */
+    box-shadow: none;
+}
+
+/* --- HEADER & NAV --- */
 #fox-header {
     text-align: center;
-    background-color: #007acc;
     padding: 20px 0;
+    background: radial-gradient(circle at center, #1e293b 0%, var(--bg-dark) 70%);
 }
 
-#fox-header img {
-    max-height: 80px;
-}
-
-/* ===== Navigtion ===== */
 #fox-nav {
-    background-color: #004a80;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--glass-border);
 }
 
 #fox-nav ul {
-    list-style: none;
     display: flex;
     justify-content: center;
+    list-style: none;
     padding: 0;
-}
-
-#fox-nav ul li {
-    flex: 1;
-    text-align: center;
-    min-width: 120px;
 }
 
 #fox-nav ul li a {
     display: block;
-    padding: 12px 10px;
-    color: white;
+    padding: 15px 25px;
+    color: var(--text-secondary);
     text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-#fox-nav ul li a:hover {
-    background-color: #005fa3;
-    border-radius: 5px;
-}
-/* ===== Nội dung Chính sách bảo mật ===== */
-#fox-body {
-    padding: 40px 32px 32px 32px;
-    background: linear-gradient(135deg, #e6f2ff 0%, #f8fbff 100%);
-    margin:  auto;
-    border-radius: 10px;
-    box-sizing: border-box;
-}
-
-#fox-body h1 {
-    color: #007acc;
-    margin-bottom: 24px;
-    font-size: 2.2em;
-    text-align: center;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-#fox-body h2 {
-    color: #004a80;
-    margin-top: 32px;
-    margin-bottom: 12px;
-    font-size: 1.3em;
+    font-weight: 600;
+    transition: 0.3s;
     position: relative;
-    padding-left: 10px;
 }
 
-#fox-body h2::before {
-    content: '';
-    display: inline-block;
-    width: 6px;
-    height: 22px;
-    background: #007acc;
-    border-radius: 3px;
-    margin-right: 10px;
-    vertical-align: middle;
+#fox-nav ul li a:hover, #fox-nav ul li a.active {
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent-glow);
 }
 
-#fox-body p, #fox-body ul {
-    color: #444;
-    font-size: 1.07em;
-    line-height: 1.7;
-    margin-bottom: 12px;
+/* Dropdown Menu */
+.user-dropdown { position: relative; }
+.dropdown-menu {
+    background: #1e293b !important;
+    border: 1px solid var(--glass-border);
+    min-width: 200px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    top: 100%; left: 0;
+    position: absolute;
+    z-index: 999;
+}
+.dropdown-menu li a {
+    color: var(--text-primary) !important;
+    padding: 12px 20px !important;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.dropdown-menu li a:hover {
+    background: var(--glass-bg);
+    color: var(--accent) !important;
 }
 
-#fox-body ul {
-    padding-left: 28px;
-    margin-bottom: 18px;
-}
-
-#fox-body b {
-    color: #007acc;
-}
-
-/* ===== Footer ===== */
+/* --- FOOTER --- */
 #fox-footer {
-    background-color: #004a80;
-    color: white;
+    background: #0f172a;
+    border-top: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    padding: 40px 20px;
     text-align: center;
-    padding: 28px 10px;
-    font-size: 0.98em;
+    margin-top: 60px;
+}
+#fox-footer a { color: var(--text-secondary); text-decoration: none; margin: 0 10px; transition: 0.3s; }
+#fox-footer a:hover { color: var(--accent); }
+
+#fox-body {
+    max-width: 1000px; margin: 50px auto; padding: 40px;
+    background: var(--glass-bg);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
 }
 
-#fox-footer p {
-    margin-bottom: 10px;
+h1 { color: var(--accent); text-align: center; margin-bottom: 30px; }
+h2 { 
+    color: var(--text-primary); font-size: 1.4rem; 
+    margin-top: 30px; margin-bottom: 15px;
+    border-left: 4px solid var(--accent); padding-left: 15px;
 }
 
-#fox-footer a {
-    color: #aad4ff;
-    text-decoration: none;
-    margin: 0 5px;
-    transition: color 0.3s ease;
+p, li { color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 10px; }
+ul { padding-left: 20px; }
+
+/* =========================================
+   JS SUPPORT STYLES (Thêm vào cuối CSS dùng chung)
+   ========================================= */
+
+/* --- Preloader --- */
+#preloader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #0a0f1c; z-index: 9999;
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.5s ease;
+}
+.loader {
+    width: 50px; height: 50px;
+    border: 3px solid rgba(56, 189, 248, 0.3);
+    border-top: 3px solid var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* --- Canvas Background --- */
+#tech-canvas {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; pointer-events: none;
 }
 
-#fox-footer a:hover {
-    color: white;
-    text-decoration: underline;
+/* --- Scroll Reveal Animations --- */
+.fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
 
+/* --- Back to Top Button --- */
+#back-to-top {
+    position: fixed; bottom: 30px; right: 30px;
+    width: 45px; height: 45px;
+    background: var(--accent); border: none; border-radius: 50%;
+    color: #000; font-size: 1.2rem; font-weight: bold;
+    cursor: pointer; opacity: 0; visibility: hidden;
+    transition: 0.3s; box-shadow: 0 0 15px var(--accent-glow);
+    z-index: 990;
+}
+#back-to-top.show { opacity: 1; visibility: visible; }
+#back-to-top:hover { transform: translateY(-5px); background: #fff; }

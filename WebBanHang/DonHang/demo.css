@@ -1,0 +1,248 @@
+/* =========================================
+   GLOBAL VARIABLES & RESET
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+:root {
+    --bg-dark: #0a0f1c;
+    --bg-card: rgba(30, 41, 59, 0.6);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --accent: #38bdf8; /* Neon Blue */
+    --accent-hover: #0ea5e9;
+    --danger: #ef4444;
+    --success: #22c55e;
+    --warning: #eab308;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+    --font-main: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Links */
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+ul { list-style: none; }
+
+/* Layout Wrapper */
+#fox { width: 100%; max-width: 100%; overflow-x: hidden; }
+
+/* =========================================
+   HEADER & NAVIGATION
+   ========================================= */
+#fox-header {
+    text-align: center; padding: 20px 0;
+    background: radial-gradient(circle at center, #1e293b 0%, var(--bg-dark) 70%);
+}
+
+#fox-nav {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    position: sticky; top: 0; z-index: 1000;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+#fox-nav ul { display: flex; justify-content: center; padding: 0; margin: 0; }
+
+#fox-nav ul li a {
+    display: block; padding: 15px 25px;
+    color: var(--text-secondary); font-weight: 600;
+}
+#fox-nav ul li a:hover { color: var(--accent); text-shadow: 0 0 10px rgba(56, 189, 248, 0.4); }
+
+/* User Dropdown */
+.user-dropdown { position: relative; }
+.user-dropdown .dropdown-menu {
+    background: #1e293b !important;
+    border: 1px solid var(--glass-border);
+    min-width: 200px;
+    position: absolute; top: 100%; right: 0;
+    box-shadow: var(--card-shadow);
+    display: none; z-index: 9999;
+    border-radius: 0 0 8px 8px;
+}
+.user-dropdown:hover .dropdown-menu { display: block; }
+.user-dropdown .dropdown-menu li a {
+    padding: 12px 20px; text-align: left;
+    color: var(--text-primary); border-bottom: 1px solid var(--glass-border);
+}
+.user-dropdown .dropdown-menu li a:hover {
+    background: var(--glass-bg); color: var(--accent);
+}
+
+/* =========================================
+   COMMON COMPONENTS (Buttons, Inputs, Cards)
+   ========================================= */
+h2 {
+    text-align: center; font-size: 2rem; margin-bottom: 30px;
+    color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px;
+}
+
+/* Cards */
+.cart-container, .order-container, .success-container {
+    max-width: 1200px; margin: 40px auto; padding: 30px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    color: var(--text-primary);
+}
+
+/* Buttons */
+button, .btn {
+    cursor: pointer; font-family: var(--font-main);
+    transition: all 0.3s ease; outline: none;
+}
+.btn-checkout, .btn-confirm, .btn-primary {
+    background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+    color: #000; font-weight: bold; padding: 12px 25px;
+    border: none; border-radius: 6px;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+}
+.btn-checkout:hover, .btn-confirm:hover {
+    transform: translateY(-2px); filter: brightness(1.1);
+}
+
+.btn-cancel, .btn-outline {
+    background: transparent; border: 1px solid var(--glass-border);
+    color: var(--text-secondary); padding: 10px 20px; border-radius: 6px;
+}
+.btn-cancel:hover { border-color: var(--text-primary); color: var(--text-primary); }
+
+/* Inputs */
+input[type="text"], input[type="number"], select {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary); padding: 10px;
+    border-radius: 6px; width: 100%;
+}
+input:focus { border-color: var(--accent); }
+
+/* =========================================
+   PAGE: GIỎ HÀNG (Giohang.php)
+   ========================================= */
+.cart-header {
+    display: flex; padding: 15px;
+    background: rgba(56, 189, 248, 0.1);
+    border-radius: 8px; margin-bottom: 20px;
+    font-weight: bold; color: var(--accent);
+    border: 1px solid var(--glass-border);
+}
+.col-product { width: 45%; }
+.col-price, .col-quantity, .col-total, .col-actions { width: 13.75%; text-align: center; }
+.col-select { width: 5%; text-align: center; }
+
+.product-item {
+    display: flex; align-items: center; padding: 20px 15px;
+    border-bottom: 1px solid var(--glass-border);
+    transition: 0.3s;
+}
+.product-item:hover { background: var(--glass-bg); }
+
+.product-thumb img {
+    width: 70px; height: 70px; object-fit: cover;
+    border-radius: 8px; margin-right: 15px; border: 1px solid var(--glass-border);
+}
+.product-details .name { font-weight: 600; font-size: 1rem; margin-bottom: 5px; }
+.product-details .classification { font-size: 0.85rem; color: var(--text-secondary); }
+
+/* Quantity Control */
+.quantity-control { display: flex; align-items: center; justify-content: center; }
+.btn-qty {
+    width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+    background: var(--glass-border); border-radius: 4px;
+    color: var(--text-primary); font-weight: bold;
+}
+.btn-qty:hover { background: var(--accent); color: #000; }
+.quantity-control input {
+    width: 40px; text-align: center; border: none; background: transparent;
+    color: var(--text-primary); font-weight: bold;
+}
+
+/* Cart Footer */
+.cart-footer {
+    margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--glass-border);
+    display: flex; justify-content: flex-end; align-items: center; gap: 20px;
+}
+.total-price { font-size: 1.5rem; color: var(--accent); font-weight: 800; }
+
+/* =========================================
+   MODAL CHECKOUT (Giohang.php)
+   ========================================= */
+.modal {
+    background-color: rgba(0, 0, 0, 0.8); /* Darker overlay */
+    backdrop-filter: blur(5px);
+}
+.modal-content {
+    background: #0f172a; /* Dark background */
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+.modal-header {
+    background: rgba(56, 189, 248, 0.1);
+    border-bottom: 1px solid var(--glass-border);
+}
+.modal-body h4 { color: var(--accent) !important; border-bottom-color: var(--glass-border) !important; }
+
+.payment-option {
+    border: 1px solid var(--glass-border); background: rgba(255,255,255,0.02);
+}
+.payment-option:hover { border-color: var(--accent); background: rgba(56, 189, 248, 0.1); }
+
+.order-summary-list { border-color: var(--glass-border); }
+.summary-item { border-bottom-color: var(--glass-border); }
+.modal-footer { background: rgba(0,0,0,0.2); border-top-color: var(--glass-border); }
+.final-price { color: var(--accent); }
+
+/* =========================================
+   PAGE: ĐƠN HÀNG CỦA TÔI (DonHangCuaToi.php)
+   ========================================= */
+table { width: 100%; border-collapse: collapse; color: var(--text-secondary); }
+th {
+    background: rgba(56, 189, 248, 0.1); color: var(--accent);
+    padding: 15px; font-weight: 600; border: 1px solid var(--glass-border);
+}
+td { padding: 15px; border: 1px solid var(--glass-border); vertical-align: middle; }
+tr:hover td { background: rgba(255,255,255,0.02); color: var(--text-primary); }
+
+/* Status Badges */
+.status-badge { padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+.st-cho-xac-nhan { background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid #facc15; }
+.st-da-giao { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid #4ade80; }
+.st-dang-giao { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid #38bdf8; }
+.st-da-huy { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid #f87171; }
+
+.btn-view { background: rgba(255,255,255,0.1); color: var(--text-primary); }
+.btn-view:hover { background: var(--accent); color: #000; }
+
+/* =========================================
+   PAGE: ĐẶT HÀNG THÀNH CÔNG (DatHang.php)
+   ========================================= */
+.success-header { border-bottom: 1px dashed var(--glass-border); }
+.success-icon { color: var(--success); text-shadow: 0 0 20px rgba(34, 197, 94, 0.4); }
+.success-title { color: var(--text-primary); margin-top: 10px; }
+
+.item-list { border-color: var(--glass-border); }
+.item { border-bottom-color: var(--glass-border); }
+.item-name { color: var(--text-primary); }
+.item-price { color: var(--accent); }
+
+/* =========================================
+   FOOTER
+   ========================================= */
+#fox-footer {
+    background: #0f172a; border-top: 1px solid var(--glass-border);
+    color: var(--text-secondary); padding: 30px 20px; text-align: center;
+    margin-top: 60px;
+}
