@@ -72,18 +72,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btn_confirm_order']))
     }
 }
 
-// --- XỬ LÝ GIỎ HÀNG (Xóa, Update - Giữ nguyên code cũ) ---
-if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id_gio_hang'])) {
-    $cart_id = (int)$_GET['id_gio_hang'];
-    $conn->query("DELETE FROM gio_hang WHERE id_gio_hang = $cart_id AND id_nguoi_dung = $user_id");
-    header("Location: Giohang.php"); exit();
-}
-if (isset($_GET['action']) && $_GET['action'] == 'update' && isset($_GET['id_gio_hang']) && isset($_GET['qty'])) {
-    $cart_id = (int)$_GET['id_gio_hang'];
-    $new_qty = max(1, (int)$_GET['qty']);
-    $conn->query("UPDATE gio_hang SET so_luong = $new_qty WHERE id_gio_hang = $cart_id AND id_nguoi_dung = $user_id");
-    header("Location: Giohang.php"); exit();
-}
+// // --- XỬ LÝ GIỎ HÀNG (Xóa, Update - Giữ nguyên code cũ) ---
+// if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id_gio_hang'])) {
+//     $cart_id = (int)$_GET['id_gio_hang'];
+//     $conn->query("DELETE FROM gio_hang WHERE id_gio_hang = $cart_id AND id_nguoi_dung = $user_id");
+//     header("Location: Giohang.php"); exit();
+// }
+// if (isset($_GET['action']) && $_GET['action'] == 'update' && isset($_GET['id_gio_hang']) && isset($_GET['qty'])) {
+//     $cart_id = (int)$_GET['id_gio_hang'];
+//     $new_qty = max(1, (int)$_GET['qty']);
+//     $conn->query("UPDATE gio_hang SET so_luong = $new_qty WHERE id_gio_hang = $cart_id AND id_nguoi_dung = $user_id");
+//     header("Location: Giohang.php"); exit();
+// }
 
 // Lấy danh sách giỏ hàng để hiển thị
 $sql_cart = "SELECT gh.id_gio_hang, gh.so_luong, sp.ten_san_pham, bt.gia_ban, bt.mau_sac, bt.cau_hinh,
@@ -197,37 +197,64 @@ while ($row = $result->fetch_assoc()) { $cart_items[] = $row; }
             <div class="empty-cart"><p>Giỏ hàng trống.</p><a href="../SanPham/SanPham.php" class="btn-continue">Mua sắm ngay</a></div>
         <?php else: ?>
             <div class="store-item">
-                <?php foreach ($cart_items as $item): 
-                    $subtotal = $item['gia_ban'] * $item['so_luong'];
-                    $total_payment += $subtotal;
-                    $variant_text = $item['mau_sac'] . ($item['cau_hinh'] ? " - " . $item['cau_hinh'] : "");
+                    <?php foreach ($cart_items as $item): 
+                    $item_subtotal = $item['gia_ban'] * $item['so_luong'];
+                    $total_payment += $item_subtotal;
+                    
+                    // Xử lý hiển thị tên biến thể
+                    $variant_text = $item['mau_sac'];
+                    if($item['cau_hinh']) $variant_text .= " - " . $item['cau_hinh'];
                 ?>
-                <div class="product-item">
+                <div class="product-item" id="cart-item-<?= $item['id_gio_hang'] ?>">
+                    <div class="col-select"><input type="checkbox" checked></div>
+                    
                     <div class="col-product">
-                        <div class="product-thumb"><img src="<?= htmlspecialchars($item['hinh_anh'] ?: '../Hinh/default.png') ?>"></div>
+                        <div class="product-thumb">
+                            <img src="<?= htmlspecialchars($item['hinh_anh'] ?: '../Hinh/default.png') ?>" alt="<?= htmlspecialchars($item['ten_san_pham']) ?>">
+                        </div>
                         <div class="product-details">
                             <div class="name"><?= htmlspecialchars($item['ten_san_pham']) ?></div>
-                            <div class="classification">Phân loại: <?= htmlspecialchars($variant_text) ?></div>
+                            <div class="classification">
+                                Phân loại: <?= htmlspecialchars($variant_text) ?>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-price"><?= number_format($item['gia_ban'], 0, ',', '.') ?>₫</div>
+                    
+                    <div class="col-price">
+                        <?= number_format($item['gia_ban'], 0, ',', '.') ?>₫
+                    </div>
+                    
                     <div class="col-quantity">
                         <div class="quantity-control">
-                            <a href="Giohang.php?action=update&id_gio_hang=<?= $item['id_gio_hang'] ?>&qty=<?= $item['so_luong'] - 1 ?>" class="btn-qty minus">-</a>
-                            <input type="text" value="<?= $item['so_luong'] ?>" readonly>
-                            <a href="Giohang.php?action=update&id_gio_hang=<?= $item['id_gio_hang'] ?>&qty=<?= $item['so_luong'] + 1 ?>" class="btn-qty plus">+</a>
+                            <a href="javascript:void(0)" onclick="updateQuantity(<?= $item['id_gio_hang'] ?>, -1)" class="btn-qty minus">-</a>
+                            
+                            <input type="text" id="qty-<?= $item['id_gio_hang'] ?>" value="<?= $item['so_luong'] ?>" readonly>
+                            
+                            <a href="javascript:void(0)" onclick="updateQuantity(<?= $item['id_gio_hang'] ?>, 1)" class="btn-qty plus">+</a>
                         </div>
                     </div>
-                    <div class="col-total"><?= number_format($subtotal, 0, ',', '.') ?>₫</div>
-                    <div class="col-actions"><a href="Giohang.php?action=remove&id_gio_hang=<?= $item['id_gio_hang'] ?>" onclick="return confirm('Xóa?')">Xóa</a></div>
+                    
+                    <div class="col-total" id="total-<?= $item['id_gio_hang'] ?>">
+                        <?= number_format($item_subtotal, 0, ',', '.') ?>₫
+                    </div>
+                    
+                    <div class="col-actions item-actions">
+                        <a href="javascript:void(0)" onclick="removeCartItem(<?= $item['id_gio_hang'] ?>)" class="remove">Xóa</a>
+                    </div>
                 </div>
                 <?php endforeach; ?>
             </div>
-            <div class="cart-footer">
-                <div>Tổng thanh toán: </div>
-                <div class="total-price"><?= number_format($total_payment, 0, ',', '.') ?>₫</div>
-                <button class="btn-checkout" onclick="openCheckoutModal()">Mua Hàng</button>
-            </div>
+                <div class="cart-footer">
+                    <div>Tổng thanh toán (<?= count($cart_items) ?> sản phẩm): </div>
+                    
+                    <div class="total-price" id="grand-total">
+                        <?= number_format($total_payment, 0, ',', '.') ?>₫
+                    </div>
+                    
+                    <input type="hidden" id="hidden-total-price" value="<?= $total_payment ?>">
+                    
+                    <button class="btn-checkout" onclick="openCheckoutModal()">Mua Hàng</button>
+                </div>
         <?php endif; ?>
     </div>
 </div>
@@ -324,6 +351,87 @@ while ($row = $result->fetch_assoc()) { $cart_items[] = $row; }
         e.preventDefault();
         var d = this.nextElementSibling; d.style.display = (d.style.display === 'block') ? 'none' : 'block';
     });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+// 1. HÀM CẬP NHẬT SỐ LƯỢNG
+function updateQuantity(cartId, change) {
+    let qtyInput = $('#qty-' + cartId);
+    let currentQty = parseInt(qtyInput.val());
+    let newQty = currentQty + change;
+
+    if (newQty < 1) return; // Không cho giảm dưới 1 (hoặc xử lý xóa nếu muốn)
+
+    $.ajax({
+        url: 'api_cart.php', // Gọi đến file xử lý API
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            action: 'update',
+            id_gio_hang: cartId,
+            qty: newQty
+        },
+        success: function(res) {
+            if (res.status === 'success') {
+                // Cập nhật số lượng trong ô input
+                qtyInput.val(newQty);
+                // Cập nhật thành tiền của dòng đó (Server trả về chuỗi định dạng sẵn "xxx.xxx₫")
+                $('#total-' + cartId).text(res.item_total);
+                // Cập nhật tổng tiền cả giỏ hàng
+                $('#grand-total').text(res.grand_total);
+                
+                // Cập nhật giá trị cho input ẩn của Modal thanh toán (nếu có dùng)
+                if($('#hidden-total-price').length){
+                     // Loại bỏ ký tự không phải số để lấy giá trị raw
+                     let rawPrice = res.grand_total.replace(/\D/g,'');
+                     $('#hidden-total-price').val(rawPrice);
+                     // Cập nhật hiển thị trong Modal nếu nó đang mở
+                     $('.final-price').text(res.grand_total);
+                }
+            } else {
+                alert(res.message);
+            }
+        },
+        error: function() {
+            console.log('Lỗi kết nối server');
+        }
+    });
+}
+
+// 2. HÀM XÓA SẢN PHẨM
+function removeCartItem(cartId) {
+    if (!confirm('Bạn có chắc muốn xóa sản phẩm này?')) return;
+
+    $.ajax({
+        url: 'api_cart.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            action: 'remove',
+            id_gio_hang: cartId
+        },
+        success: function(res) {
+            if (res.status === 'success') {
+                // Hiệu ứng mờ dần và xóa dòng HTML
+                $('#cart-item-' + cartId).fadeOut(300, function() { 
+                    $(this).remove(); 
+                    
+                    // Cập nhật tổng tiền sau khi xóa
+                    $('#grand-total').text(res.grand_total);
+                    
+                    // Nếu giỏ hàng trống (server trả về flag is_empty)
+                    if (res.is_empty) {
+                        location.reload(); // Tải lại trang để hiện giao diện giỏ hàng trống
+                    }
+                });
+            } else {
+                alert(res.message);
+            }
+        }
+    });
+}
 </script>
 </body>
 </html>

@@ -415,7 +415,6 @@ document.addEventListener("DOMContentLoaded", function () {
         window.history.pushState({}, '', url);
     }
 </script>
-<?php endif; ?>
 
 <script>
 function ajaxAddToCart() {
@@ -458,8 +457,7 @@ function ajaxAddToCart() {
     });
 }
 </script>
-
-
+<?php endif; ?>
 </html>
 
 
