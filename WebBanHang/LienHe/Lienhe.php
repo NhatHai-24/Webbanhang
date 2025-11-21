@@ -9,7 +9,6 @@
 <canvas id="tech-canvas"></canvas>
 <div id="fox">
     <!-- Header -->
-
     <!-- Navigation -->
     <!-- Navigation -->
 <div id="fox-nav">
@@ -108,6 +107,6 @@
         this.reset();
     });
 </script>
-<script src="main.js"></script>
+<script src="Lienhe.js"></script>
 </body>
 </html>

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -294,5 +297,13 @@
     </footer>
 
     <script src="Gioithieu.js"></script>
+    <script>
+        // JS Dropdown
+    document.getElementById('user-toggle').addEventListener('click', function(e) {
+        e.preventDefault();
+        var d = this.nextElementSibling;
+        d.style.display = (d.style.display === 'block') ? 'none' : 'block';
+    });
+    </script>
 </body>
 </html>
