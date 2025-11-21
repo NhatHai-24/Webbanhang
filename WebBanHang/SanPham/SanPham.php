@@ -235,7 +235,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-</script>
-<script src="sanpham.js"></script>
+    </script>
 </body>
 </html>

@@ -225,15 +225,15 @@ while ($row = $result->fetch_assoc()) { $cart_items[] = $row; }
 
                     <h4 style="color:#004a80; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 15px; margin-top: 20px;">💳 Phương thức thanh toán</h4>
                     <div class="payment-methods">
-                        <label class="payment-option">
-                            <input type="radio" name="payment_method" value="COD" checked>
-                            <span>Thanh toán khi nhận hàng (COD)</span>
-                        </label>
-                        <label class="payment-option">
-                            <input type="radio" name="payment_method" value="BANK">
-                            <span>Chuyển khoản ngân hàng</span>
-                        </label>
-                    </div>
+    <label class="payment-option" style="display: block; margin-bottom: 8px;">
+        <input type="radio" name="payment_method" value="COD" checked>
+        <span>Thanh toán khi nhận hàng (COD)</span>
+    </label>
+    <label class="payment-option" style="display: block;">
+        <input type="radio" name="payment_method" value="BANK">
+        <span>Chuyển khoản ngân hàng</span>
+    </label>
+</div>
                 </div>
 
                 <div class="col-right">
@@ -282,7 +282,7 @@ while ($row = $result->fetch_assoc()) { $cart_items[] = $row; }
 <script>
     // JS Modal
     var modal = document.getElementById("checkoutModal");
-    function openCheckoutModal() { modal.style.display = "block"; }
+    function openCheckoutModal() { modal.style.display = "flex"; }
     function closeCheckoutModal() { modal.style.display = "none"; }
     window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
 

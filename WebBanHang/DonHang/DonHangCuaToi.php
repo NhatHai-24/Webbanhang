@@ -37,7 +37,7 @@ $result = $stmt->get_result();
             <li class="user-dropdown">
                 <a href="#" id="user-toggle"><?= $username ?> ⮟</a>
                 <ul class="dropdown-menu">
-                    <li><a href="../User/ThongTinCaNhan.php">Thông tin cá nhân</a></li>s
+                    <li><a href="../User/ThongTinCaNhan.php">Thông tin cá nhân</a></li>
                     <li><a href="../DonHang/Giohang.php">Giỏ hàng của tôi</a></li>
                     <li><a href="../DonHang/DonHangCuaToi.php">Đơn hàng của tôi</a></li>
                     <li><a href="../Login/logout.php">Đăng xuất</a></li>

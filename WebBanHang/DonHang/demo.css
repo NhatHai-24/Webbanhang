@@ -246,3 +246,66 @@ tr:hover td { background: rgba(255,255,255,0.02); color: var(--text-primary); }
     color: var(--text-secondary); padding: 30px 20px; text-align: center;
     margin-top: 60px;
 }
+
+
+
+/* Modal overlay */
+/* Modal overlay: căn giữa nội dung modal */
+#checkoutModal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal content: giới hạn chiều rộng, bo góc, căn giữa */
+#checkoutModal .modal-content {
+    background: #1e293b;
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    padding: 32px 24px;
+    max-width: 500px;
+    width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: var(--text-primary);
+    border: 1px solid var(--glass-border);
+    position: relative;
+    animation: modalShow 0.25s cubic-bezier(.4,2,.6,1) both;
+    margin: 0; /* Đảm bảo không bị lệch */
+}
+
+/* Close button */
+#checkoutModal .close-modal {
+    position: absolute;
+    top: 16px; right: 20px;
+    font-size: 2rem;
+    color: var(--accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    transition: color 0.2s;
+}
+#checkoutModal .close-modal:hover {
+    color: var(--danger);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    #checkoutModal .modal-content {
+        padding: 16px 6px;
+        max-width: 98vw;
+    }
+}
+
+/* Animation */
+@keyframes modalShow {
+    from { transform: translateY(40px) scale(0.95); opacity: 0; }
+    to   { transform: translateY(0) scale(1); opacity: 1; }
+}
