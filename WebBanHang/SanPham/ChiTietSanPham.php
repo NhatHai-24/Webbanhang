@@ -255,11 +255,10 @@ if (strpos($videoLink, 'watch?v=') !== false) {
 
  
     <div class="action-buttons">
-    <button type="submit" name="add_to_cart" class="add-to-cart-btn" 
-            formaction="ChiTietSanPham.php?id_san_pham=<?= $product['id_san_pham'] ?>"
-            style="padding: 12px 25px; background-color: #35fdecff; color: #333; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
-        Thêm vào Giỏ hàng
-    </button>
+    <button type="button" onclick="ajaxAddToCart()" class="add-to-cart-btn" 
+        style="padding: 12px 25px; background-color: #35fdecff; color: #333; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
+    ➕ Thêm vào Giỏ hàng
+</button>
        
 
     <?php if (!isUserLoggedIn()): ?>
@@ -417,6 +416,48 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 </script>
 <?php endif; ?>
+
+<script>
+function ajaxAddToCart() {
+    // Kiểm tra login (nếu chưa login thì biến user trong PHP sẽ check, ở đây check sơ bộ)
+    <?php if (!isset($_SESSION['user'])) { ?>
+        document.getElementById("loginMsgBox").style.display = "block";
+        return;
+    <?php } ?>
+
+    var product_id = $('input[name="product_id"]').val();
+    var variant_id = $('#id_bien_the').val();
+    var quantity   = $('#quantity').val();
+
+    if (!variant_id) {
+        alert("Vui lòng chọn biến thể!");
+        return;
+    }
+
+    $.ajax({
+        url: '../DonHang/api_cart.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            action: 'add',
+            product_id: product_id,
+            variant_id: variant_id,
+            quantity: quantity
+        },
+        success: function(response) {
+            if (response.status === 'success') {
+                // Hiển thị popup thành công của bạn
+                document.getElementById('successCartMsg').style.display = 'block';
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function() {
+            alert('Có lỗi xảy ra, vui lòng thử lại.');
+        }
+    });
+}
+</script>
 
 
 </html>
