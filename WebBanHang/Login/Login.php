@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["username"], $_POST["p
             <ul>
                 <li><a href="../index/index.php">Trang chủ</a></li>
                 <li><a href="../SanPham/SanPham.php">Sản phẩm</a></li>
-                <li><a href="../Gioithieu/Gioithieu.html">Giới thiệu</a></li>
+                <li><a href="../Gioithieu/Gioithieu.php">Giới thiệu</a></li>
                 <li><a href="../chinhsachbaomat/chinhsachbaomat.php">Chính sách bảo mật</a></li>
                 <li><a href="../LienHe/LienHe.php">Liên hệ</a></li>
                 <?php if (!isset($_SESSION["user"])): ?>
