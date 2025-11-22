@@ -194,6 +194,7 @@ while ($row = $result->fetch_assoc()) { $cart_items[] = $row; }
                     <input type="hidden" id="hidden-total-price" value="<?= $total_payment ?>">
                     
                     <button class="btn-checkout" onclick="openCheckoutModal()">Mua Hàng</button>
+
                 </div>
         <?php endif; ?>
     </div>
@@ -282,7 +283,9 @@ while ($row = $result->fetch_assoc()) { $cart_items[] = $row; }
 <script>
     // JS Modal
     var modal = document.getElementById("checkoutModal");
-    function openCheckoutModal() { modal.style.display = "flex"; }
+    function openCheckoutModal() {
+    document.getElementById('checkoutModal').style.display = 'flex';
+}
     function closeCheckoutModal() { modal.style.display = "none"; }
     window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
 

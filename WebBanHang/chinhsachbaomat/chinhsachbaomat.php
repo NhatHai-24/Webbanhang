@@ -6,7 +6,6 @@
 </head>
 <body>
     <div id="preloader"><div class="loader"></div></div>
-<canvas id="tech-canvas"></canvas>
 <div id="fox">
     <!-- Header -->
 
