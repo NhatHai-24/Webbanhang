@@ -67,7 +67,7 @@ $status_map = [
 <head>
     <meta charset="UTF-8">
     <title>Quản lý đơn hàng</title>
-    <link rel="stylesheet" href="../index/index.css">
+    <link rel="stylesheet" href="admin.css?v=2">
     <style>
         .admin-container {
             max-width: 1200px;

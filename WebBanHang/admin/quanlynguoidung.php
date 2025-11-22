@@ -58,7 +58,7 @@ $users = $conn->query("SELECT * FROM users");
 <head>
     <meta charset="UTF-8">
     <title>Quản lý người dùng - Fox Tech</title>
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="admin.css?v=2">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
     $(document).ready(function () {
