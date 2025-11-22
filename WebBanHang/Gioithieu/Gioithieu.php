@@ -282,7 +282,7 @@ session_start();
         </section>
     </main>
 
-    <footer id="footer">
+    <footer id="fox-footer">
         <div class="footer-content">
             <div class="footer-brand">
                 <h2>TECH<span>NOVA</span></h2>

@@ -343,7 +343,7 @@ body {
 }
 
 /* --- 8. FOOTER --- */
-#fox-footer {
+#footer {
     border-top: 1px solid var(--glass-border);
     padding: 50px 20px;
     margin-top: 50px;

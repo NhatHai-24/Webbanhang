@@ -186,7 +186,7 @@ if (isset($_GET['id'])) {
         </div>
     </div>
 
-    <div id="footer">
+    <div id="fox-footer">
         <p>© 2025 TECHNOVA. All rights reserved.</p>
     </div>
 </div>
