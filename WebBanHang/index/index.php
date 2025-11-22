@@ -23,7 +23,7 @@ $result = $conn->query($sql);
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
-    <title>Fox Tech - Trang Chủ</title>
+    <title>TECHNOVA - Trang Chủ</title>
     <link rel="stylesheet" href="index.css" />
 </head>
 <body>
@@ -127,7 +127,7 @@ $result = $conn->query($sql);
     <?php if (isset($_GET['updated'])) echo "<script>alert('Cập nhật thông tin thành công!');</script>"; ?>
 
 <!-- Footer -->
-<div id="fox-footer">
+<div id="footer">
     <p>© 2025 TECHNOVA. All rights reserved.</p>
     <p>Địa chỉ: 123 Đường Nguyễn Trãi, TP.HCM | Hotline: 0123 456 789 | Email: support@technova.vn</p>
     <p>

@@ -126,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["username"], $_POST["p
         </div>
 
         <!-- Footer -->
-        <div id="fox-footer">
+        <div id="footer">
             <p>© 2025 TECHNOVA. All rights reserved.</p>
             <p>Địa chỉ: 123 Đường Nguyễn Trãi, TP.HCM | Hotline: 0123 456 789 | Email: support@technova.vn</p>
             <p>

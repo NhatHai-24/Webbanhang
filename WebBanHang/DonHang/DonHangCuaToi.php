@@ -117,7 +117,7 @@ $result = $stmt->get_result();
         <?php endif; ?>
     </div>
 
-    <div id="fox-footer">
+    <div id="footer">
         <p>© 2025 TECHNOVA. All rights reserved.</p>
     </div>
 </div>

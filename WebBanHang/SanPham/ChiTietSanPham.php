@@ -209,7 +209,7 @@ if (strpos($videoLink, 'watch?v=') !== false) {
         <p style="text-align:center; margin: 50px 0; font-size: 18px;">Không tìm thấy sản phẩm.</p>
     <?php endif; ?>
 
-    <div id="fox-footer"><p>© 2025 TECHNOVA. All rights reserved.</p></div>
+    <div id="footer"><p>© 2025 TECHNOVA. All rights reserved.</p></div>
 </div>
 
 <div id="successCartMsg" style="display:none; position:fixed; top:30%; left:50%; transform:translate(-50%,-50%); background:#fff; border:2px solid #4CAF50; padding:30px 40px; border-radius:10px; box-shadow:0 4px 16px rgba(0,0,0,0.2); z-index:9999; text-align:center;">

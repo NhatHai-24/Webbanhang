@@ -6,7 +6,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Về Fox Tech - Tương lai công nghệ</title>
+    <title>Về TECHNOVA</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="Gioithieu.css">
 </head>
@@ -76,7 +76,7 @@ session_start();
     <main class="main-content">
         <section class="section story-section">
             <div class="section-header fade-up">
-                <h2>Câu chuyện Fox Tech</h2>
+                <h2>Câu chuyện TECHNOVA</h2>
                 <div class="line"></div>
             </div>
             <div class="story-grid">
@@ -282,7 +282,7 @@ session_start();
         </section>
     </main>
 
-    <footer id="fox-footer">
+    <footer id="footer">
         <div class="footer-content">
             <div class="footer-brand">
                 <h2>TECH<span>NOVA</span></h2>

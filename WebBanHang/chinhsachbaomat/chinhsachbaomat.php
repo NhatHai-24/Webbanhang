@@ -1,7 +1,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
-     <title>Fox Tech - Chính sách bảo mật</title>
+     <title>TECHNOVA - Chính sách bảo mật</title>
     <link rel="stylesheet" href="chinhsachbaomat.css" />
 </head>
 <body>
@@ -57,7 +57,7 @@
         <h2>3. Bảo mật thông tin</h2>
         <p>Chúng tôi áp dụng các biện pháp bảo mật để bảo vệ thông tin cá nhân khỏi truy cập trái phép, mất mát hoặc tiết lộ.</p>
         <h2>4. Chia sẻ thông tin</h2>
-        <p>Fox Tech không chia sẻ thông tin cá nhân của bạn cho bên thứ ba, trừ khi có yêu cầu từ cơ quan pháp luật hoặc được sự đồng ý của bạn.</p>
+        <p>TECHNOVA không chia sẻ thông tin cá nhân của bạn cho bên thứ ba, trừ khi có yêu cầu từ cơ quan pháp luật hoặc được sự đồng ý của bạn.</p>
         <h2>5. Quyền của khách hàng</h2>
         <p>Bạn có quyền kiểm tra, cập nhật hoặc yêu cầu xóa thông tin cá nhân của mình bất cứ lúc nào bằng cách liên hệ với chúng tôi.</p>
         <h2>6. Liên hệ</h2>
@@ -65,7 +65,7 @@
     </div>
 
     <!-- Footer -->
-    <div id="fox-footer">
+    <div id="footer">
         <p>© 2025 TECHNOVA. All rights reserved.</p>
         <p>Địa chỉ: 123 Đường Nguyễn Trãi, TP.HCM | Hotline: 0123 456 789 | Email: support@technova.vn</p>
         <p>
