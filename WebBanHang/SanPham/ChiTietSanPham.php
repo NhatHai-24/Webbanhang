@@ -127,7 +127,7 @@ if (strpos($videoLink, 'watch?v=') !== false) {
                 <p><strong>Bảo hành:</strong> <?= htmlspecialchars($product['bao_hanh']) ?></p>
 
                 <div class="variant-section">
-                    <h4>Biến thể sản phẩm</h4>
+                    <h4>Màu sản phẩm</h4>
                     <ul>
                         <?php foreach ($variants as $v): ?>
                             <li>Màu: <?= htmlspecialchars($v['mau_sac']) ?> | Cấu hình: <?= htmlspecialchars($v['cau_hinh']) ?: "Mặc định" ?> | Giá: <?= number_format($v['gia_ban'], 0, ',', '.') ?>₫ | Kho: <?= $v['so_luong_ton_kho'] ?></li>
@@ -142,7 +142,7 @@ if (strpos($videoLink, 'watch?v=') !== false) {
                     <?php
                      if (count($variants) > 0): ?>
                         <div class="variant-wrapper">
-                            <label for="id_bien_the">Chọn biến thể:</label>
+                            <label for="id_bien_the">Chọn màu sản phẩm:</label>
                             <select name="id_bien_the" id="id_bien_the" required>
                                 <option value="" disabled selected>-- Chọn màu --</option>
                                 <?php foreach ($variants as $v): ?>
@@ -330,7 +330,7 @@ function ajaxAddToCart() {
     var variant_id = $('#id_bien_the').val();
     var quantity   = $('#quantity').val();
 
-    if (!variant_id) { alert("Vui lòng chọn biến thể (Màu sắc/Cấu hình)!"); $('#id_bien_the').focus(); return; }
+    if (!variant_id) { alert("Vui lòng chọn màu sắc!"); $('#id_bien_the').focus(); return; }
     if (quantity < 1) { alert("Số lượng phải lớn hơn 0!"); return; }
 
     $.ajax({
@@ -392,7 +392,7 @@ function ajaxAddToCart() {
     var variant_id = $('#id_bien_the').val();
     var quantity   = $('#quantity').val();
 
-    if (!variant_id) { alert("Vui lòng chọn biến thể (Màu sắc/Cấu hình)!"); $('#id_bien_the').focus(); return; }
+    if (!variant_id) { alert("Vui lòng chọn màu sắc!"); $('#id_bien_the').focus(); return; }
     if (quantity < 1) { alert("Số lượng phải lớn hơn 0!"); return; }
 
     $.ajax({
@@ -443,7 +443,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // 2. Kiểm tra user đã chọn biến thể chưa
         var variantId = variantSelect.value;
         if (!variantId || variantId == 0) {
-            alert("Vui lòng chọn màu sắc/cấu hình trước khi đặt hàng!");
+            alert("Vui lòng chọn màu sắc trước khi đặt hàng!");
             variantSelect.focus();
             return;
         }
@@ -457,7 +457,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         // Kiểm tra giá có hợp lệ không
         if (price === 0 || isNaN(price)) {
-            alert("Không thể lấy giá sản phẩm. Vui lòng chọn biến thể khác!");
+            alert("Không thể lấy giá sản phẩm. Vui lòng chọn màu khác!");
             return;
         }
         
