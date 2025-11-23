@@ -1,4 +1,5 @@
 <?php
+$current_page = basename($_SERVER['PHP_SELF']);
 session_start();
 
 // Kiểm tra quyền Admin
@@ -72,7 +73,7 @@ $status_map = [
         .admin-container {
             max-width: 1200px;
             margin: 40px auto;
-            background: white;
+            background: rgba(255, 255, 255, 0.03);
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
@@ -92,19 +93,19 @@ $status_map = [
             margin-bottom: 30px;
         }
         th, td {
-            border: 1px solid #ccc;
+            border: 1px solid var(--glass-border);
             padding: 12px;
             text-align: left;
             vertical-align: top;
         }
         th {
             background-color: #007acc;
-            color: white;
+            color: black;
             text-align: center;
         }
         .product-list {
             font-size: 13px;
-            color: #333;
+            color: #94a3b8;
             line-height: 1.6;
         }
         .price {
@@ -119,7 +120,7 @@ $status_map = [
         .action-form select {
             padding: 6px;
             border-radius: 4px;
-            border: 1px solid #ccc;
+            border: 1px solid var(--glass-border);
         }
         .action-form button {
             background-color: #28a745;
@@ -138,15 +139,12 @@ $status_map = [
 </head>
 <body>
 <div id="fox">
-    <div id="fox-header">
-        <img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand">
-    </div>
 
     <div id="fox-nav">
         <ul>
             <li><a href="admin.php">Trang Chủ</a></li>
             <li><a href="quanlysanpham.php">Quản Lý Sản Phẩm</a></li>
-            <li><a href="quanlydonHang.php">Quản lý Đơn Hàng</a></li>
+            <li><a href="quanlydonHang.php" class="<?= ($current_page == 'quanlydonHang.php') ? 'active' : '' ?>">Quản lý Đơn Hàng</a></li>
             <li><a href="quanlynguoidung.php">Quản lý Người Dùng</a></li>
             <li><a href="quanlythongke.php">Thống Kê</a></li>
             <li><a href="quanlydanhgia.php">Quản lý Đánh Giá</a></li>
@@ -212,7 +210,7 @@ $status_map = [
     </div>
 
     <div id="fox-footer">
-        <p>© 2025 Fox Tech. All rights reserved.</p>
+        <p>© 2025 Team 7. All rights reserved.</p>
     </div>
 </div>
 </body>

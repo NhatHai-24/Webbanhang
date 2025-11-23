@@ -1,4 +1,5 @@
 <?php
+$current_page = basename($_SERVER['PHP_SELF']);
 session_start();
 if (!isset($_SESSION["user"]) || stripos($_SESSION["user"]["username"], "admin") === false) {
     header("Location: ../Login/Login.php");
@@ -107,14 +108,11 @@ $products = $conn->query("
 </head>
 <body>
 <div id="fox">
-  <div id="fox-header">
-    <img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand" />
-  </div>
 
   <div id="fox-nav">
     <ul>
             <li><a href="admin.php">Trang Chủ</a></li>
-            <li><a href="quanlysanpham.php">Quản Lý Sản Phẩm</a></li>
+            <li><a href="quanlysanpham.php" class="<?= ($current_page == 'quanlysanpham.php') ? 'active' : '' ?>">Quản Lý Sản Phẩm</a></li>
             <li><a href="quanlydonHang.php">Quản lý Đơn Hàng</a></li>
             <li><a href="quanlynguoidung.php">Quản lý Người Dùng</a></li>
             <li><a href="quanlythongke.php">Thống Kê</a></li>\
@@ -286,7 +284,7 @@ function removeVariant(btn) {
   </div>
 
   <div id="fox-footer">
-    <p>© 2025 Fox Tech. All rights reserved.</p>
+    <p>© 2025 Team 7. All rights reserved.</p>
     <p>Địa chỉ: 123 Đường Công Nghệ, TP.HCM | Hotline: 0123 456 789</p>
     <p>
       <a href="../index/index.html">Trang chủ</a> |

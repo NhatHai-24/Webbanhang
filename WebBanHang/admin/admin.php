@@ -1,5 +1,6 @@
 <?php
 session_start();
+$current_page = basename($_SERVER['PHP_SELF']);
 
 // Nếu chưa đăng nhập hoặc không phải là admin thì quay về trang đăng nhập
 if (!isset($_SESSION["user"]) || strpos(strtolower($_SESSION["user"]["username"]), "admin") === false) {
@@ -17,17 +18,13 @@ if (!isset($_SESSION["user"]) || strpos(strtolower($_SESSION["user"]["username"]
 </head>
 <body>
   <div id="fox">
-    <!-- Header -->
-    <div id="fox-header">
-      <img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand" />
-    </div>
-
+  
     <!-- Navigation -->
     <div id="fox-nav">
       <ul>
-        <li><a href=#>Trang chủ</a></li>
-        <li><a href="quanlysanpham.php">Sản phẩm</a></li>
-        <li><a href="../Login/Logout.php">Đăng xuất</a></li>
+        <li><a href="admin.php" class="<?= ($current_page == 'admin.php') ? 'active' : '' ?>">Trang chủ</a></li>
+        <li><a href="quanlysanpham.php" class="<?= ($current_page == 'quanlysanpham.php') ? 'active' : '' ?>">Sản phẩm</a></li>
+        <li><a href="../Login/Logout.php" class="<?= ($current_page == '../Login/Logout.php') ? 'active' : '' ?>">Đăng xuất</a></li>
       </ul>
     </div>
 
@@ -60,7 +57,7 @@ if (!isset($_SESSION["user"]) || strpos(strtolower($_SESSION["user"]["username"]
 
     <!-- Footer -->
     <div id="fox-footer">
-      <p>© 2025 Fox Tech. All rights reserved.</p>
+      <p>© 2025 Team 7. All rights reserved.</p>
       <p>Địa chỉ: 123 Đường Công Nghệ, TP.HCM | Hotline: 0123 456 789</p>
       <p>
         <a href="../index/index.php">Trang chủ</a> | 

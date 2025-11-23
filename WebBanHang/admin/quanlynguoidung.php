@@ -1,4 +1,5 @@
 <?php
+$current_page = basename($_SERVER['PHP_SELF']);
 session_start();
 if (!isset($_SESSION["user"]) || strpos(strtolower($_SESSION["user"]["username"]), "admin") === false) {
     header("Location: ../Login/Login.php");
@@ -82,18 +83,14 @@ $users = $conn->query("SELECT * FROM users");
 </head>
 <body>
 <div id="fox">
-    <!-- Header -->
-    <div id="fox-header">
-        <img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand" />
-    </div>
-
+   
     <!-- Navigation -->
     <div id="fox-nav">
         <ul>
             <li><a href="admin.php">Trang Chủ</a></li>
             <li><a href="quanlysanpham.php">Quản Lý Sản Phẩm</a></li>
             <li><a href="quanlydonHang.php">Quản lý Đơn Hàng</a></li>
-            <li><a href="quanlynguoidung.php">Quản lý Người Dùng</a></li>
+            <li><a href="quanlynguoidung.php" class="<?= ($current_page == 'quanlynguoidung.php') ? 'active' : '' ?>">Quản lý Người Dùng</a></li>
             <li><a href="quanlythongke.php">Thống Kê</a></li>\
             <li><a href="quanlydanhgia.php">Quản lý Đánh Giá</a></li>
             <li><a href="../Login/logout.php">Đăng Xuất</a></li>
@@ -171,7 +168,7 @@ $users = $conn->query("SELECT * FROM users");
 
     <!-- Footer -->
     <div id="fox-footer">
-        <p>© 2025 Fox Tech. All rights reserved.</p>
+        <p>© 2025 Team 7. All rights reserved.</p>
         <p>Địa chỉ: 123 Đường Công Nghệ, TP.HCM | Hotline: 0123 456 789</p>
         <p>
             <a href="../index/index.html">Trang chủ</a> | 

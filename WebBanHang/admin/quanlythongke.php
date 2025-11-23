@@ -1,4 +1,5 @@
 <?php
+$current_page = basename($_SERVER['PHP_SELF']);
 session_start();
 
 // Kiểm tra quyền Admin
@@ -46,7 +47,7 @@ $monthlyRevenue = array_reverse($monthlyRevenue); // Đảo ngược để hiể
     .admin-container {
       max-width: 1000px;
       margin: 40px auto;
-      background: white;
+      background: rgba(255, 255, 255, 0.03);
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
@@ -58,7 +59,7 @@ $monthlyRevenue = array_reverse($monthlyRevenue); // Đảo ngược để hiể
       gap: 20px;
     }
     .stat {
-      background: #f8faff;
+      background: rgba(300, 300, 300, 0.03);
       padding: 25px;
       border-radius: 10px;
       width: 32%;
@@ -92,9 +93,6 @@ $monthlyRevenue = array_reverse($monthlyRevenue); // Đảo ngược để hiể
 </head>
 <body>
 <div id="fox">
-  <div id="fox-header">
-    <img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand">
-  </div>
 
   <div id="fox-nav">
     <ul>
@@ -102,7 +100,7 @@ $monthlyRevenue = array_reverse($monthlyRevenue); // Đảo ngược để hiể
         <li><a href="quanlysanpham.php">Quản Lý Sản Phẩm</a></li>
         <li><a href="quanlydonHang.php">Quản lý Đơn Hàng</a></li>
         <li><a href="quanlynguoidung.php">Quản lý Người Dùng</a></li>
-        <li><a href="quanlythongke.php">Thống Kê</a></li>
+        <li><a href="quanlythongke.php" class="<?= ($current_page == 'quanlythongke.php') ? 'active' : '' ?>">Thống Kê</a></li>
         <li><a href="quanlydanhgia.php">Quản lý Đánh Giá</a></li>
         <li><a href="../Login/logout.php">Đăng Xuất</a></li>
     </ul>

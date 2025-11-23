@@ -1,4 +1,5 @@
 <?php
+$current_page = basename($_SERVER['PHP_SELF']);
 session_start();
 if (!isset($_SESSION["user"]) || stripos($_SESSION["user"]["username"], "admin") === false) {
     header("Location: ../Login/Login.php");
@@ -33,7 +34,7 @@ $result = $conn->query($sql);
             max-width: 1100px;
             margin: 40px auto;
             padding: 30px;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 12px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
         }
@@ -52,10 +53,12 @@ $result = $conn->query($sql);
 
         th, td {
             padding: 12px;
-            border: 1px solid #ccc;
+            border: 1px solid var(--glass-border);
             vertical-align: top;
             text-align: center;
+            color: #94a3b8;
         }
+
 
         th {
             background: #004a80;
@@ -84,20 +87,16 @@ $result = $conn->query($sql);
 </head>
 <body>
 <div id="fox">
-    <!-- Header -->
-    <div id="fox-header">
-        <img src="../Hinh/Foxbrand.png" alt="Fox Tech Brand" />
-    </div>
-
+    
     <!-- Navigation -->
     <div id="fox-nav">
         <ul>
-            <li><a href="admin.php">Trang Chủ</a></li>
-            <li><a href="quanlysanpham.php">Quản Lý Sản Phẩm</a></li>
+            <li><a href="admin.php" >Trang Chủ</a></li>
+            <li><a href="quanlysanpham.php" >Quản Lý Sản Phẩm</a></li>
             <li><a href="quanlydonHang.php">Quản lý Đơn Hàng</a></li>
             <li><a href="quanlynguoidung.php">Quản lý Người Dùng</a></li>
-            <li><a href="quanlythongke.php">Thống Kê</a></li>\
-            <li><a href="quanlydanhgia.php">Quản lý Đánh Giá</a></li>
+            <li><a href="quanlythongke.php">Thống Kê</a></li>
+            <li><a href="quanlydanhgia.php" class="<?= ($current_page == 'quanlydanhgia.php') ? 'active' : '' ?>" >Quản lý Đánh Giá</a></li>
             <li><a href="../Login/logout.php">Đăng Xuất</a></li>
         </ul>
     </div>
@@ -134,7 +133,7 @@ $result = $conn->query($sql);
 
     <!-- Footer -->
     <div id="fox-footer">
-        <p>© 2025 Fox Tech. All rights reserved.</p>
+        <p>© 2025 Team 7. All rights reserved.</p>
     </div>
 </div>
 </body>
