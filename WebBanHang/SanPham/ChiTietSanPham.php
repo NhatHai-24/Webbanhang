@@ -1,4 +1,5 @@
 <?php
+$current_page = 'sanpham';
 session_start();
 // Hàm kiểm tra user đã đăng nhập chưa
 function isUserLoggedIn() {
@@ -90,7 +91,7 @@ if (strpos($videoLink, 'watch?v=') !== false) {
     <div id="fox-nav">
         <ul>
             <li><a href="../index/index.php">Trang chủ</a></li>
-            <li><a href="../SanPham/SanPham.php">Sản phẩm</a></li>
+            <li><a href="../SanPham/SanPham.php" class="<?= ($current_page == 'sanpham') ? 'active' : '' ?>">Sản phẩm</a></li>
             <li><a href="../Gioithieu/Gioithieu.html">Giới thiệu</a></li>
             <li><a href="../ChinhSachBaoMat/ChinhSachBaoMat.php">Chính sách bảo mật</a></li>
             <li><a href="../LienHe/LienHe.php">Liên hệ</a></li>

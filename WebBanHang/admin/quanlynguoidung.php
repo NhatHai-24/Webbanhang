@@ -1,5 +1,5 @@
 <?php
-$current_page = basename($_SERVER['PHP_SELF']);
+$current_page = 'quanlynguoidung';
 session_start();
 if (!isset($_SESSION["user"]) || strpos(strtolower($_SESSION["user"]["username"]), "admin") === false) {
     header("Location: ../Login/Login.php");
@@ -90,8 +90,8 @@ $users = $conn->query("SELECT * FROM users");
             <li><a href="admin.php">Trang Chủ</a></li>
             <li><a href="quanlysanpham.php">Quản Lý Sản Phẩm</a></li>
             <li><a href="quanlydonHang.php">Quản lý Đơn Hàng</a></li>
-            <li><a href="quanlynguoidung.php" class="<?= ($current_page == 'quanlynguoidung.php') ? 'active' : '' ?>">Quản lý Người Dùng</a></li>
-            <li><a href="quanlythongke.php">Thống Kê</a></li>\
+            <li><a href="quanlynguoidung.php" class="<?= ($current_page == 'quanlynguoidung') ? 'active' : '' ?>">Quản lý Người Dùng</a></li>
+            <li><a href="quanlythongke.php">Thống Kê</a></li>
             <li><a href="quanlydanhgia.php">Quản lý Đánh Giá</a></li>
             <li><a href="../Login/logout.php">Đăng Xuất</a></li>
         </ul>

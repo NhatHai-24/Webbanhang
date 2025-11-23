@@ -1,4 +1,5 @@
 <?php
+$current_page ='trangchu';
 session_start();
 // Kết nối đến cơ sở dữ liệu
 $conn = new mysqli("localhost", "root", "", "webbh");
@@ -34,7 +35,7 @@ $result = $conn->query($sql);
     <!-- Navigation -->
     <div id="fox-nav">
     <ul>
-        <li><a href="../index/index.php">Trang chủ</a></li>
+        <li><a href="../index/index.php" class="<?= ($current_page == 'trangchu') ? 'active' : '' ?>">Trang chủ</a></li>
         <li><a href="../SanPham/SanPham.php">Sản phẩm</a></li>
         <li><a href="../Gioithieu/Gioithieu.php">Giới thiệu</a></li>
         <li><a href="../chinhsachbaomat/chinhsachbaomat.php">Chính sách bảo mật</a></li>

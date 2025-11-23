@@ -1,4 +1,5 @@
 <?php
+$current_page = 'login';
 session_start();
 $loginError = "";
 
@@ -45,7 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["username"], $_POST["p
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập - TECHNOVA</title>
     <link rel="stylesheet" href="style_common.css">
-    <link rel="stylesheet" href="Login.css">
     <link rel="stylesheet" href="register.css">
     <script src="Login.js" defer></script>
     <style>
@@ -126,6 +126,11 @@ body {
 #fox-nav ul li a:hover {
     color: var(--accent);
     text-shadow: 0 0 10px var(--accent-glow);
+}
+
+#fox-nav ul li a.active {
+    color: #38bdf8 !important ; 
+    font-weight: 800 !important;
 }
 
 /* =========================================
@@ -305,6 +310,7 @@ body {
             <li><a href="../Gioithieu/Gioithieu.php">Giới thiệu</a></li>
             <li><a href="../chinhsachbaomat/chinhsachbaomat.php">Chính sách bảo mật</a></li>
             <li><a href="../LienHe/Lienhe.php">Liên hệ</a></li>
+            <li><a href="../Login/Login.php" class="<?= (isset($current_page) && $current_page == 'login') ? 'active' : '' ?>">Đăng nhập</a></li>
         </ul>
     </div>
 

@@ -52,7 +52,10 @@ ul { list-style: none; }
     color: var(--accent); 
     text-shadow: 0 0 10px rgba(56, 189, 248, 0.4); 
 }
-
+#fox-nav ul li a.active {
+    color: #38bdf8 ; 
+    font-weight: 800 ;
+}
 /* Dropdown User */
 .user-dropdown { position: relative; }
 .dropdown-menu {

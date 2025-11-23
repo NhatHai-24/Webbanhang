@@ -1,4 +1,5 @@
 <?php
+$current_page = 'gioithieu';
 session_start();
 ?>
 <!DOCTYPE html>
@@ -21,7 +22,7 @@ session_start();
     <ul>
         <li><a href="../index/index.php">Trang chủ</a></li>
         <li><a href="../SanPham/SanPham.php">Sản phẩm</a></li>
-        <li><a href="../Gioithieu/Gioithieu.php">Giới thiệu</a></li>
+        <li><a href="../Gioithieu/Gioithieu.php" class="<?= ($current_page == 'gioithieu') ? 'active' : '' ?>">Giới thiệu</a></li>
         <li><a href="../chinhsachbaomat/chinhsachbaomat.php">Chính sách bảo mật</a></li>
         <li><a href="../LienHe/Lienhe.php">Liên hệ</a></li>
 

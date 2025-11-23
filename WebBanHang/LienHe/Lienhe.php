@@ -1,3 +1,5 @@
+<?php
+$current_page = 'lienhe'; ?>
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
@@ -15,7 +17,7 @@
         <li><a href="../SanPham/SanPham.php">Sản phẩm</a></li>
         <li><a href="../Gioithieu/Gioithieu.php">Giới thiệu</a></li>
         <li><a href="../chinhsachbaomat/chinhsachbaomat.php">Chính sách bảo mật</a></li>
-        <li><a href="../LienHe/Lienhe.php">Liên hệ</a></li>
+        <li><a href="../LienHe/Lienhe.php" class="<?= ($current_page == 'lienhe') ? 'active' : '' ?>">Liên hệ</a></li>
 
         <?php
         session_start(); 

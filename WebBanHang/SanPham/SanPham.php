@@ -1,5 +1,6 @@
 <?php
 session_start();
+$current_page = 'sanpham';
 
 $conn = new mysqli("localhost", "root", "", "webbh");
 if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);
@@ -82,7 +83,7 @@ $conn->close();
     <div id="fox-nav">
     <ul>
         <li><a href="../index/index.php">Trang chủ</a></li>
-        <li><a href="../SanPham/SanPham.php">Sản phẩm</a></li>
+        <li><a href="../SanPham/SanPham.php" class="<?= ($current_page == 'sanpham') ? 'active' : '' ?>">Sản phẩm</a></li>
         <li><a href="../Gioithieu/Gioithieu.php">Giới thiệu</a></li>
         <li><a href="../chinhsachbaomat/chinhsachbaomat.php">Chính sách bảo mật</a></li>
         <li><a href="../LienHe/Lienhe.php">Liên hệ</a></li>

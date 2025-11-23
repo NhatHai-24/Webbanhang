@@ -1,3 +1,5 @@
+<?php
+$current_page = 'chinhsachbaomat'; ?>
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
@@ -16,7 +18,7 @@
         <li><a href="../index/index.php">Trang chủ</a></li>
         <li><a href="../SanPham/SanPham.php">Sản phẩm</a></li>
         <li><a href="../Gioithieu/Gioithieu.php">Giới thiệu</a></li>
-        <li><a href="../chinhsachbaomat/chinhsachbaomat.php">Chính sách bảo mật</a></li>
+        <li><a href="../chinhsachbaomat/chinhsachbaomat.php"  class="<?= ($current_page == 'chinhsachbaomat') ? 'active' : '' ?>">Chính sách bảo mật</a></li>
         <li><a href="../LienHe/Lienhe.php">Liên hệ</a></li>
 
         <?php 

@@ -115,7 +115,7 @@ $products = $conn->query("
             <li><a href="quanlysanpham.php" class="<?= ($current_page == 'quanlysanpham.php') ? 'active' : '' ?>">Quản Lý Sản Phẩm</a></li>
             <li><a href="quanlydonHang.php">Quản lý Đơn Hàng</a></li>
             <li><a href="quanlynguoidung.php">Quản lý Người Dùng</a></li>
-            <li><a href="quanlythongke.php">Thống Kê</a></li>\
+            <li><a href="quanlythongke.php">Thống Kê</a></li>
             <li><a href="quanlydanhgia.php">Quản lý Đánh Giá</a></li>
             <li><a href="../Login/logout.php">Đăng Xuất</a></li>
     </ul>

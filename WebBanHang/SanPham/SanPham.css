@@ -71,6 +71,11 @@ body {
     text-shadow: 0 0 10px var(--accent-glow);
 }
 
+#fox-nav ul li a.active {
+  color: #38bdf8;
+  font-weight: 800;
+}
+
 /* Dropdown Menu */
 .user-dropdown { position: relative; }
 .dropdown-menu {
