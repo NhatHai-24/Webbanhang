@@ -210,7 +210,7 @@ $status_map = [
     </div>
 
     <div id="fox-footer">
-        <p>© 2025 Team 7. All rights reserved.</p>
+        <p>© 2025 TECHNOVA. All rights reserved.</p>
     </div>
 </div>
 </body>
