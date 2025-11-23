@@ -29,6 +29,14 @@ while ($row = $result_variant->fetch_assoc()) {
     $variants[] = $row;
 }
 
+// Thêm đoạn này sau khi lấy product
+$user_info = [
+    'username' => $_SESSION['user']['username'] ?? '',
+    'phone' => $_SESSION['user']['phone'] ?? '',
+    'address' => $_SESSION['user']['address'] ?? ''
+];
+
+
 // Lấy đánh giá
 $reviews = [];
 $result_reviews = $conn->query("SELECT * FROM danh_gia_san_pham WHERE id_san_pham = $id ORDER BY ngay_danh_gia DESC");
@@ -131,20 +139,25 @@ if (strpos($videoLink, 'watch?v=') !== false) {
                     <input type="hidden" name="ten_san_pham" value="<?= htmlspecialchars($product['ten_san_pham']) ?>">
                     <input type="hidden" name="product_id" value="<?= $product['id_san_pham'] ?>">
 
-                    <?php if (count($variants) > 0): ?>
+                    <?php
+                     if (count($variants) > 0): ?>
                         <div class="variant-wrapper">
                             <label for="id_bien_the">Chọn biến thể:</label>
                             <select name="id_bien_the" id="id_bien_the" required>
                                 <option value="" disabled selected>-- Chọn màu --</option>
                                 <?php foreach ($variants as $v): ?>
-                                    <option value="<?= $v['id_bien_the'] ?>"><?= htmlspecialchars($v['mau_sac']) ?> - Kho: <?= $v['so_luong_ton_kho'] ?></option>
+                                    <option value="<?= $v['id_bien_the'] ?>" 
+                                            data-price="<?= $v['gia_ban'] ?>"
+                                            data-name="<?= htmlspecialchars($v['mau_sac']) ?> - <?= htmlspecialchars($v['cau_hinh'] ?: 'Mặc định') ?>"
+                                            data-stock="<?= $v['so_luong_ton_kho'] ?>">
+                                        <?= htmlspecialchars($v['mau_sac']) ?> - Kho: <?= $v['so_luong_ton_kho'] ?>
+                                    </option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                     <?php else: ?>
                         <input type="hidden" name="id_bien_the" id="id_bien_the" value="0">
                     <?php endif; ?>
-
                     <div class="quantity-wrapper">
                         <label for="quantity">Số lượng:</label>
                         <input type="number" id="quantity" name="quantity" value="1" min="1" required>
@@ -155,7 +168,7 @@ if (strpos($videoLink, 'watch?v=') !== false) {
                         <?php if (!isUserLoggedIn()): ?>
                             <button type="button" class="btn-order" id="btnShowLoginMsg">🛒 Đặt hàng ngay</button>
                         <?php else: ?>
-                            <button type="submit" class="btn-order">🛒 Đặt hàng ngay</button>
+                            <button type="button" onclick="openCheckoutModal()" class="btn-order">🛒 Đặt hàng ngay</button>
                         <?php endif; ?>
                     </div>
                 </form>
@@ -210,6 +223,86 @@ if (strpos($videoLink, 'watch?v=') !== false) {
     <?php endif; ?>
 
     <div id="footer"><p>© 2025 TECHNOVA. All rights reserved.</p></div>
+</div>
+
+<div id="checkoutModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; justify-content: center; align-items: center;">
+    <form method="POST" action="../DonHang/DatHang.php">
+        <div class="modal-content" style="background:#fff; width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto; border-radius: 8px; display:flex; flex-direction:column; padding: 0;">
+            <div class="modal-header" style="padding: 15px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; background: #004a80; color: white;">
+                <h3 style="margin:0;">XÁC NHẬN ĐẶT HÀNG</h3>
+                <span class="close-modal" onclick="closeCheckoutModal()" style="font-size: 28px; cursor: pointer;">&times;</span>
+            </div>
+            
+            <div class="modal-body" style="padding: 20px; display: flex; gap: 20px; flex-wrap: wrap; color: #333;">
+                <div class="col-left" style="flex: 1; min-width: 300px;">
+                    <h4 style="color:#004a80; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 15px;">📍 Thông tin giao hàng</h4>
+                    
+                    <input type="hidden" name="product_id" value="<?= $product['id_san_pham'] ?>">
+                    <input type="hidden" name="id_bien_the" id="modal_input_variant">
+                    <input type="hidden" name="quantity" id="modal_input_quantity">
+                    <input type="hidden" name="total_payment" id="modal_input_total">
+                    <input type="hidden" name="buy_now" value="1">
+
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label style="display:block; margin-bottom: 5px; font-weight: bold; color: #333;">Họ và tên người nhận</label>
+                        <input type="text" name="fullname" value="<?= htmlspecialchars($user_info['username']) ?>" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; color: #333;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label style="display:block; margin-bottom: 5px; font-weight: bold; color: #333;">Số điện thoại</label>
+                        <input type="text" name="phone" value="<?= htmlspecialchars($user_info['phone']) ?>" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; color: #333;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label style="display:block; margin-bottom: 5px; font-weight: bold; color: #333;">Địa chỉ nhận hàng</label>
+                        <input type="text" name="address" value="<?= htmlspecialchars($user_info['address']) ?>" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; color: #333;">
+                    </div>
+
+                    <h4 style="color:#004a80; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 15px; margin-top: 20px;">💳 Phương thức thanh toán</h4>
+                    <div class="payment-methods">
+                        <label class="payment-option" style="display: block; margin-bottom: 8px; cursor: pointer; color: #333;">
+                            <input type="radio" name="payment_method" value="COD" checked>
+                            <span style="color: #333;">Thanh toán khi nhận hàng (COD)</span>
+                        </label>
+                        <label class="payment-option" style="display: block; cursor: pointer; color: #333;">
+                            <input type="radio" name="payment_method" value="BANK">
+                            <span style="color: #333;">Chuyển khoản ngân hàng</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-right" style="flex: 1; min-width: 300px; background: #f9f9f9; padding: 15px; border-radius: 8px;">
+                    <h4 style="color:#004a80; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 15px;">🛒 Đơn hàng của bạn</h4>
+                    <div class="order-summary-list">
+                        <div class="summary-item" style="display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px dashed #ccc;">
+                            <div style="flex: 1;">
+                                <b id="modal_prod_name" style="font-size: 16px; color: #333;"></b><br>
+                                <span id="modal_var_name" style="font-size: 13px; color: #666;"></span>
+                            </div>
+                            <div style="text-align: right;">
+                                <span id="modal_qty_display" style="display: block; font-weight: bold; color: #333;"></span>
+                                <span id="modal_price_display" style="color: #d32f2f;"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-total">
+                        <div class="row-total" style="display: flex; justify-content: space-between; margin-bottom: 10px; color: #333;">
+                            <span>Phí vận chuyển:</span>
+                            <span style="color: green;">Miễn phí</span>
+                        </div>
+                        <div class="row-total" style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; font-size: 18px; color: #d32f2f; font-weight: bold; border-top: 2px solid #ddd; padding-top: 15px;">
+                            <span style="color: #d32f2f;">TỔNG CỘNG:</span>
+                            <span id="modal_total_payment" class="final-price">0₫</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer" style="padding: 15px; border-top: 1px solid #ddd; text-align: right; background: #f1f1f1;">
+                <button type="button" class="btn-cancel" onclick="closeCheckoutModal()" style="padding: 10px 20px; border: 1px solid #ccc; background: white; cursor: pointer; margin-right: 10px; border-radius: 4px; color: #333;">Hủy Bỏ</button>
+                <button type="submit" name="btn_confirm_order" class="btn-confirm" style="padding: 10px 20px; border: none; background: #e53935; color: white; font-weight: bold; cursor: pointer; border-radius: 4px;">❤ XÁC NHẬN ĐẶT HÀNG</button>
+            </div>
+        </div>
+    </form>
 </div>
 
 <div id="successCartMsg" style="display:none; position:fixed; top:30%; left:50%; transform:translate(-50%,-50%); background:#fff; border:2px solid #4CAF50; padding:30px 40px; border-radius:10px; box-shadow:0 4px 16px rgba(0,0,0,0.2); z-index:9999; text-align:center;">
@@ -279,6 +372,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 <script src="ChiTietSanPham.js"></script>
 <script>
+   
     // JS Dropdown
     document.getElementById('user-toggle').addEventListener('click', function(e) {
         e.preventDefault();
@@ -286,5 +380,115 @@ document.addEventListener("DOMContentLoaded", function() {
         d.style.display = (d.style.display === 'block') ? 'none' : 'block';
     });
 </script>
+
+<script>
+function ajaxAddToCart() {
+    <?php if (!isset($_SESSION['user'])) { ?>
+        document.getElementById("loginMsgBox").style.display = "block";
+        return;
+    <?php } ?>
+
+    var product_id = $('input[name="product_id"]').val();
+    var variant_id = $('#id_bien_the').val();
+    var quantity   = $('#quantity').val();
+
+    if (!variant_id) { alert("Vui lòng chọn biến thể (Màu sắc/Cấu hình)!"); $('#id_bien_the').focus(); return; }
+    if (quantity < 1) { alert("Số lượng phải lớn hơn 0!"); return; }
+
+    $.ajax({
+        url: '../DonHang/api_cart.php',
+        type: 'POST',
+        dataType: 'json',
+        data: { action: 'add', product_id: product_id, variant_id: variant_id, quantity: quantity },
+        success: function(response) {
+            if (response.status === 'success') {
+                document.getElementById('successCartMsg').style.display = 'block';
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function() { alert('Có lỗi xảy ra khi kết nối đến server.'); }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    var btnShowLoginMsg = document.getElementById("btnShowLoginMsg");
+    if (btnShowLoginMsg) {
+        btnShowLoginMsg.addEventListener("click", function(e) {
+            document.getElementById("loginMsgBox").style.display = "block";
+        });
+    }
+    // Dropdown user logic
+    const toggleBtn = document.getElementById("user-toggle");
+    const dropdownMenu = document.querySelector(".user-dropdown .dropdown-menu");
+    if (toggleBtn && dropdownMenu) {
+        toggleBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+        });
+        document.addEventListener("click", function (e) {
+            if (!e.target.closest(".user-dropdown")) dropdownMenu.style.display = "none";
+        });
+    }
+});
+</script>
+<script src="ChiTietSanPham.js"></script>
+<script>
+ 
+    function openCheckoutModal() {
+        // 1. Lấy giá trị từ form
+        var variantSelect = document.getElementById('id_bien_the');
+        var quantityInput = document.getElementById('quantity');
+        
+        // 2. Kiểm tra user đã chọn biến thể chưa
+        var variantId = variantSelect.value;
+        if (!variantId || variantId == 0) {
+            alert("Vui lòng chọn màu sắc/cấu hình trước khi đặt hàng!");
+            variantSelect.focus();
+            return;
+        }
+
+        // 3. Lấy dữ liệu từ thẻ Option đã chọn
+        var selectedOption = variantSelect.options[variantSelect.selectedIndex];
+        var price = parseInt(selectedOption.getAttribute('data-price')) || 0;
+        var variantName = selectedOption.getAttribute('data-name') || 'N/A';
+        var quantity = parseInt(quantityInput.value) || 1;
+        var productName = "<?= htmlspecialchars($product['ten_san_pham']) ?>";
+        
+        // Kiểm tra giá có hợp lệ không
+        if (price === 0 || isNaN(price)) {
+            alert("Không thể lấy giá sản phẩm. Vui lòng chọn biến thể khác!");
+            return;
+        }
+        
+        var total = price * quantity;
+
+        // 4. Điền vào Modal HTML
+        document.getElementById('modal_prod_name').innerText = productName;
+        document.getElementById('modal_var_name').innerText = variantName;
+        document.getElementById('modal_qty_display').innerText = 'x' + quantity;
+        document.getElementById('modal_price_display').innerText = new Intl.NumberFormat('vi-VN').format(price) + '₫';
+        document.getElementById('modal_total_payment').innerText = new Intl.NumberFormat('vi-VN').format(total) + '₫';
+
+        // 5. Điền vào Input ẩn để Submit Form
+        document.getElementById('modal_input_variant').value = variantId;
+        document.getElementById('modal_input_quantity').value = quantity;
+        document.getElementById('modal_input_total').value = total;
+
+        // 6. Hiển thị Modal
+        document.getElementById('checkoutModal').style.display = 'flex';
+    }
+
+    function closeCheckoutModal() { 
+        document.getElementById('checkoutModal').style.display = "none"; 
+    }
+    
+    // Đóng modal khi click ra ngoài
+    window.onclick = function(event) { 
+        var modal = document.getElementById("checkoutModal");
+        if (event.target == modal) { modal.style.display = "none"; } 
+    }
+</script>
+
 </body>
 </html>
