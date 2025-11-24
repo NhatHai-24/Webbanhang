@@ -13,9 +13,30 @@ if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_erro
 if (isset($_POST["add"])) {
   $ten = $conn->real_escape_string($_POST["ten_san_pham"]);
   $mo_ta = $conn->real_escape_string($_POST["mo_ta"]);
-  $hinh = $conn->real_escape_string($_POST["hinh_anh"]);
   $bao_hanh = $conn->real_escape_string($_POST["bao_hanh"]);
   $video = $conn->real_escape_string($_POST["video_gioi_thieu"]);
+
+  // Xử lý upload file (nếu có). Nếu upload thành công sẽ dùng file, ngược lại dùng URL từ input.
+  $hinh = '';
+  if (isset($_FILES['hinh_file']) && $_FILES['hinh_file']['error'] === UPLOAD_ERR_OK) {
+      $uploadDir = __DIR__ . '/uploads/';
+      if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
+      $tmp = $_FILES['hinh_file']['tmp_name'];
+      $orig = basename($_FILES['hinh_file']['name']);
+      $ext = pathinfo($orig, PATHINFO_EXTENSION);
+      $safeName = uniqid('img_') . ($ext ? '.' . $ext : '');
+      if (move_uploaded_file($tmp, $uploadDir . $safeName)) {
+          // Lưu đường dẫn tương đối để hiển thị (điều chỉnh nếu thư mục uploads ở chỗ khác)
+          $hinh = 'admin/uploads/' . $safeName;
+      }
+  }
+
+  // Nếu không upload file thì dùng URL từ input (nếu có)
+  if (empty($hinh) && !empty($_POST['hinh_anh'])) {
+      $hinh = $conn->real_escape_string($_POST['hinh_anh']);
+  } else {
+      $hinh = $conn->real_escape_string($hinh);
+  }
 
   // Thêm sản phẩm chính
   $conn->query("INSERT INTO san_pham (ten_san_pham, mo_ta, bao_hanh, video_gioi_thieu)
@@ -136,8 +157,13 @@ $products = $conn->query("
     <label>Mô tả</label>
     <textarea name="mo_ta" rows="3" required></textarea>
 
-    <label>URL hình ảnh (ảnh đại diện)</label>
-    <input type="url" name="hinh_anh" required>
+    <label>Hình ảnh (URL hoặc upload)</label>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <input type="url" name="hinh_anh" id="hinh_anh_url" placeholder="https://..." style="flex:1;">
+      <input type="file" name="hinh_file" id="hinh_file" accept="image/*">
+    </div>
+    <img id="preview" src="" alt="" style="max-width:200px; display:none; margin-top:10px;">
+    <small>Chọn file để upload hoặc dán URL — ít nhấ
 
     <label>Bảo hành</label>
     <input type="text" name="bao_hanh">
@@ -154,7 +180,7 @@ $products = $conn->query("
         <button type="button" onclick="removeVariant(this)" class="remove-btn">❌</button>
       </div>
     </div>
-    <button type="button" onclick="addVariant()">➕ Thêm biến thể</button>
+    <button type="button" onclick="addVariant()">➕ Các màu của sản phẩm</button>
 
     <br><br>
     <button type="submit" name="add">Thêm sản phẩm</button>
@@ -295,5 +321,42 @@ function removeVariant(btn) {
     </p>
   </div>
 </div>
+<script>
+// Trước submit kiểm tra ít nhất có file hoặc URL.
+document.getElementById('hinh_file').addEventListener('change', function(e){
+  const f = this.files[0];
+  const p = document.getElementById('preview');
+  if (f) {
+    p.src = URL.createObjectURL(f);
+    p.style.display = 'block';
+    // xóa URL input (tùy chọn)
+    
+  } else {
+    p.src = '';
+    p.style.display = 'none';
+  }
+});
+
+document.getElementById('hinh_anh_url').addEventListener('input', function(e){
+  const url = this.value.trim();
+  const p = document.getElementById('preview');
+  if (url) {
+    p.src = url;
+    p.style.display = 'block';
+  } else if (!document.getElementById('hinh_file').files.length) {
+    p.src = '';
+    p.style.display = 'none';
+  }
+});
+
+document.getElementById('form-add').addEventListener('submit', function(e){
+  const url = document.getElementById('hinh_anh_url').value.trim();
+  const hasFile = document.getElementById('hinh_file').files.length > 0;
+  if (!url && !hasFile) {
+    e.preventDefault();
+    alert('Vui lòng chọn ảnh (upload) hoặc dán URL ảnh.');
+  }
+});
+</script>
 </body>
 </html>

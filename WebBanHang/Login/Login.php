@@ -371,9 +371,7 @@ body {
                     📝 Tạo tài khoản mới
                 </button>
 
-                <div class="login-tips">
-                    💡 <strong>Tip:</strong> Nếu chưa có tài khoản, bạn có thể đăng ký ngay bên dưới. Mật khẩu tối thiểu 6 ký tự.
-                </div>
+                
             </form>
 
             <!-- Register Modal -->
