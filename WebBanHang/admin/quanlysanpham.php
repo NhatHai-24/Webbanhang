@@ -115,7 +115,7 @@ $products = $conn->query("
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Quản lý sản phẩm Admin - Fox Tech</title>
+  <title>Quản lý sản phẩm Admin</title>
   <link rel="stylesheet" href="admin.css?v=2">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script>
@@ -138,7 +138,19 @@ $products = $conn->query("
             <li><a href="quanlynguoidung.php">Quản lý Người Dùng</a></li>
             <li><a href="quanlythongke.php">Thống Kê</a></li>
             <li><a href="quanlydanhgia.php">Quản lý Đánh Giá</a></li>
-            <li><a href="../Login/logout.php">Đăng Xuất</a></li>
+           <?php if (!isset($_SESSION["user"])): ?>
+            <!-- Chưa đăng nhập -->
+            <li><a href="../Login/Login.php">Đăng nhập</a></li>
+        <?php else: ?>
+            <!-- Đã đăng nhập -->
+            <?php $username = htmlspecialchars($_SESSION["user"]["username"]); ?>
+            <li class="user-dropdown">
+                <a href="#" id="user-toggle"><?= $username ?> ⮟</a>
+                <ul class="dropdown-menu" style="display: none;">  
+                  <li><a href="../Login/logout.php">Đăng xuất</a></li>
+                </ul>
+            </li>
+        <?php endif; ?>
     </ul>
   </div>
 
@@ -171,7 +183,7 @@ $products = $conn->query("
     <label>Video giới thiệu (YouTube)</label>
     <input type="url" name="video_gioi_thieu">
 
-    <h4>Biến thể sản phẩm</h4>
+    <h4>Màu Sản Phẩm</h4>
     <div id="variant-container">
       <div class="variant-row">
         <input type="text" name="mau_sac[]" placeholder="Màu sắc" required>
@@ -217,7 +229,7 @@ function removeVariant(btn) {
     <label>Mô tả</label>
     <textarea name="mo_ta" rows="3" required><?= htmlspecialchars($productEdit["mo_ta"]) ?></textarea>
 
-    <h4>Biến thể:</h4>
+    <h4>Màu sản phẩm:</h4>
     <?php foreach ($variantsEdit as $v): ?>
       <div class="variant-block" style="margin-bottom:10px; border:1px solid #ccc; padding:10px; border-radius:6px;">
         <input type="hidden" name="id_bien_the[]" value="<?= $v['id_bien_the'] ?>">
@@ -243,7 +255,7 @@ function removeVariant(btn) {
       <th>ID</th>
       <th>Tên sản phẩm</th>
       <th>Mô tả</th>
-      <th>Biến thể</th>
+      <th>Màu sản phẩm</th>
       <th>Hành động</th>
     </tr>
   </thead>
@@ -312,13 +324,7 @@ function removeVariant(btn) {
   <div id="fox-footer">
     <p>© 2025 TECHNOVA. All rights reserved.</p>
     <p>Địa chỉ: 123 Đường Công Nghệ, TP.HCM | Hotline: 0123 456 789</p>
-    <p>
-      <a href="../index/index.html">Trang chủ</a> |
-      <a href="SanPham.php">Sản phẩm</a> |
-      <a href="../Gioithieu/Gioithieu.html">Giới thiệu</a> |
-      <a href="../ChinhSachBaoMat/ChinhSachBaoMat.html">Chính sách</a> |
-      <a href="../LienHe/LienHe.html">Liên hệ</a>
-    </p>
+    
   </div>
 </div>
 <script>
@@ -358,5 +364,25 @@ document.getElementById('form-add').addEventListener('submit', function(e){
   }
 });
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById("user-toggle");
+    const dropdownMenu = document.querySelector(".user-dropdown .dropdown-menu");
+
+    if (toggleBtn && dropdownMenu) {
+        toggleBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!e.target.closest(".user-dropdown")) {
+                dropdownMenu.style.display = "none";
+            }
+        });
+    }
+});
+</script>
+<script src="index.js"></script>
 </body>
 </html>

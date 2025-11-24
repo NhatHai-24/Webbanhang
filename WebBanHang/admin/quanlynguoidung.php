@@ -58,7 +58,7 @@ $users = $conn->query("SELECT * FROM users");
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Quản lý người dùng - Fox Tech</title>
+    <title>Quản lý người dùng</title>
     <link rel="stylesheet" href="admin.css?v=2">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
@@ -93,7 +93,19 @@ $users = $conn->query("SELECT * FROM users");
             <li><a href="quanlynguoidung.php" class="<?= ($current_page == 'quanlynguoidung') ? 'active' : '' ?>">Quản lý Người Dùng</a></li>
             <li><a href="quanlythongke.php">Thống Kê</a></li>
             <li><a href="quanlydanhgia.php">Quản lý Đánh Giá</a></li>
-            <li><a href="../Login/logout.php">Đăng Xuất</a></li>
+            <?php if (!isset($_SESSION["user"])): ?>
+            <!-- Chưa đăng nhập -->
+            <li><a href="../Login/Login.php">Đăng nhập</a></li>
+        <?php else: ?>
+            <!-- Đã đăng nhập -->
+            <?php $username = htmlspecialchars($_SESSION["user"]["username"]); ?>
+            <li class="user-dropdown">
+                <a href="#" id="user-toggle"><?= $username ?> ⮟</a>
+                <ul class="dropdown-menu" style="display: none;">  
+                  <li><a href="../Login/logout.php">Đăng xuất</a></li>
+                </ul>
+            </li>
+        <?php endif; ?>
         </ul>
     </div>
 
@@ -170,12 +182,28 @@ $users = $conn->query("SELECT * FROM users");
     <div id="fox-footer">
         <p>© 2025 TECHNOVA. All rights reserved.</p>
         <p>Địa chỉ: 123 Đường Công Nghệ, TP.HCM | Hotline: 0123 456 789</p>
-        <p>
-            <a href="../index/index.html">Trang chủ</a> | 
-            <a href="quantri.php">Bảng điều khiển</a> | 
-            <a href="../Login/Logout.php">Đăng xuất</a>
-        </p>
+        
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById("user-toggle");
+    const dropdownMenu = document.querySelector(".user-dropdown .dropdown-menu");
+
+    if (toggleBtn && dropdownMenu) {
+        toggleBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!e.target.closest(".user-dropdown")) {
+                dropdownMenu.style.display = "none";
+            }
+        });
+    }
+});
+</script>
+<script src="index.js"></script>
 </body>
 </html>

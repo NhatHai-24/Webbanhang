@@ -40,7 +40,7 @@ $monthlyRevenue = array_reverse($monthlyRevenue); // Đảo ngược để hiể
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Thống kê - Fox Tech</title>
+  <title>Thống kê</title>
   <link rel="stylesheet" href="../index/index.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
@@ -102,7 +102,19 @@ $monthlyRevenue = array_reverse($monthlyRevenue); // Đảo ngược để hiể
         <li><a href="quanlynguoidung.php">Quản lý Người Dùng</a></li>
         <li><a href="quanlythongke.php" class="<?= ($current_page == 'quanlythongke.php') ? 'active' : '' ?>">Thống Kê</a></li>
         <li><a href="quanlydanhgia.php">Quản lý Đánh Giá</a></li>
-        <li><a href="../Login/logout.php">Đăng Xuất</a></li>
+        <?php if (!isset($_SESSION["user"])): ?>
+            <!-- Chưa đăng nhập -->
+            <li><a href="../Login/Login.php">Đăng nhập</a></li>
+        <?php else: ?>
+            <!-- Đã đăng nhập -->
+            <?php $username = htmlspecialchars($_SESSION["user"]["username"]); ?>
+            <li class="user-dropdown">
+                <a href="#" id="user-toggle"><?= $username ?> ⮟</a>
+                <ul class="dropdown-menu" style="display: none;">  
+                  <li><a href="../Login/logout.php">Đăng xuất</a></li>
+                </ul>
+            </li>
+        <?php endif; ?>
     </ul>
   </div>
 
@@ -130,6 +142,7 @@ $monthlyRevenue = array_reverse($monthlyRevenue); // Đảo ngược để hiể
 
   <div id="fox-footer">
     <p>© 2025 TECHNOVA. All rights reserved.</p>
+    <p>Địa chỉ: 123 Đường Công Nghệ, TP.HCM | Hotline: 0123 456 789</p>
   </div>
 </div>
 
@@ -186,5 +199,25 @@ const chart = new Chart(ctx, {
   }
 });
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById("user-toggle");
+    const dropdownMenu = document.querySelector(".user-dropdown .dropdown-menu");
+
+    if (toggleBtn && dropdownMenu) {
+        toggleBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!e.target.closest(".user-dropdown")) {
+                dropdownMenu.style.display = "none";
+            }
+        });
+    }
+});
+</script>
+<script src="index.js"></script>
 </body>
 </html>
