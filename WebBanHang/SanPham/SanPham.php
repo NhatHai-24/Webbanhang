@@ -5,9 +5,13 @@ $current_page = 'sanpham';
 $conn = new mysqli("localhost", "root", "", "webbh");
 if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);
 
+// ... (Phần session_start và kết nối db giữ nguyên ở trên) ...
+
+// 1. CÂU TRUY VẤN SQL (Đã thêm cột loai_san_pham)
 $sql = "SELECT 
             sp.id_san_pham, 
             sp.ten_san_pham, 
+            sp.loai_san_pham,  /* <-- Quan trọng: Phải lấy cột này */
             sp.mo_ta, 
             sp.bao_hanh, 
             ha.url_hinh_anh,
@@ -16,31 +20,47 @@ $sql = "SELECT
         LEFT JOIN hinh_anh_san_pham ha ON sp.id_san_pham = ha.id_san_pham AND ha.la_anh_dai_dien = TRUE
         LEFT JOIN bien_the_san_pham btsp ON sp.id_san_pham = btsp.id_san_pham
         GROUP BY sp.id_san_pham
-        ORDER BY sp.ten_san_pham";
+        ORDER BY sp.id_san_pham DESC"; // Lấy sản phẩm mới nhất lên trước
 
 $result = $conn->query($sql);
 $groups = [];
 
+// 2. VÒNG LẶP GOM NHÓM (Thay thế cho if/elseif dài dòng cũ)
 while ($row = $result->fetch_assoc()) {
-    $ten = $row['ten_san_pham'];
-    if (stripos($ten, 'Túi') !== false) {
-        $groups['Túi chống sốc'][] = $row;
-    } elseif (stripos($ten, 'Balo') !== false) {
-        $groups['Balo laptop'][] = $row;
-    } elseif (stripos($ten, 'Quạt') !== false) {
-        $groups['Quạt mini'][] = $row;
-    } elseif (stripos($ten, 'Máy in') !== false) {
-        $groups['Máy in'][] = $row;
-    } elseif (stripos($ten, 'iPhone') !== false || stripos($ten, 'Samsung') !== false || stripos($ten, 'OPPO') !== false || stripos($ten, 'Xiaomi') !== false) {
-        $groups['Điện thoại'][] = $row;
-    } elseif (stripos($ten, 'Máy hủy') !== false) {
-        $groups['Máy hủy tài liệu'][] = $row;
-    } elseif (stripos($ten, 'PlayStation') !== false || stripos($ten, 'Nintendo') !== false || stripos($ten, 'Xbox') !== false) {
-        $groups['Máy chơi game'][] = $row;
-    } else {
-        $groups['Các sản phẩm nổi bật'][] = $row;
-    }
+    // Kiểm tra xem sản phẩm có loại chưa, nếu chưa có thì cho vào mục "Khác"
+    $cat = !empty($row['loai_san_pham']) ? $row['loai_san_pham'] : 'Các sản phẩm nổi bật';
+    
+    // Đẩy sản phẩm vào mảng của nhóm tương ứng
+    $groups[$cat][] = $row;
 }
+
+// 3. SẮP XẾP THỨ TỰ HIỂN THỊ CÁC NHÓM
+// Định nghĩa thứ tự ưu tiên hiển thị (Danh mục nào muốn hiện trước thì ghi vào đây)
+$priority = [
+    'Điện thoại' => 1,
+    'Laptop' => 2,
+    'Tivi' => 3,
+    'Loa' => 4,
+    'Tai nghe' => 5,
+    'Máy chơi game' => 6,
+    'Máy in' => 7,
+    'Phụ kiện' => 8,
+    'Các sản phẩm nổi bật' => 99 // Luôn để cuối
+];
+
+// Hàm sắp xếp tùy chỉnh theo danh sách ưu tiên ở trên
+uksort($groups, function($a, $b) use ($priority) {
+    // Lấy thứ tự của nhóm A (nếu không có trong danh sách thì mặc định là 100)
+    $posA = $priority[$a] ?? 100;
+    // Lấy thứ tự của nhóm B
+    $posB = $priority[$b] ?? 100;
+
+    if ($posA == $posB) {
+        return strcmp($a, $b); // Nếu cùng độ ưu tiên thì sắp xếp A-Z
+    }
+    return $posA - $posB; // Sắp xếp theo số ưu tiên nhỏ đến lớn
+});
+
 $conn->close();
 ?>
 

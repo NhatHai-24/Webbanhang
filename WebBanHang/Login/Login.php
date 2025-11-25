@@ -371,6 +371,7 @@ body {
                     📝 Tạo tài khoản mới
                 </button>
 
+
                 
             </form>
 
@@ -387,6 +388,10 @@ body {
                         <div class="form-group">
                             <label for="registerPassword">Mật khẩu</label>
                             <input type="password" id="registerPassword" name="password" placeholder="Tối thiểu 6 ký tự" required />
+                            <small style="color: var(--accent); font-size: 0.85rem; margin-top: 5px; display: block; font-style: italic;">
+                                * Lưu ý: Tạo mật khẩu với ít nhất 6 ký tự
+                            </small>
+                                                  
                         </div>
                         <div class="form-group">
                             <label for="registerConfirm">Xác nhận mật khẩu</label>

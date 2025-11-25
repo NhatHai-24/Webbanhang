@@ -12,7 +12,9 @@ if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_erro
 // ===== Thêm sản phẩm =====
 if (isset($_POST["add"])) {
   $ten = $conn->real_escape_string($_POST["ten_san_pham"]);
+  $loai = $conn->real_escape_string($_POST["loai_san_pham"]);
   $mo_ta = $conn->real_escape_string($_POST["mo_ta"]);
+  $thong_so = $conn->real_escape_string($_POST["thong_so_ky_thuat"]);
   $bao_hanh = $conn->real_escape_string($_POST["bao_hanh"]);
   $video = $conn->real_escape_string($_POST["video_gioi_thieu"]);
 
@@ -26,9 +28,9 @@ if (isset($_POST["add"])) {
       $ext = pathinfo($orig, PATHINFO_EXTENSION);
       $safeName = uniqid('img_') . ($ext ? '.' . $ext : '');
       if (move_uploaded_file($tmp, $uploadDir . $safeName)) {
-          // Lưu đường dẫn tương đối để hiển thị (điều chỉnh nếu thư mục uploads ở chỗ khác)
-          $hinh = 'admin/uploads/' . $safeName;
-      }
+    // Thêm ../ để khi hiển thị ở trang Sản phẩm (bên ngoài thư mục admin) vẫn đọc được
+    $hinh = '../admin/uploads/' . $safeName;
+}
   }
 
   // Nếu không upload file thì dùng URL từ input (nếu có)
@@ -39,8 +41,8 @@ if (isset($_POST["add"])) {
   }
 
   // Thêm sản phẩm chính
-  $conn->query("INSERT INTO san_pham (ten_san_pham, mo_ta, bao_hanh, video_gioi_thieu)
-                VALUES ('$ten', '$mo_ta', '$bao_hanh', '$video')");
+  $conn->query("INSERT INTO san_pham (ten_san_pham, loai_san_pham, mo_ta, bao_hanh, video_gioi_thieu, thong_so_ky_thuat)
+                VALUES ('$ten', '$loai', '$mo_ta', '$bao_hanh', '$video', '$thong_so')");
   $idMoi = $conn->insert_id;
 
   // Thêm ảnh đại diện
@@ -65,13 +67,15 @@ if (isset($_POST["add"])) {
   exit();
 }
 
-// ===== Cập nhật sản phẩm và biến thể =====
+// ===== Cập nhật sản phẩm  =====
 if (isset($_POST["update"])) {
     $id = (int)$_POST["id_sua"];
     $ten = $conn->real_escape_string($_POST["ten_san_pham"]);
+    $loai = $conn->real_escape_string($_POST["loai_san_pham"]);
     $mo_ta = $conn->real_escape_string($_POST["mo_ta"]);
+    $thong_so = $conn->real_escape_string($_POST["thong_so_ky_thuat"]);
 
-    $conn->query("UPDATE san_pham SET ten_san_pham='$ten', mo_ta='$mo_ta' WHERE id_san_pham = $id");
+    $conn->query("UPDATE san_pham SET ten_san_pham='$ten', loai_san_pham='$loai', mo_ta='$mo_ta', thong_so_ky_thuat='$thong_so' WHERE id_san_pham = $id");
 
     // Cập nhật từng biến thể
     $ids = $_POST["id_bien_the"];
@@ -118,6 +122,30 @@ $products = $conn->query("
   <title>Quản lý sản phẩm Admin</title>
   <link rel="stylesheet" href="admin.css?v=2">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+      /* Chỉnh màu cho ô Select */
+      select {
+          background-color: #1a2332; /* Màu nền tối (Xanh đen) */
+          color: #ffffff;            /* Chữ màu trắng */
+          border: 1px solid #4a5568; /* Viền xám */
+          padding: 8px;
+          border-radius: 4px;
+          width: 100%;               /* Đảm bảo rộng bằng ô input */
+          outline: none;
+      }
+
+      /* Chỉnh màu cho các dòng Option khi xổ xuống */
+      select option {
+          background-color: #1a2332; /* Nền tối */
+          color: #ffffff;            /* Chữ trắng */
+          padding: 10px;
+      }
+      
+      /* Hiệu ứng khi focus vào */
+      select:focus {
+          border-color: #35fdec;     /* Viền sáng màu xanh neon khi bấm vào */
+      }
+  </style>
   <script>
     $(function () {
       $(".toggle-form").click(() => $(".form-section").slideToggle());
@@ -146,7 +174,8 @@ $products = $conn->query("
             <?php $username = htmlspecialchars($_SESSION["user"]["username"]); ?>
             <li class="user-dropdown">
                 <a href="#" id="user-toggle"><?= $username ?> ⮟</a>
-                <ul class="dropdown-menu" style="display: none;">  
+                <ul class="dropdown-menu" style="display: none;">
+                  <li><a href="DoiMatKhauAdmin.php">Đổi Mật Khẩu</a></li>  
                   <li><a href="../Login/logout.php">Đăng xuất</a></li>
                 </ul>
             </li>
@@ -162,12 +191,29 @@ $products = $conn->query("
 
     <!-- Form Thêm -->
 <div class="form-section" style="display: none;">
-  <form method="POST" class="product-form">
+  <form method="POST" class="product-form" enctype="multipart/form-data">
     <label>Tên sản phẩm</label>
-    <input type="text" name="ten_san_pham" required>
+<input type="text" name="ten_san_pham" id="input_ten_sp" onkeyup="autoClassify(this.value)" required>
+
+<label>Loại sản phẩm (Tự động gợi ý)</label>
+<select name="loai_san_pham" id="select_loai_sp" required>
+    <option value="">-- Chọn loại sản phẩm --</option>
+    <option value="Điện thoại">Điện thoại</option>
+    <option value="Laptop">Laptop</option>
+    <option value="Tai nghe">Tai nghe</option>
+    <option value="Loa">Loa</option>
+    <option value="Tivi">Tivi</option>
+    <option value="Máy chơi game">Máy chơi game</option>
+    <option value="Phụ kiện">Phụ kiện</option>
+    <option value="Máy in">Máy in</option>
+</select>
+    
 
     <label>Mô tả</label>
     <textarea name="mo_ta" rows="3" required></textarea>
+
+    <label>Thông số kỹ thuật</label>
+    <textarea name="thong_so_ky_thuat" rows="5"><?= htmlspecialchars($productEdit["thong_so_ky_thuat"] ?? '') ?></textarea>
 
     <label>Hình ảnh (URL hoặc upload)</label>
     <div style="display:flex; gap:10px; align-items:center;">
@@ -225,9 +271,24 @@ function removeVariant(btn) {
     <input type="hidden" name="id_sua" value="<?= $productEdit["id_san_pham"] ?>">
     <label>Tên sản phẩm</label>
     <input type="text" name="ten_san_pham" value="<?= htmlspecialchars($productEdit["ten_san_pham"]) ?>" required>
+    <label>Loại sản phẩm (Tự động gợi ý)</label>
+<select name="loai_san_pham" id="select_loai_sp" required>
+    <option value="">-- Chọn loại sản phẩm --</option>
+    <option value="Điện thoại">Điện thoại</option>
+    <option value="Laptop">Laptop</option>
+    <option value="Tai nghe">Tai nghe</option>
+    <option value="Loa">Loa</option>
+    <option value="Tivi">Tivi</option>
+    <option value="Máy chơi game">Máy chơi game</option>
+    <option value="Phụ kiện">Phụ kiện</option>
+    <option value="Máy in">Máy in</option>
+</select>
+    
 
     <label>Mô tả</label>
     <textarea name="mo_ta" rows="3" required><?= htmlspecialchars($productEdit["mo_ta"]) ?></textarea>
+    <label>Thông số kỹ thuật</label>
+    <textarea name="thong_so_ky_thuat" rows="5"><?= htmlspecialchars($productEdit["thong_so_ky_thuat"] ?? '') ?></textarea>
 
     <h4>Màu sản phẩm:</h4>
     <?php foreach ($variantsEdit as $v): ?>
@@ -280,7 +341,7 @@ function removeVariant(btn) {
                 echo "</tbody></table></td>
                       <td class='action-col'>
                           <a href='quanlysanpham.php?id_sua=$lastId' class='btn-edit'>Sửa SP</a>
-                          <a href='deleteproduct.php?id=$lastId' class='btn-delete' onclick='return confirm(\"Xóa sản phẩm này?\")'>Xóa SP</a>
+                          <a href='xoasanpham.php?id=$lastId' class='btn-delete' onclick='return confirm(\"Xóa sản phẩm này?\")'>Xóa SP</a>
                       </td>
                     </tr>";
             }
@@ -384,5 +445,43 @@ document.getElementById('form-add').addEventListener('submit', function(e){
 });
 </script>
 <script src="index.js"></script>
+
+<script>
+function autoClassify(name) {
+    // Chuyển tên về chữ thường để dễ so sánh
+    let lowerName = name.toLowerCase();
+    let categorySelect = document.getElementById('select_loai_sp');
+    
+    // Định nghĩa các từ khóa cho từng danh mục
+    // Ví dụ: Nếu tên có chữ "iphone" hoặc "samsung" -> Chọn "Điện thoại"
+    const rules = {
+        'Điện thoại': ['điện thoại', 'iphone', 'samsung galaxy', 'oppo', 'xiaomi redmi', 'vivo', 'realme'],
+        'Laptop': ['laptop', 'macbook', 'dell', 'hp', 'asus', 'acer', 'lenovo', 'msi'],
+        'Tai nghe': ['tai nghe', 'headphone', 'airpod', 'earbud', 'galaxy buds'],
+        'Loa': ['loa', 'speaker', 'jbl', 'kéo', 'soundbar'],
+        'Tivi': ['tivi', 'tv', 'lg', 'sony bravia', 'samsung ua', 'casper'],
+        'Máy chơi game': ['playstation', 'ps5', 'xbox', 'nintendo', 'game', 'console'],
+        'Máy in': ['máy in', 'canon', 'brother', 'inkjet'],
+        'Phụ kiện': ['chuột', 'bàn phím', 'cáp', 'sạc', 'bao da', 'ốp', 'túi']
+    };
+
+    let found = false;
+
+    // Duyệt qua từng danh mục trong luật (rules)
+    for (let category in rules) {
+        let keywords = rules[category];
+        
+        // Kiểm tra xem tên sản phẩm có chứa từ khóa nào không
+        for (let i = 0; i < keywords.length; i++) {
+            if (lowerName.includes(keywords[i])) {
+                categorySelect.value = category; // Tự động chọn danh mục
+                found = true;
+                break;
+            }
+        }
+        if (found) break; // Nếu tìm thấy rồi thì dừng lại
+    }
+}
+</script>
 </body>
 </html>

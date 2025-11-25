@@ -1,9 +1,11 @@
 <?php
+// ...existing code...
 session_start();
 if (!isset($_SESSION["user"])) {
     header("Location: ../Login/Login.php");
     exit();
 }
+
 
 $conn = new mysqli("localhost", "root", "", "webbh");
 if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);
@@ -12,22 +14,63 @@ $username = $_SESSION["user"]["username"];
 $message = "";
 
 if (isset($_POST["change"])) {
-    $old = $_POST["old_password"];
-    $new = $_POST["new_password"];
-    $confirm = $_POST["confirm_password"];
+    $old = trim($_POST["old_password"] ?? "");
+    $new = trim($_POST["new_password"] ?? "");
+    $confirm = trim($_POST["confirm_password"] ?? "");
 
-    $user = $conn->query("SELECT * FROM users WHERE username = '$username'")->fetch_assoc();
-
-    if ($user && $user["password"] === $old) {
-        if ($new === $confirm) {
-            $conn->query("UPDATE users SET password = '$new' WHERE username = '$username'");
-            $message = "<span style='color:green;'>Đổi mật khẩu thành công!</span>";
-            header("refresh:2;url=../index/index.php");
-        } else {
-            $message = "❌ Mật khẩu mới không khớp.";
-        }
+    if ($old === "" || $new === "" || $confirm === "") {
+        $message = "❌ Vui lòng điền đầy đủ thông tin.";
+    } elseif ($new !== $confirm) {
+        $message = "❌ Mật khẩu mới không khớp.";
+    } elseif (strlen($new) < 6) {
+        $message = "❌ Mật khẩu mới phải có ít nhất 6 ký tự.";
     } else {
-        $message = "❌ Mật khẩu cũ không chính xác.";
+        // Lấy password hiện tại từ DB bằng prepared statement
+        $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $userRow = $result->fetch_assoc();
+        $stmt->close();
+
+        if (!$userRow) {
+            $message = "❌ Tài khoản không tồn tại.";
+        } else {
+            $currentHash = $userRow["password"];
+
+            // Xác thực mật khẩu cũ:
+            // - ưu tiên password_verify (nếu password đã hash bằng password_hash)
+            // - fallback nếu DB vẫn lưu plain text (tạm thời)
+            $oldMatches = false;
+            if (password_verify($old, $currentHash)) {
+                $oldMatches = true;
+            } elseif ($currentHash === $old) {
+                // fallback: DB lưu plain text => vẫn cho phép dùng, sau đó sẽ hash mật khẩu mới
+                $oldMatches = true;
+            }
+
+            if (!$oldMatches) {
+                $message = "❌ Mật khẩu cũ không chính xác.";
+            } else {
+                if ($old === $new) {
+                    $message = "❌ Mật khẩu mới phải khác mật khẩu cũ.";
+                } else {
+                    // Lưu mật khẩu mới đã hash
+                    $newHash = password_hash($new, PASSWORD_DEFAULT);
+
+                    $updateStmt = $conn->prepare("UPDATE users SET password = ? WHERE username = ?");
+                    $updateStmt->bind_param("ss", $newHash, $username);
+                    if ($updateStmt->execute()) {
+                        $message = "<span style='color:green;'>Đổi mật khẩu thành công!</span>";
+                        // bạn có thể redirect ngay hoặc chờ 2s
+                        header("refresh:2;url=../index/index.php");
+                    } else {
+                        $message = "❌ Cập nhật mật khẩu thất bại: " . htmlspecialchars($conn->error);
+                    }
+                    $updateStmt->close();
+                }
+            }
+        }
     }
 }
 ?>

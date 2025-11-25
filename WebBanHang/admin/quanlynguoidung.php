@@ -102,6 +102,7 @@ $users = $conn->query("SELECT * FROM users");
             <li class="user-dropdown">
                 <a href="#" id="user-toggle"><?= $username ?> ⮟</a>
                 <ul class="dropdown-menu" style="display: none;">  
+                    <li><a href="DoiMatKhauAdmin.php">Đổi Mật Khẩu</a></li>
                   <li><a href="../Login/logout.php">Đăng xuất</a></li>
                 </ul>
             </li>

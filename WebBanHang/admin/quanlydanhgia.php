@@ -105,8 +105,10 @@ $result = $conn->query($sql);
             <?php $username = htmlspecialchars($_SESSION["user"]["username"]); ?>
             <li class="user-dropdown">
                 <a href="#" id="user-toggle"><?= $username ?> ⮟</a>
-                <ul class="dropdown-menu" style="display: none;">  
+                <ul class="dropdown-menu" style="display: none;"> 
+                    <li><a href="DoiMatKhauAdmin.php">Đổi Mật Khẩu</a></li> 
                   <li><a href="../Login/logout.php">Đăng xuất</a></li>
+                  
                 </ul>
             </li>
         <?php endif; ?>
