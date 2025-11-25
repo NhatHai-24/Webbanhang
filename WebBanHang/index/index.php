@@ -1,6 +1,14 @@
 <?php
-$current_page ='trangchu';
+$current_page = 'trangchu';
 session_start();
+// Nếu đã đăng nhập: chỉ redirect admin sang trang quản trị
+ if (isset($_SESSION["user"])) {
+     if (strpos(strtolower($_SESSION["user"]["username"]), "admin") !== false) {
+         header("Location: ../admin/admin.php");
+         exit();
+     }
+    
+ }
 // Kết nối đến cơ sở dữ liệu
 $conn = new mysqli("localhost", "root", "", "webbh");
 if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);

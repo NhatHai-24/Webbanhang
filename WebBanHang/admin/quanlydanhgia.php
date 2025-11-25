@@ -1,4 +1,5 @@
 <?php
+
 $current_page = basename($_SERVER['PHP_SELF']);
 session_start();
 if (!isset($_SESSION["user"]) || stripos($_SESSION["user"]["username"], "admin") === false) {

@@ -1,5 +1,6 @@
 <?php
-$current_page = 'lienhe'; ?>
+$current_page = 'lienhe';
+ ?>
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />

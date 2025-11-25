@@ -1,4 +1,5 @@
 <?php
+
 $current_page = basename($_SERVER['PHP_SELF']);
 session_start();
 
@@ -136,6 +137,30 @@ $status_map = [
         }
         .info-cell p { margin: 3px 0; }
     </style>
+     <style>
+      /* Chỉnh màu cho ô Select */
+      select {
+          background-color: #1a2332; /* Màu nền tối (Xanh đen) */
+          color: #ffffff;            /* Chữ màu trắng */
+          border: 1px solid #4a5568; /* Viền xám */
+          padding: 8px;
+          border-radius: 4px;
+          width: 100%;               /* Đảm bảo rộng bằng ô input */
+          outline: none;
+      }
+
+      /* Chỉnh màu cho các dòng Option khi xổ xuống */
+      select option {
+          background-color: #1a2332; /* Nền tối */
+          color: #ffffff;            /* Chữ trắng */
+          padding: 10px;
+      }
+      
+      /* Hiệu ứng khi focus vào */
+      select:focus {
+          border-color: #35fdec;     /* Viền sáng màu xanh neon khi bấm vào */
+      }
+  </style>
 </head>
 <body>
 <div id="fox">

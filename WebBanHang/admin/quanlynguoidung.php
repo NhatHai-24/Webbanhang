@@ -1,4 +1,5 @@
 <?php
+
 $current_page = 'quanlynguoidung';
 session_start();
 if (!isset($_SESSION["user"]) || strpos(strtolower($_SESSION["user"]["username"]), "admin") === false) {

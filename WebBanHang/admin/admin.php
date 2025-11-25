@@ -1,6 +1,8 @@
 <?php
+
 session_start();
 $current_page = basename($_SERVER['PHP_SELF']);
+
 
 
 // Nếu chưa đăng nhập hoặc không phải là admin thì quay về trang đăng nhập
