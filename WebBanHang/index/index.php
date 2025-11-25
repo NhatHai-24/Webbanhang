@@ -147,13 +147,7 @@ $result = $conn->query($sql);
             <a href="../LienHe/LienHe.html">Liên hệ</a>
         </p>
     </p>
-        <p style="margin-top: 20px;">
-            <strong>Theo dõi chúng tôi:</strong>
-            <a href="#">Facebook</a> | 
-            <a href="#">Instagram</a> | 
-            <a href="#">LinkedIn</a> | 
-            <a href="#">YouTube</a>
-        </p>
+       
 </div>
 </div>
 <script>

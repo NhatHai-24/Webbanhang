@@ -288,12 +288,9 @@ session_start();
             <div class="footer-brand">
                 <h2>TECH<span>NOVA</span></h2>
                 <p>© 2025 All rights reserved.</p>
+                <p>Địa chỉ: 123 Đường Nguyễn Trãi, TP.HCM | Hotline: 0123 456 789 | Email: support@technova.vn</p>
             </div>
-            <div class="footer-links">
-                <a href="#">Facebook</a>
-                <a href="#">LinkedIn</a>
-                <a href="#">Instagram</a>
-            </div>
+            
         </div>
     </footer>
 

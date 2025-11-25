@@ -62,14 +62,7 @@ $current_page = 'lienhe';
         </form>
     </div>
 
-        <!-- Google Map -->
-        <div style="margin-top: 30px;">
-            <h2>Địa chỉ trên bản đồ</h2>
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.123456789012!2d106.12345678901234!3d10.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752abcde123456%3A0x123456789abcdef0!2sFox%20Tech%20Store!5e0!3m2!1sen!2svi!4v1612345678901" 
-                width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
-            </iframe>
-        </div>
+        
     <!-- Footer -->
     <div id="fox-footer">
         <p>© 2025 TECHNOVA. All rights reserved.</p>
@@ -81,13 +74,7 @@ $current_page = 'lienhe';
             <a href="../ChinhSachBaoMat/ChinhSachBaoMat.html">Chính sách bảo mật</a> |
             <a href="../LienHe/LienHe.html">Liên hệ</a>
         </p>
-        <p style="margin-top: 20px;">
-            <strong>Theo dõi chúng tôi:</strong>
-            <a href="#">Facebook</a> | 
-            <a href="#">Instagram</a> | 
-            <a href="#">LinkedIn</a> | 
-            <a href="#">YouTube</a>
-        </p>
+       
     </div>
 </div>
 

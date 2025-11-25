@@ -76,13 +76,7 @@ $current_page = 'chinhsachbaomat'; ?>
             <a href="#">Chính sách bảo mật</a> |
             <a href="../LienHe/Lienhe.html">Liên hệ</a>
         </p>
-        <p style="margin-top: 20px;">
-            <strong>Theo dõi chúng tôi:</strong>
-            <a href="#">Facebook</a> | 
-            <a href="#">Instagram</a> | 
-            <a href="#">LinkedIn</a> | 
-            <a href="#">YouTube</a>
-        </p>
+        
     </div>
 </div>
 <script>

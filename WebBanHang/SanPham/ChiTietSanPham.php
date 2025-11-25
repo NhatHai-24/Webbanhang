@@ -223,8 +223,19 @@ if (strpos($videoLink, 'watch?v=') !== false) {
         <p style="text-align:center; margin: 50px 0; font-size: 18px;">Không tìm thấy sản phẩm.</p>
     <?php endif; ?>
 
-    <div id="footer"><p>© 2025 TECHNOVA. All rights reserved.</p></div>
+    
 </div>
+<div id="fox-footer">
+        <p>© 2025 TECHNOVA. All rights reserved.</p>
+        <p>Địa chỉ: 123 Đường Nguyễn Trãi, TP.HCM | Hotline: 0123 456 789 | Email: support@technova.vn</p>
+        <p>
+            <a href="../index/index.html">Trang chủ</a> |
+            <a href="../SanPham/SanPham.php">Sản phẩm</a> |
+            <a href="../Gioithieu/Gioithieu.html">Giới thiệu</a> |
+            <a href="../ChinhSachBaoMat/ChinhSachBaoMat.html">Chính sách bảo mật</a> |
+            <a href="../LienHe/LienHe.html">Liên hệ</a>
+        </p>
+    </div>
 
 <div id="checkoutModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; justify-content: center; align-items: center;">
     <form method="POST" action="../DonHang/DatHang.php">

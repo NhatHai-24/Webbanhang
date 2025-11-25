@@ -143,7 +143,7 @@ $monthlyRevenue = array_reverse($monthlyRevenue); // Đảo ngược để hiể
 
   <div id="fox-footer">
     <p>© 2025 TECHNOVA. All rights reserved.</p>
-    <p>Địa chỉ: 123 Đường Công Nghệ, TP.HCM | Hotline: 0123 456 789</p>
+    <p>Địa chỉ: 123 Đường Nguyễn Trãi, TP.HCM | Hotline: 0123 456 789 | Email: support@technova.vn</p>
   </div>
 </div>
 
