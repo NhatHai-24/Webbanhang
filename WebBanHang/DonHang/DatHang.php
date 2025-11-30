@@ -146,7 +146,7 @@ if (isset($_GET['id'])) {
         <div class="success-header">
             <div class="success-icon">✔</div>
             <div class="success-title">ĐẶT HÀNG THÀNH CÔNG</div>
-            <p>Cảm ơn bạn đã mua sắm tại Fox Tech!</p>
+            <p>Cảm ơn bạn đã mua sắm tại TECHNOVA </p>
         </div>
 
         <div class="order-info">

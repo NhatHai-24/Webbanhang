@@ -120,7 +120,7 @@ $monthlyRevenue = array_reverse($monthlyRevenue); // Đảo ngược để hiể
   </div>
 
   <div class="admin-container">
-    <h2>📊 Thống kê hệ thống</h2>
+    <h2>Thống Kê Doanh Thu</h2>
 
     <div class="stat-box">
       <div class="stat">
