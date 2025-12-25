@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . '/../auth.php';
 
+ini_set('memory_limit', '-1'); //// Tăng giới hạn bộ nhớ lên vô hạn để tránh lỗi với dữ liệu lớn
+
+
 $current_page = 'sanpham';
 
 $conn = new mysqli("localhost", "root", "", "webbh");
@@ -13,7 +16,7 @@ $sql = "SELECT
             sp.id_san_pham, 
             sp.ten_san_pham, 
             sp.loai_san_pham,  /* <-- Quan trọng: Phải lấy cột này */
-            sp.mo_ta, 
+            LEFT(sp.mo_ta, 150) AS mo_ta,
             sp.bao_hanh, 
             ha.url_hinh_anh,
             MIN(btsp.gia_ban) AS gia_ban
