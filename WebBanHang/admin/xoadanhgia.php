@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+require_once __DIR__ . '/../auth.php';
+require_admin();
 // Kiểm tra nếu chưa đăng nhập hoặc không phải admin thì chuyển hướng về trang đăng nhập
 if (!isset($_SESSION["user"]) || stripos($_SESSION["user"]["username"], "admin") === false) {
     header("Location: ../Login/Login.php");

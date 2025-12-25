@@ -2,8 +2,8 @@
 
 session_start();
 $current_page = basename($_SERVER['PHP_SELF']);
-
-
+require_once __DIR__ . '/../auth.php';
+require_admin(); // bảo vệ toàn bộ trang admin
 
 // Nếu chưa đăng nhập hoặc không phải là admin thì quay về trang đăng nhập
 if (!isset($_SESSION["user"]) || strpos(strtolower($_SESSION["user"]["username"]), "admin") === false) {

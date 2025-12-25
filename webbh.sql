@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 25, 2025 lúc 11:31 AM
+-- Thời gian đã tạo: Th12 25, 2025 lúc 11:25 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -109,10 +109,10 @@ INSERT INTO `bien_the_san_pham` (`id_bien_the`, `id_san_pham`, `mau_sac`, `cau_h
 (64, 58, 'Trắng', NULL, 2500000.00, 30, 'BPR-BWV3-TRANG', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (65, 59, 'Trắng', NULL, 3000000.00, 15, 'MCG-RETPK3P-TRANG', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (66, 59, 'Xanh mint', NULL, 3000000.00, 7, 'MCG-RETPK3P-XANH', '2025-06-21 10:53:44', '2025-11-20 11:20:06'),
-(67, 60, 'Xanh Iceblue', '8GB RAM + 128GB ROM', 9000000.00, 70, 'SSA55-XB-128', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
+(67, 60, 'Xanh Iceblue', '8GB RAM + 128GB ROM', 9000000.00, 70, 'SSA55-XB-128', '2025-06-21 10:53:44', '2025-11-30 10:03:01'),
 (68, 60, 'Tím Lilac', '8GB RAM + 256GB ROM', 9500000.00, 59, 'SSA55-TL-256', '2025-06-21 10:53:44', '2025-07-10 09:05:23'),
 (69, 60, 'Vàng Lemon', '12GB RAM + 256GB ROM', 10500000.00, 49, 'SSA55-VL-256', '2025-06-21 10:53:44', '2025-07-11 01:46:25'),
-(70, 61, 'Xanh dương', '128GB', 15000000.00, 48, 'IP13-XD-128', '2025-06-21 10:53:44', '2025-07-10 09:03:27'),
+(70, 61, 'Xanh dương', '128GB', 15000000.00, 47, 'IP13-XD-128', '2025-06-21 10:53:44', '2025-11-27 07:03:08'),
 (71, 61, 'Hồng', '256GB', 17000000.00, 39, 'IP13-HONG-256', '2025-06-21 10:53:44', '2025-07-11 00:08:06'),
 (72, 61, 'Đen', '512GB', 19000000.00, 30, 'IP13-DEN-512', '2025-06-21 10:53:44', '2025-06-21 10:53:44'),
 (73, 62, 'Đen', '6GB RAM + 128GB ROM', 4500000.00, 80, 'OPPO-A58-DEN-128-6G', '2025-06-21 10:53:45', '2025-06-21 10:53:45'),
@@ -122,7 +122,107 @@ INSERT INTO `bien_the_san_pham` (`id_bien_the`, `id_san_pham`, `mau_sac`, `cau_h
 (77, 64, 'Xanh lá', '4GB RAM + 128GB ROM', 3000000.00, 99, 'RM13C-XANHLA-128-4G', '2025-06-21 10:53:45', '2025-11-25 08:34:29'),
 (78, 64, 'Đen', '6GB RAM + 128GB ROM', 3300000.00, 90, 'RM13C-DEN-128-6G', '2025-06-21 10:53:45', '2025-06-21 10:53:45'),
 (79, 64, 'Xanh dương', '8GB RAM + 256GB ROM', 3800000.00, 70, 'RM13C-XANHDUONG-256-8G', '2025-06-21 10:53:45', '2025-06-21 10:53:45'),
-(86, 71, 'Đen', NULL, 5000000.00, 50, NULL, '2025-11-25 07:32:50', '2025-11-25 07:32:50');
+(86, 71, 'Đen', NULL, 5000000.00, 47, NULL, '2025-11-25 07:32:50', '2025-11-27 07:03:08'),
+(87, 75, 'Đen', '64GB', 8990000.00, 50, 'IP11-64-BLK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(88, 76, 'Xanh dương', '128GB', 11990000.00, 40, 'IP12-128-BLU', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(89, 77, 'Tím', '128GB', 16990000.00, 30, 'IP14P-128-PUR', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(90, 78, 'Xanh Mint', '8GB/128GB', 10990000.00, 25, 'S23FE-GRN', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(91, 79, 'Kem', '256GB', 18990000.00, 20, 'ZFLIP5-CRM', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(92, 80, 'Xanh Icy', '256GB', 29990000.00, 10, 'ZFOLD5-BLU', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(93, 81, 'Đen', '8GB/256GB', 6490000.00, 100, 'RMN13P-BLK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(94, 82, 'Xanh Tuyết', '12GB/256GB', 10990000.00, 40, 'MI13T-BLU', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(95, 83, 'Bạc', '8GB/256GB', 9490000.00, 50, 'RENO10-SLV', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(96, 84, 'Vàng', '256GB', 22990000.00, 15, 'FINDN3F-GLD', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(97, 85, 'Trắng Huy Hiệu', '12GB/256GB', 8990000.00, 30, 'R11PRO-WHT', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(98, 86, 'Xanh Sông Băng', '8GB/256GB', 7990000.00, 20, 'VIVOV29E-BLU', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(99, 87, 'Đen', '16GB/512GB', 24990000.00, 10, 'ROG7-BLK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(100, 88, 'Trắng', '128GB', 12990000.00, 15, 'PIXEL7P-WHT', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(101, 89, 'Hồng', '128GB', 15990000.00, 10, 'PIXEL8-PNK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(102, 90, 'Bạc', '8GB/128GB', 6990000.00, 80, 'A34-SLV', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(103, 91, 'Xanh Lime', '8GB/128GB', 7990000.00, 70, 'A54-LIM', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(104, 92, 'Hồng', '128GB', 19990000.00, 40, 'IP15-PNK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(105, 93, 'Vàng', '128GB', 22990000.00, 35, 'IP15P-YEL', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(106, 94, 'Vàng', '8GB/256GB', 8490000.00, 60, 'POCOX6P-YEL', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(107, 95, 'Vàng', '8GB/256GB', 18490000.00, 100, 'MBA-M1-GLD', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(108, 96, 'Space Black', 'M3/8GB/512GB', 39990000.00, 20, 'MBP14-M3-BLK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(109, 97, 'Xanh', 'Ultra 5/16GB', 23990000.00, 15, 'ZEN14-OLED', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(110, 98, 'Đen', 'i5/8GB', 12990000.00, 50, 'INS3520-BLK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(111, 99, 'Bạc', 'i5/16GB', 16490000.00, 30, 'PAV15-SLV', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(112, 100, 'Đen', 'i5/RTX3050', 19990000.00, 40, 'NITRO5-TIGER', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(113, 101, 'Đen', 'i7/RTX4050', 26990000.00, 25, 'KATANA15', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(114, 102, 'Xám', 'R7/3050Ti', 21990000.00, 30, 'LEGION5-GRY', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(115, 103, 'Xám', 'R5/8GB', 13490000.00, 40, 'TB14-GRY', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(116, 104, 'Trắng', 'i7/16GB', 29990000.00, 10, 'GRAM14-WHT', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(117, 105, 'Sapphire', 'i5/8GB', 24990000.00, 15, 'SFPRO9-BLU', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(118, 106, 'Platinum', 'i5/8GB', 23990000.00, 12, 'SFLAP5-SLV', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(119, 107, 'Đen', 'i5/RTX4050', 20990000.00, 45, 'G5-MF', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(120, 108, 'Xám', 'i3/8GB', 9990000.00, 60, 'VOS3520', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(121, 109, 'Xanh Đậm', 'R5/3050', 17990000.00, 35, 'VICTUS16-BLU', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(122, 110, 'Bạc', 'i5/8GB', 14990000.00, 40, 'SWIFT3-SLV', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(123, 111, 'Đen', 'R5/OLED', 13990000.00, 50, 'VIVO15-BLK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(124, 112, 'Đen', 'i3/8GB', 8990000.00, 80, 'MODERN14-BLK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(125, 113, 'Midnight', 'M2/8GB', 27990000.00, 20, 'MBA15-MID', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(126, 114, 'Đen', 'i7/RTX4060', 35990000.00, 15, 'HELIOS-NEO', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(127, 115, 'Xám', '64GB WiFi', 6990000.00, 150, 'IPAD9-GRY', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(128, 116, 'Xanh', '64GB WiFi', 9990000.00, 80, 'IPAD10-BLU', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(129, 117, 'Xám', '128GB WiFi', 19990000.00, 30, 'IPADPRO11-M2', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(130, 118, 'Beige', '128GB WiFi', 16990000.00, 25, 'TABS9-BGE', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(131, 119, 'Xanh Mint', '128GB WiFi', 8990000.00, 40, 'TABS9FE-GRN', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(132, 120, 'Vàng', '8GB/128GB', 7990000.00, 60, 'PAD6-GLD', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(133, 121, 'Xám', '4GB/64GB', 3990000.00, 50, 'TABM10-GRY', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(134, 122, 'Tím', '4GB/64GB', 4990000.00, 35, 'PADAIR-PUR', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(135, 123, 'Starlight', '40mm GPS', 5990000.00, 70, 'AWSE-STAR', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(136, 124, 'Titan', 'Dây Alpine', 19990000.00, 15, 'AWU2-ALP', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(137, 125, 'Đen', '43mm BT', 6490000.00, 30, 'GW6CL-BLK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(138, 126, 'Vàng', '40mm BT', 4990000.00, 40, 'GW6-GLD', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(139, 127, 'Đen', '46mm', 10990000.00, 15, 'FR265-BLK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(140, 128, 'Trắng', '45mm', 10490000.00, 20, 'VENU3-WHT', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(141, 129, 'Đen', 'Bluetooth', 3990000.00, 35, 'MIWATCH2', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(142, 130, 'Xanh', '46mm', 5490000.00, 45, 'GT4-GRN', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(143, 131, 'Nâu', 'Da', 4290000.00, 40, 'GTR4-BRN', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(144, 132, 'Đen', 'Dây từ', 1290000.00, 60, 'KRPRO-BLK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(145, 133, 'Đen', 'Silicone', 890000.00, 200, 'MIBAND8', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(146, 134, 'Hồng', 'Silicone', 890000.00, 100, 'HUAWEIB9-PNK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(147, 135, 'Trắng', 'Lightning', 2690000.00, 500, 'AP2', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(148, 136, 'Trắng', 'Lightning', 3990000.00, 200, 'AP3', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(149, 137, 'Trắng', 'USB-C', 5990000.00, 250, 'APPRO2-C', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(150, 138, 'Tím', 'Bora Purple', 2990000.00, 80, 'BUDS2P-PUR', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(151, 139, 'Đen', 'ANC', 6490000.00, 40, 'WF1000XM5', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(152, 140, 'Xanh', 'Không dây', 1190000.00, 60, 'CH520-BLU', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(153, 141, 'Vàng', 'Gold', 5990000.00, 20, 'TOURPRO2', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(154, 142, 'Đỏ', 'Bluetooth', 2590000.00, 100, 'FLIP6-RED', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(155, 143, 'Rằn ri', 'Camo', 3690000.00, 80, 'CHARGE5-CAMO', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(156, 144, 'Đen', 'Kèm Mic', 7990000.00, 30, 'ENCORE', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(157, 145, 'Đen', 'Vàng đồng', 3990000.00, 50, 'EMBER2-BLK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(158, 146, 'Kem', 'Cream', 2690000.00, 70, 'WILLEN-CRM', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(159, 147, 'Nâu', 'Bluetooth', 6990000.00, 60, 'ACTON3-BRN', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(160, 148, 'Xám', 'Bluetooth', 4990000.00, 40, 'ONYX7-GRY', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(161, 149, 'Đen', 'Bluetooth', 7490000.00, 25, 'GOPLAY3-BLK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(162, 150, 'Cam', 'Bluetooth', 1290000.00, 50, 'XB100-ORG', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(163, 151, 'Đen', 'Soundbar', 2990000.00, 30, 'HWC450', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(164, 152, 'Đỏ Đen', 'Có dây', 1890000.00, 100, 'CLOUD2-RED', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(165, 153, 'Đen', 'Wireless', 5490000.00, 20, 'GPROX2', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(166, 154, 'Xanh', 'Có dây', 1290000.00, 60, 'BLACKSHARKV2X', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(167, 155, 'Đen', 'USB', 399000.00, 500, 'G102-BLK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(168, 156, 'Trắng', 'Wireless', 799000.00, 250, 'G304-WHT', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(169, 157, 'Đen', 'USB', 599000.00, 150, 'VIPERMINI', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(170, 158, 'Hồng', 'Akko Switch', 1690000.00, 50, '3098B-PNK', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(171, 159, 'Nhôm', 'Red Switch', 2490000.00, 40, 'K2PRO-RED', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(172, 160, 'Xanh', 'Bluetooth', 599000.00, 200, 'K380-BLU', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(173, 161, 'Trắng', '20W', 250000.00, 300, 'ANKER20W', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(174, 162, 'Đen', '65W', 690000.00, 100, 'UGREEN65W', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(175, 163, 'Trắng', '20000mAh', 450000.00, 150, 'MI20K', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(176, 164, 'Đen', 'MagSafe', 1190000.00, 50, 'ANKERMAG10K', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(177, 165, 'Đen', '720p', 550000.00, 100, 'C270', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(178, 166, 'Trắng', 'PS5', 1690000.00, 80, 'DUALSENSE', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(179, 167, 'Đen', '27 inch', 5490000.00, 40, 'ODYSSEYG5', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(180, 168, 'Đen', '24 inch', 4990000.00, 30, 'PA248QV', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(181, 169, 'Bạc', '24 inch', 5290000.00, 50, 'U2422H', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(182, 170, 'Đen', '16GB', 1290000.00, 100, 'VENGRS16', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(183, 171, 'Đen', '500GB', 990000.00, 150, 'NV2-500', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(184, 172, 'Xanh', 'CPU', 2990000.00, 100, 'I5-12400F', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(185, 173, 'Đen', 'VGA', 7490000.00, 50, '3060DUAL', '2025-12-25 10:21:39', '2025-12-25 10:21:39'),
+(186, 174, 'Trắng', 'TV Box', 1190000.00, 40, 'CHROMECAST4K', '2025-12-25 10:21:39', '2025-12-25 10:21:39');
 
 -- --------------------------------------------------------
 
@@ -163,7 +263,11 @@ INSERT INTO `chi_tiet_don_hang` (`id_chi_tiet`, `id_don_hang`, `id_san_pham`, `i
 (19, 15, 14, 15, 2, 1200000.00, 'Loa Bluetooth JBL Go 4', 'Đen'),
 (20, 16, 19, 20, 1, 900000.00, 'Loa vi tính Bluetooth Enkor E700 Đen', 'Đen'),
 (21, 16, 45, 46, 1, 400000.00, 'Đèn bàn học Điện Quang ĐQ LDL06', 'Trắng'),
-(25, 19, 64, 77, 1, 3000000.00, 'Xiaomi Redmi 13C', 'Xanh lá - 4GB RAM + 128GB ROM');
+(25, 19, 64, 77, 1, 3000000.00, 'Xiaomi Redmi 13C', 'Xanh lá - 4GB RAM + 128GB ROM'),
+(26, 20, 71, 86, 1, 5000000.00, 'Máy Chơi Game PS4', 'Đen'),
+(27, 21, 71, 86, 1, 5000000.00, 'Máy Chơi Game PS4', 'Đen'),
+(28, 22, 71, 86, 1, 5000000.00, 'Máy Chơi Game PS4', 'Đen'),
+(29, 22, 61, 70, 1, 15000000.00, 'iPhone 13', 'Xanh dương - 128GB');
 
 -- --------------------------------------------------------
 
@@ -273,7 +377,10 @@ INSERT INTO `don_hang` (`id_don_hang`, `id_nguoi_dung`, `ngay_dat`, `tong_tien`,
 (14, 12, '2025-11-21 11:16:34', 700000.00, 'hai', '0255115661', 'p25', 'COD', 'Cho_xac_nhan'),
 (15, 12, '2025-11-21 12:08:09', 3150000.00, 'hai', '0255115661', 'p25', 'COD', 'Cho_xac_nhan'),
 (16, 12, '2025-11-21 18:51:14', 1300000.00, 'hai', '0255115661', 'nguyễn gia trí', 'COD', 'Da_giao'),
-(19, 12, '2025-11-25 15:34:29', 3000000.00, 'hai', '0255115661', 'p25', 'BANK', 'Da_giao');
+(19, 12, '2025-11-25 15:34:29', 3000000.00, 'hai', '0255115661', 'p25', 'BANK', 'Da_giao'),
+(20, 12, '2025-11-25 18:08:28', 5000000.00, 'hai', '0255115661', 'p25', 'COD', 'Cho_xac_nhan'),
+(21, 12, '2025-11-27 13:27:56', 5000000.00, 'Lê Nhật Hải', '0347389473', 'nguyễn gia trí, p25, Bình Thạnh', 'COD', 'Cho_xac_nhan'),
+(22, 12, '2025-11-27 14:03:08', 29000000.00, 'Lê Nhật Hải', '0347389473', 'nguyễn gia trí, p25, Bình Thạnh', 'COD', 'Dang_giao');
 
 -- --------------------------------------------------------
 
@@ -373,7 +480,107 @@ INSERT INTO `hinh_anh_san_pham` (`id_hinh_anh`, `id_san_pham`, `url_hinh_anh`, `
 (62, 62, 'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/o/p/oppo-a58-den.jpg', 1, 0, '2025-06-21 10:53:45'),
 (63, 63, 'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/x/i/xiaomi-redmi-note-13-pro-4g_6__1.png', 1, 0, '2025-06-21 10:53:45'),
 (64, 64, 'https://cdn.tgdd.vn/Products/Images/42/316771/xiaomi-redmi-13c-xanh-1-1-750x500.jpg', 1, 0, '2025-06-21 10:53:45'),
-(71, 71, '../admin/uploads/img_69255ba22672d.jpg', 1, 0, '2025-11-25 07:32:50');
+(71, 71, '../admin/uploads/img_69255ba22672d.jpg', 1, 0, '2025-11-25 07:32:50'),
+(72, 75, 'https://cdn.tgdd.vn/Products/Images/42/153856/iphone-11-trang-1-1-1-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(73, 76, 'https://cdn.tgdd.vn/Products/Images/42/213031/iphone-12-xanh-duong-new-2-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(74, 77, 'https://cdn.tgdd.vn/Products/Images/42/289691/iphone-14-plus-tim-thumbnew-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(75, 78, 'https://cdn.tgdd.vn/Products/Images/42/306994/samsung-galaxy-s23-fe-xanh-mint-thumbnew-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(76, 79, 'https://cdn.tgdd.vn/Products/Images/42/299250/samsung-galaxy-z-flip5-kem-thumbnew-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(77, 80, 'https://cdn.tgdd.vn/Products/Images/42/299253/samsung-galaxy-z-fold5-xanh-icy-thumbnew-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(78, 81, 'https://cdn.tgdd.vn/Products/Images/42/319665/xiaomi-redmi-note-13-pro-den-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(79, 82, 'https://cdn.tgdd.vn/Products/Images/42/309816/xiaomi-13t-xanh-duong-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(80, 83, 'https://cdn.tgdd.vn/Products/Images/42/306997/oppo-reno10-bac-thumbnew-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(81, 84, 'https://cdn.tgdd.vn/Products/Images/42/313084/oppo-find-n3-flip-vang-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(82, 85, 'https://cdn.tgdd.vn/Products/Images/42/306991/realme-11-pro-plus-trang-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(83, 86, 'https://cdn.tgdd.vn/Products/Images/42/313437/vivo-v29e-xanh-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(84, 87, 'https://cdn.tgdd.vn/Products/Images/42/306899/asus-rog-phone-7-den-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(85, 88, 'https://cdn.tgdd.vn/Products/Images/42/294697/google-pixel-7-pro-trang-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(86, 89, 'https://cdn.tgdd.vn/Products/Images/42/316937/google-pixel-8-hong-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(87, 90, 'https://cdn.tgdd.vn/Products/Images/42/298377/samsung-galaxy-a34-bac-thumbnew-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(88, 91, 'https://cdn.tgdd.vn/Products/Images/42/251856/samsung-galaxy-a54-5g-xanh-thumb-1-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(89, 92, 'https://cdn.tgdd.vn/Products/Images/42/281570/iphone-15-hong-thumb-1-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(90, 93, 'https://cdn.tgdd.vn/Products/Images/42/303891/iphone-15-plus-vang-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(91, 94, 'https://cdn.tgdd.vn/Products/Images/42/320857/xiaomi-poco-x6-pro-vang-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(92, 95, 'https://cdn.tgdd.vn/Products/Images/44/231244/macbook-air-m1-2020-gold-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(93, 96, 'https://cdn.tgdd.vn/Products/Images/44/318225/macbook-pro-14-inch-m3-2023-den-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(94, 97, 'https://cdn.tgdd.vn/Products/Images/44/321453/asus-zenbook-14-oled-ux3405ma-ultra-5-pp151w-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(95, 98, 'https://cdn.tgdd.vn/Products/Images/44/291617/dell-inspiron-15-3520-i5-n5i5122w1-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(96, 99, 'https://cdn.tgdd.vn/Products/Images/44/287768/hp-pavilion-15-eg2035tx-i5-6k781pa-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(97, 100, 'https://cdn.tgdd.vn/Products/Images/44/278559/acer-nitro-5-tiger-an515-58-52sp-i5-nhqfhsv001-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(98, 101, 'https://cdn.tgdd.vn/Products/Images/44/303498/msi-katana-15-b13vfk-i7-672vn-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(99, 102, 'https://cdn.tgdd.vn/Products/Images/44/268345/lenovo-legion-5-15ach6-r7-82jw00klvn-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(100, 103, 'https://cdn.tgdd.vn/Products/Images/44/298410/lenovo-thinkbook-14-g3-acl-r5-21a200r0vn-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(101, 104, 'https://cdn.tgdd.vn/Products/Images/44/305562/lg-gram-2023-14z90r-gah53a5-i5-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(102, 105, 'https://cdn.tgdd.vn/Products/Images/44/297298/surface-pro-9-i5-16gb-256gb-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(103, 106, 'https://cdn.tgdd.vn/Products/Images/44/303423/surface-laptop-5-i5-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(104, 107, 'https://cdn.tgdd.vn/Products/Images/44/303445/gigabyte-gaming-g5-mf-i5-f2vn333sh-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(105, 108, 'https://cdn.tgdd.vn/Products/Images/44/299645/dell-vostro-3520-i3-v5i3614w1-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(106, 109, 'https://cdn.tgdd.vn/Products/Images/44/282245/hp-victus-16-e1106ax-r5-7c0t3pa-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(107, 110, 'https://cdn.tgdd.vn/Products/Images/44/289895/acer-swift-3-sf314-512-56qn-i5-nxk0fsv002-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(108, 111, 'https://cdn.tgdd.vn/Products/Images/44/304724/asus-vivobook-15-oled-a1505va-i5-l1052w-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(109, 112, 'https://cdn.tgdd.vn/Products/Images/44/305370/msi-modern-14-c11m-i3-011vn-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(110, 113, 'https://cdn.tgdd.vn/Products/Images/44/307409/macbook-air-15-inch-m2-2023-midnight-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(111, 114, 'https://cdn.tgdd.vn/Products/Images/44/304470/acer-predator-helios-neo-phn16-71-7460-i7-nhqlusv004-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(112, 115, 'https://cdn.tgdd.vn/Products/Images/522/247517/ipad-gen-9-wifi-grey-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(113, 116, 'https://cdn.tgdd.vn/Products/Images/522/294103/ipad-gen-10-wifi-xanh-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(114, 117, 'https://cdn.tgdd.vn/Products/Images/522/295252/ipad-pro-m2-11-inch-wifi-xam-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(115, 118, 'https://cdn.tgdd.vn/Products/Images/522/308479/samsung-galaxy-tab-s9-wifi-kem-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(116, 119, 'https://cdn.tgdd.vn/Products/Images/522/315998/samsung-galaxy-tab-s9-fe-wifi-xanh-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(117, 120, 'https://cdn.tgdd.vn/Products/Images/522/305597/xiaomi-pad-6-vang-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(118, 121, 'https://cdn.tgdd.vn/Products/Images/522/285226/lenovo-tab-m10-gen-3-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(119, 122, 'https://cdn.tgdd.vn/Products/Images/522/286071/oppo-pad-air-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(120, 123, 'https://cdn.tgdd.vn/Products/Images/7077/314766/apple-watch-se-2023-gps-40mm-vien-nhom-day-silicone-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(121, 124, 'https://cdn.tgdd.vn/Products/Images/7077/314789/apple-watch-ultra-2-gps-cellular-49mm-vien-titanium-day-alpine-loop-co-vua-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(122, 125, 'https://cdn.tgdd.vn/Products/Images/7077/308412/samsung-galaxy-watch6-classic-43mm-den-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(123, 126, 'https://cdn.tgdd.vn/Products/Images/7077/308405/samsung-galaxy-watch6-40mm-vang-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(124, 127, 'https://cdn.tgdd.vn/Products/Images/7077/303960/garmin-forerunner-265-music-day-silicone-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(125, 128, 'https://cdn.tgdd.vn/Products/Images/7077/313838/garmin-venu-3-day-silicone-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(126, 129, 'https://cdn.tgdd.vn/Products/Images/7077/322883/xiaomi-watch-2-den-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(127, 130, 'https://cdn.tgdd.vn/Products/Images/7077/315183/huawei-watch-gt-4-46mm-day-cao-su-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(128, 131, 'https://cdn.tgdd.vn/Products/Images/7077/290356/amazfit-gtr-4-46mm-thumb-1-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(129, 132, 'https://cdn.tgdd.vn/Products/Images/7077/304381/kieslect-kr-pro-day-tu-tinh-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(130, 133, 'https://cdn.tgdd.vn/Products/Images/7077/316008/mi-band-8-den-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(131, 134, 'https://cdn.tgdd.vn/Products/Images/7077/323869/huawei-band-9-hong-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(132, 135, 'https://cdn.tgdd.vn/Products/Images/54/236016/bluetooth-airpods-2-apple-mv7n2-imei-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(133, 136, 'https://cdn.tgdd.vn/Products/Images/54/250701/airpods-3-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(134, 137, 'https://cdn.tgdd.vn/Products/Images/54/314811/airpods-pro-2-usb-c-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(135, 138, 'https://cdn.tgdd.vn/Products/Images/54/286236/tai-nghe-bluetooth-true-wireless-samsung-galaxy-buds-2-pro-r510n-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(136, 139, 'https://cdn.tgdd.vn/Products/Images/54/309664/sony-wf-1000xm5-den-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(137, 140, 'https://cdn.tgdd.vn/Products/Images/54/304494/tai-nghe-chup-tai-bluetooth-sony-wh-ch520-xanh-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(138, 141, 'https://cdn.tgdd.vn/Products/Images/54/312521/tai-nghe-bluetooth-true-wireless-jbl-tour-pro-2-vang-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(139, 142, 'https://cdn.tgdd.vn/Products/Images/2162/255677/loa-bluetooth-jbl-flip-6-do-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(140, 143, 'https://cdn.tgdd.vn/Products/Images/2162/249911/loa-bluetooth-jbl-charge-5-ran-ri-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(141, 144, 'https://cdn.tgdd.vn/Products/Images/2162/285854/loa-bluetooth-jbl-partybox-encore-2-mic-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(142, 145, 'https://cdn.tgdd.vn/Products/Images/2162/288543/loa-bluetooth-marshall-emberton-ii-den-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(143, 146, 'https://cdn.tgdd.vn/Products/Images/2162/288540/loa-bluetooth-marshall-willen-kem-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(144, 147, 'https://cdn.tgdd.vn/Products/Images/2162/288541/loa-bluetooth-marshall-acton-iii-nau-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(145, 148, 'https://cdn.tgdd.vn/Products/Images/2162/236056/loa-bluetooth-harman-kardon-onyx-studio-7-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(146, 149, 'https://cdn.tgdd.vn/Products/Images/2162/313426/loa-bluetooth-harman-kardon-go-play-3-den-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(147, 150, 'https://cdn.tgdd.vn/Products/Images/2162/309653/loa-bluetooth-sony-srs-xb100-cam-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(148, 151, 'https://cdn.tgdd.vn/Products/Images/7264/305214/loa-thanh-samsung-hw-c450-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(149, 152, 'https://cdn.tgdd.vn/Products/Images/54/293290/tai-nghe-co-day-gaming-hyperx-cloud-ii-do-den-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(150, 153, 'https://cdn.tgdd.vn/Products/Images/54/309252/tai-nghe-chup-tai-gaming-logitech-pro-x-2-lightspeed-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(151, 154, 'https://cdn.tgdd.vn/Products/Images/54/285514/tai-nghe-chup-tai-gaming-razer-blackshark-v2-x-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(152, 155, 'https://cdn.tgdd.vn/Products/Images/86/160100/chuot-gaming-logitech-g102-den-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(153, 156, 'https://cdn.tgdd.vn/Products/Images/86/186596/chuot-khong-day-gaming-logitech-g304-trang-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(154, 157, 'https://cdn.tgdd.vn/Products/Images/86/226164/chuot-gaming-razer-viper-mini-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(155, 158, 'https://cdn.tgdd.vn/Products/Images/4547/313171/ban-phim-co-khong-day-akko-3098b-multi-mode-black-pink-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(156, 159, 'https://cdn.tgdd.vn/Products/Images/4547/308197/ban-phim-co-khong-day-keychron-k2-pro-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(157, 160, 'https://cdn.tgdd.vn/Products/Images/4547/166016/ban-phim-bluetooth-logitech-k380-xanh-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(158, 161, 'https://cdn.tgdd.vn/Products/Images/58/314486/adapter-sac-type-c-20w-anker-nano-3-a2147-trang-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(159, 162, 'https://cdn.tgdd.vn/Products/Images/58/308272/adapter-sac-3-cong-gan-65w-ugreen-nexode-10335-den-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(160, 163, 'https://cdn.tgdd.vn/Products/Images/57/237699/pin-sac-du-phong-20000mah-type-c-pd-qc30-xiaomi-3-pro-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(161, 164, 'https://cdn.tgdd.vn/Products/Images/57/314227/pin-sac-du-phong-khong-day-tich-hop-chan-de-10000mah-magnetic-anker-maggo-a1652-den-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(162, 165, 'https://cdn.tgdd.vn/Products/Images/4729/236025/webcam-720p-logitech-c270-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(163, 166, 'https://cdn.tgdd.vn/Products/Images/200010/256950/tay-cam-choi-game-khong-day-dualsense-ps5-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(164, 167, 'https://cdn.tgdd.vn/Products/Images/5697/233044/samsung-lc27g55tq-27-inch-2k-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(165, 168, 'https://cdn.tgdd.vn/Products/Images/5697/233036/asus-proart-pa248qv-24-1-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(166, 169, 'https://cdn.tgdd.vn/Products/Images/5697/244304/dell-ultrasharp-u2422h-238-inch-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(167, 170, 'https://cdn.tgdd.vn/Products/Images/8686/260742/ram-desktop-corsair-vengeance-rgb-rs-16gb-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(168, 171, 'https://cdn.tgdd.vn/Products/Images/8687/294285/o-cung-ssd-500gb-nvme-pcie-gen-40-x4-kingston-nv2-snv2s500g-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(169, 172, 'https://cdn.tgdd.vn/Products/Images/8689/265330/cpu-intel-core-i5-12400f-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(170, 173, 'https://cdn.tgdd.vn/Products/Images/8692/236081/vga-asus-dual-geforce-rtx-3060-v2-oc-edition-12gb-gddr6-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39'),
+(171, 174, 'https://cdn.tgdd.vn/Products/Images/9344/228795/google-chromecast-with-google-tv-trang-thumb-600x600.jpg', 1, 0, '2025-12-25 10:21:39');
 
 -- --------------------------------------------------------
 
@@ -462,7 +669,107 @@ INSERT INTO `san_pham` (`id_san_pham`, `ten_san_pham`, `loai_san_pham`, `mo_ta`,
 (62, 'OPPO A58', 'Điện thoại', 'OPPO A58 là mẫu smartphone phổ thông, hướng đến người dùng cơ bản với màn hình lớn, pin trâu và camera ổn định trong tầm giá. Máy có thiết kế trẻ trung, màu sắc đa dạng.', 'Màn hình: IPS LCD, 6.72 inch, Full HD+ (1080 x 2400 Pixels). Chip: MediaTek Helio G85. RAM: 6GB / 8GB. Bộ nhớ trong: 128GB. Camera sau: Chính 50MP, Xóa phông 2MP. Camera trước: 8MP. Pin: 5000 mAh, sạc nhanh SuperVOOC 33W. Hệ điều hành: Android 13 với ColorOS 13.1. Tính năng khác: Loa kép.', 'https://www.youtube.com/watch?v=e_c5faPCMOs', 'Thường có giảm giá tiền mặt, trả góp 0% hoặc tặng kèm sim data.', 'Chính hãng 12 tháng.', 0.0, 0),
 (63, 'Xiaomi Redmi Note 13 Pro+ 5G', 'Điện thoại', 'Xiaomi Redmi Note 13 Pro+ 5G là mẫu smartphone tầm trung cao cấp của Xiaomi, nổi bật với màn hình cong AMOLED 1.5K, camera 200MP chống rung OIS và công nghệ sạc siêu nhanh 120W.', 'Màn hình: AMOLED, 6.67 inch, 1.5K (1220 x 2712 Pixels), tần số quét 120Hz, độ sáng tối đa 1800 nits. Chip: MediaTek Dimensity 7200 Ultra. RAM: 8GB / 12GB. Bộ nhớ trong: 256GB / 512GB. Camera sau: Chính 200MP (OIS), Góc siêu rộng 8MP, Macro 2MP. Camera trước: 16MP. Pin: 5000 mAh, sạc nhanh 120W. Hệ điều hành: Android 13 với MIUI 14 (có thể cập nhật lên HyperOS). Tính năng khác: Kháng nước, bụi IP68, cảm biến vân tay dưới màn hình, loa kép.', '', 'Thường có ưu đãi trả góp 0%, giảm giá trực tiếp, tặng kèm tai nghe hoặc phiếu mua hàng.', 'Chính hãng 12 tháng.', 0.0, 0),
 (64, 'Xiaomi Redmi 13C', 'Điện thoại', 'Xiaomi Redmi 13C là mẫu điện thoại giá rẻ của Xiaomi, tập trung vào việc mang lại trải nghiệm màn hình lớn, pin \"trâu\" và hiệu năng ổn định cho các tác vụ cơ bản hàng ngày.', 'Màn hình: IPS LCD, 6.74 inch, HD+ (720 x 1600 Pixels), tần số quét 90Hz. Chip: MediaTek Helio G85. RAM: 4GB / 6GB / 8GB. Bộ nhớ trong: 128GB / 256GB. Camera sau: Chính 50MP, Macro 2MP, Xóa phông 2MP. Camera trước: 8MP. Pin: 5000 mAh, sạc nhanh 18W. Hệ điều hành: Android 13 với MIUI 14.', 'https://youtu.be/4ku0sxoJ4oo', 'Thường có giảm giá tiền mặt, tặng kèm sim data hoặc phiếu mua hàng.', 'Chính hãng 12 tháng.', 0.0, 0),
-(71, 'Máy Chơi Game PS4', 'Máy chơi game', 'Đến từ nhà Sony', 'Tên sản phẩm	PlayStation 4 Pro\r\nModel	CUH‑7000 series\r\nCPU	AMD x86-64 \"Jaguar\" 8 lõi, tốc độ ~2.1 GHz—nhanh hơn ~31% so với PS4 gốc\r\nGPU	AMD Radeon (GCN, Polaris) với 36 Compute Units @ 911 MHz (~4.2 TFLOPS)—gấp hơn 2.2 lần so với PS4 gốc\r\nRAM hệ thống	8 GB GDDR5 (băng thông 218 GB/s) + 1 GB DDR3 dành cho hệ điều hành\r\nLưu trữ (HDD)	HDD 1 TB 2.5\" SATA, có thể thay thế/tăng cấp\r\nĐầu ra hình ảnh	HDMI 2.0a hỗ trợ xuất 4K (checkerboard upscale hoặc native 4K), HDR\r\nỔ đĩa quang	Blu-ray & DVD (chỉ đọc)\r\nCổng kết nối	3 × USB 3.1 Gen1, 1 × AUX, HDMI, Optical Audio Out, Gigabit Ethernet\r\nKết nối không dây	Wi-Fi 802.11ac (dual-band), Bluetooth 4.0 (LE)\r\nKích thước (WxHxD)	295 × 55 × 327 mm (~11.6″ × 2.2″ × 12.9″)\r\nTrọng lượng	Khoảng 3.3 kg (7.3 lb)\r\nCông suất tiêu thụ tối đa	Khoảng 310 W\r\nTính năng nổi bật	4K HDR gaming, VR cải thiện, hình ảnh chi tiết hơn, tốc độ khung hình ổn định hơn\r\n', '', NULL, '6 tháng', 0.0, 0);
+(71, 'Máy Chơi Game PS4', 'Máy chơi game', 'Đến từ nhà Sony', 'Tên sản phẩm	PlayStation 4 Pro\r\nModel	CUH‑7000 series\r\nCPU	AMD x86-64 \"Jaguar\" 8 lõi, tốc độ ~2.1 GHz—nhanh hơn ~31% so với PS4 gốc\r\nGPU	AMD Radeon (GCN, Polaris) với 36 Compute Units @ 911 MHz (~4.2 TFLOPS)—gấp hơn 2.2 lần so với PS4 gốc\r\nRAM hệ thống	8 GB GDDR5 (băng thông 218 GB/s) + 1 GB DDR3 dành cho hệ điều hành\r\nLưu trữ (HDD)	HDD 1 TB 2.5\" SATA, có thể thay thế/tăng cấp\r\nĐầu ra hình ảnh	HDMI 2.0a hỗ trợ xuất 4K (checkerboard upscale hoặc native 4K), HDR\r\nỔ đĩa quang	Blu-ray & DVD (chỉ đọc)\r\nCổng kết nối	3 × USB 3.1 Gen1, 1 × AUX, HDMI, Optical Audio Out, Gigabit Ethernet\r\nKết nối không dây	Wi-Fi 802.11ac (dual-band), Bluetooth 4.0 (LE)\r\nKích thước (WxHxD)	295 × 55 × 327 mm (~11.6″ × 2.2″ × 12.9″)\r\nTrọng lượng	Khoảng 3.3 kg (7.3 lb)\r\nCông suất tiêu thụ tối đa	Khoảng 310 W\r\nTính năng nổi bật	4K HDR gaming, VR cải thiện, hình ảnh chi tiết hơn, tốc độ khung hình ổn định hơn\r\n', '', NULL, '6 tháng', 0.0, 0),
+(75, 'iPhone 11 64GB', 'Điện thoại', 'Thiết kế vẫn rất thời thượng, hiệu năng ổn định.', 'Chip A13 Bionic, Màn hình 6.1 Liquid Retina', NULL, NULL, '12 tháng', 4.5, 100),
+(76, 'iPhone 12 128GB', 'Điện thoại', 'Thiết kế vuông vức, màn hình OLED sắc nét.', 'Chip A14 Bionic, Màn hình Super Retina XDR', NULL, NULL, '12 tháng', 4.6, 80),
+(77, 'iPhone 14 Plus 128GB', 'Điện thoại', 'Màn hình lớn, pin trâu.', 'Chip A15 Bionic, Màn hình 6.7 inch', NULL, NULL, '12 tháng', 4.7, 50),
+(78, 'Samsung Galaxy S23 FE', 'Điện thoại', 'Phiên bản Fan Edition đáng giá.', 'Exynos 2200, Màn hình 120Hz', NULL, NULL, '12 tháng', 4.2, 30),
+(79, 'Samsung Galaxy Z Flip5', 'Điện thoại', 'Màn hình phụ Flex Window đột phá.', 'Snapdragon 8 Gen 2 for Galaxy', NULL, NULL, '12 tháng', 4.8, 45),
+(80, 'Samsung Galaxy Z Fold5', 'Điện thoại', 'Quyền năng PC trong túi quần.', 'Snapdragon 8 Gen 2, Đa nhiệm cực đỉnh', NULL, NULL, '12 tháng', 4.9, 20),
+(81, 'Xiaomi Redmi Note 13 Pro', 'Điện thoại', 'Camera 200MP, sạc nhanh 67W.', 'Helio G99-Ultra, Màn hình AMOLED', NULL, NULL, '18 tháng', 4.5, 120),
+(82, 'Xiaomi 13T 5G', 'Điện thoại', 'Camera Leica chuyên nghiệp.', 'Dimensity 8200-Ultra, Màn hình 144Hz', NULL, NULL, '24 tháng', 4.6, 60),
+(83, 'OPPO Reno10 5G', 'Điện thoại', 'Chuyên gia chân dung tele.', 'Dimensity 7050 5G, Camera 64MP', NULL, NULL, '12 tháng', 4.4, 90),
+(84, 'OPPO Find N3 Flip', 'Điện thoại', 'Camera Hasselblad đẳng cấp.', 'Dimensity 9200, Màn hình gập không nếp gấp', NULL, NULL, '12 tháng', 4.7, 15),
+(85, 'Realme 11 Pro+', 'Điện thoại', 'Thiết kế da sinh học sang trọng.', 'Camera 200MP, Sạc 100W', NULL, NULL, '12 tháng', 4.3, 40),
+(86, 'Vivo V29e 5G', 'Điện thoại', 'Vòng sáng Aura độc đáo.', 'Snapdragon 695, Camera selfie 50MP', NULL, NULL, '12 tháng', 4.2, 25),
+(87, 'Asus ROG Phone 7', 'Điện thoại', 'Ông vua Gaming Phone.', 'Snapdragon 8 Gen 2, Pin 6000mAh, AirTrigger', NULL, NULL, '12 tháng', 5.0, 35),
+(88, 'Google Pixel 7 Pro', 'Điện thoại', 'Android thuần, Camera AI đỉnh cao.', 'Google Tensor G2, Màn hình LTPO', NULL, NULL, '12 tháng', 4.5, 10),
+(89, 'Google Pixel 8', 'Điện thoại', 'Nhỏ gọn, mạnh mẽ, AI tích hợp sâu.', 'Google Tensor G3, Màn hình Actua', NULL, NULL, '12 tháng', 4.6, 5),
+(90, 'Samsung Galaxy A34 5G', 'Điện thoại', 'Chiến thần tầm trung.', 'Dimensity 1080, Kháng nước IP67', NULL, NULL, '12 tháng', 4.4, 200),
+(91, 'Samsung Galaxy A54 5G', 'Điện thoại', 'Chụp đêm siêu đỉnh.', 'Exynos 1380, Lưng kính sang trọng', NULL, NULL, '12 tháng', 4.5, 150),
+(92, 'iPhone 15 128GB', 'Điện thoại', 'Dynamic Island, Camera 48MP.', 'Chip A16 Bionic, Cổng USB-C', NULL, NULL, '12 tháng', 4.8, 70),
+(93, 'iPhone 15 Plus 128GB', 'Điện thoại', 'Pin khủng nhất dòng iPhone 15.', 'Chip A16 Bionic, Màn hình 6.7 inch', NULL, NULL, '12 tháng', 4.7, 65),
+(94, 'Xiaomi Poco X6 Pro', 'Điện thoại', 'Hiệu năng vô đối trong tầm giá.', 'Dimensity 8300 Ultra, Màn hình 1.5K', NULL, NULL, '18 tháng', 4.6, 88),
+(95, 'MacBook Air M1 2020', 'Laptop', 'Laptop văn phòng quốc dân.', 'Apple M1, 8GB RAM, 256GB SSD', NULL, NULL, '12 tháng', 4.9, 500),
+(96, 'MacBook Pro 14 M3', 'Laptop', 'Sức mạnh Pro, màu Space Black.', 'Apple M3, 8GB RAM, 512GB SSD', NULL, NULL, '12 tháng', 4.8, 20),
+(97, 'Asus Zenbook 14 OLED', 'Laptop', 'Mỏng nhẹ, màn hình đẹp tuyệt mỹ.', 'Core Ultra 5, Màn hình 3K OLED', NULL, NULL, '24 tháng', 4.5, 30),
+(98, 'Dell Inspiron 15 3520', 'Laptop', 'Bền bỉ, phục vụ học tập tốt.', 'Core i5 1235U, 8GB, 512GB', NULL, NULL, '12 tháng', 4.3, 100),
+(99, 'HP Pavilion 15', 'Laptop', 'Thời trang, âm thanh B&O.', 'Core i5 1240P, 16GB RAM', NULL, NULL, '12 tháng', 4.2, 50),
+(100, 'Acer Nitro 5 Tiger', 'Laptop', 'Laptop Gaming quốc dân.', 'i5 12500H, RTX 3050, 144Hz', NULL, NULL, '12 tháng', 4.4, 150),
+(101, 'MSI Katana 15', 'Laptop', 'Sắc bén như thanh kiếm Nhật.', 'i7 13620H, RTX 4050, 144Hz', NULL, NULL, '24 tháng', 4.3, 40),
+(102, 'Lenovo Legion 5', 'Laptop', 'Build chắc chắn, tản nhiệt tốt.', 'Ryzen 7 5800H, RTX 3050Ti', NULL, NULL, '24 tháng', 4.7, 80),
+(103, 'Lenovo ThinkBook 14 G3', 'Laptop', 'Thiết kế doanh nhân, bảo mật cao.', 'Ryzen 5 5500U, Vỏ nhôm', NULL, NULL, '12 tháng', 4.4, 60),
+(104, 'LG Gram 2023 14 inch', 'Laptop', 'Siêu nhẹ chỉ 999g.', 'Core i7 1340P, 16GB, 512GB', NULL, NULL, '12 tháng', 4.8, 15),
+(105, 'Surface Pro 9', 'Laptop', 'Máy tính bảng lai Laptop đỉnh cao.', 'Core i5 1235U, Màn hình 120Hz', NULL, NULL, '12 tháng', 4.6, 25),
+(106, 'Surface Laptop 5 13.5', 'Laptop', 'Sang trọng, mượt mà.', 'Core i5 1235U, Cảm ứng', NULL, NULL, '12 tháng', 4.5, 20),
+(107, 'Gigabyte G5 MF', 'Laptop', 'Hiệu năng cao giá rẻ.', 'i5 12500H, RTX 4050', NULL, NULL, '24 tháng', 4.1, 70),
+(108, 'Dell Vostro 3520', 'Laptop', 'Nồi đồng cối đá.', 'Core i3 1215U, 8GB, SSD 256GB', NULL, NULL, '12 tháng', 4.0, 90),
+(109, 'HP Victus 16', 'Laptop', 'Thiết kế đơn giản, cấu hình mạnh.', 'Ryzen 5 6600H, RTX 3050', NULL, NULL, '12 tháng', 4.3, 60),
+(110, 'Acer Swift 3', 'Laptop', 'Mỏng nhẹ di động.', 'Core i5 1135G7, Vỏ nhôm', NULL, NULL, '12 tháng', 4.2, 55),
+(111, 'Asus Vivobook 15 OLED', 'Laptop', 'Màn hình OLED giá rẻ.', 'Ryzen 5 7530U, Màn OLED', NULL, NULL, '24 tháng', 4.4, 75),
+(112, 'MSI Modern 14', 'Laptop', 'Giá rẻ cho sinh viên.', 'Core i3 1115G4, Nhỏ gọn', NULL, NULL, '24 tháng', 4.1, 200),
+(113, 'MacBook Air M2 15 inch', 'Laptop', 'Màn hình lớn, siêu mỏng.', 'Apple M2, 8GB, 256GB', NULL, NULL, '12 tháng', 4.8, 30),
+(114, 'Acer Predator Helios Neo', 'Laptop', 'Vũ khí tối thượng.', 'i7 13700HX, RTX 4060', NULL, NULL, '12 tháng', 4.7, 25),
+(115, 'iPad Gen 9 10.2 inch', 'Máy tính bảng', 'iPad giá rẻ tốt nhất.', 'A13 Bionic, 64GB', NULL, NULL, '12 tháng', 4.8, 300),
+(116, 'iPad Gen 10 10.9 inch', 'Máy tính bảng', 'Thiết kế mới, nhiều màu sắc.', 'A14 Bionic, USB-C', NULL, NULL, '12 tháng', 4.5, 100),
+(117, 'iPad Pro 11 M2', 'Máy tính bảng', 'Hiệu năng không đối thủ.', 'Apple M2, Màn hình 120Hz', NULL, NULL, '12 tháng', 4.9, 40),
+(118, 'Samsung Galaxy Tab S9 WiFi', 'Máy tính bảng', 'Chống nước, kèm bút S-Pen.', 'Snapdragon 8 Gen 2, Màn 11 inch', NULL, NULL, '12 tháng', 4.7, 35),
+(119, 'Samsung Galaxy Tab S9 FE', 'Máy tính bảng', 'Phiên bản rút gọn vừa túi tiền.', 'Exynos 1380, 90Hz', NULL, NULL, '12 tháng', 4.4, 50),
+(120, 'Xiaomi Pad 6', 'Máy tính bảng', 'Màn hình 144Hz siêu mượt.', 'Snapdragon 870, Pin 8840mAh', NULL, NULL, '18 tháng', 4.6, 90),
+(121, 'Lenovo Tab M10 Gen 3', 'Máy tính bảng', 'Máy tính bảng giá rẻ cho trẻ em.', 'Màn hình 10.1 inch, Loa kép', NULL, NULL, '12 tháng', 4.0, 60),
+(122, 'OPPO Pad Air', 'Máy tính bảng', 'Mỏng nhẹ, thiết kế đẹp.', 'Snapdragon 680, 4 loa', NULL, NULL, '12 tháng', 4.3, 40),
+(123, 'Apple Watch SE 2023', 'Đồng hồ', 'Smartwatch Apple giá tốt.', 'Chip S8, Chống nước 50m', NULL, NULL, '12 tháng', 4.7, 120),
+(124, 'Apple Watch Ultra 2', 'Đồng hồ', 'Dành cho dân thể thao chuyên nghiệp.', 'Vỏ Titan, Pin 36h', NULL, NULL, '12 tháng', 4.9, 30),
+(125, 'Samsung Galaxy Watch6 Classic', 'Đồng hồ', 'Vòng xoay bezel vật lý trở lại.', 'Đo thành phần cơ thể, Sleep Coaching', NULL, NULL, '12 tháng', 4.6, 50),
+(126, 'Samsung Galaxy Watch6', 'Đồng hồ', 'Viền mỏng hơn, màn hình lớn hơn.', 'Sapphire Crystal', NULL, NULL, '12 tháng', 4.5, 60),
+(127, 'Garmin Forerunner 265', 'Đồng hồ', 'Chuyên chạy bộ, màn AMOLED.', 'GPS đa băng tần, Pin 13 ngày', NULL, NULL, '12 tháng', 4.8, 20),
+(128, 'Garmin Venu 3', 'Đồng hồ', 'Theo dõi sức khỏe toàn diện.', 'Nghe gọi trên đồng hồ, Pin 14 ngày', NULL, NULL, '12 tháng', 4.7, 25),
+(129, 'Xiaomi Watch 2', 'Đồng hồ', 'Chạy WearOS mượt mà.', 'Snapdragon W5+ Gen 1', NULL, NULL, '12 tháng', 4.3, 40),
+(130, 'Huawei Watch GT 4', 'Đồng hồ', 'Thiết kế thời trang bát giác.', 'Pin 2 tuần, Theo dõi calo', NULL, NULL, '12 tháng', 4.6, 70),
+(131, 'Amazfit GTR 4', 'Đồng hồ', 'GPS chính xác, pin trâu.', 'Cảm biến BioTracker 4.0', NULL, NULL, '12 tháng', 4.4, 55),
+(132, 'Kieslect Kr Pro', 'Đồng hồ', 'Màn hình Always On giá rẻ.', 'Nghe gọi Bluetooth ổn định', NULL, NULL, '12 tháng', 4.2, 80),
+(133, 'Vòng đeo tay Xiaomi Band 8', 'Đồng hồ', 'Vòng đeo tay quốc dân mới.', 'Màn hình 60Hz, Pin 16 ngày', NULL, NULL, '12 tháng', 4.5, 300),
+(134, 'Huawei Band 9', 'Đồng hồ', 'Mỏng nhẹ, đeo như không đeo.', 'Theo dõi giấc ngủ chuyên sâu', NULL, NULL, '12 tháng', 4.4, 150),
+(135, 'AirPods 2', 'Tai nghe', 'Tai nghe True Wireless phổ biến nhất.', 'Chip H1, Hey Siri', NULL, NULL, '12 tháng', 4.8, 1000),
+(136, 'AirPods 3 Lightning', 'Tai nghe', 'Âm thanh vòm Spatial Audio.', 'Thiết kế mới, Pin 6h', NULL, NULL, '12 tháng', 4.6, 300),
+(137, 'AirPods Pro 2 USB-C', 'Tai nghe', 'Chống ồn gấp 2 lần.', 'Chip H2, Hộp sạc tìm kiếm chính xác', NULL, NULL, '12 tháng', 4.9, 400),
+(138, 'Samsung Galaxy Buds2 Pro', 'Tai nghe', 'Âm thanh Hi-Fi 24bit.', 'Chống ồn ANC thông minh', NULL, NULL, '12 tháng', 4.5, 150),
+(139, 'Sony WF-1000XM5', 'Tai nghe', 'Đỉnh cao chống ồn TWS.', 'Màng loa Dynamic X, Hi-Res Audio', NULL, NULL, '12 tháng', 4.7, 50),
+(140, 'Sony WH-CH520', 'Tai nghe', 'Tai nghe chụp tai giá rẻ pin trâu.', 'Pin 50 giờ, Nhẹ nhàng', NULL, NULL, '12 tháng', 4.4, 100),
+(141, 'JBL Tour Pro 2', 'Tai nghe', 'Hộp sạc có màn hình cảm ứng.', 'Chống ồn True Adaptive', NULL, NULL, '12 tháng', 4.3, 30),
+(142, 'JBL Flip 6', 'Loa', 'Loa di động kháng nước bụi.', 'Âm bass mạnh mẽ, IP67', NULL, NULL, '12 tháng', 4.6, 200),
+(143, 'JBL Charge 5', 'Loa', 'Vừa nghe nhạc vừa sạc điện thoại.', 'Công suất 40W, Pin 20h', NULL, NULL, '12 tháng', 4.7, 180),
+(144, 'JBL PartyBox Encore', 'Loa', 'Khuấy động mọi bữa tiệc.', 'Kèm 2 micro không dây, Đèn LED', NULL, NULL, '12 tháng', 4.8, 60),
+(145, 'Marshall Emberton II', 'Loa', 'Nhỏ gọn, âm thanh 360 độ.', 'Thiết kế Iconic, Pin 30h', NULL, NULL, '12 tháng', 4.6, 90),
+(146, 'Marshall Willen', 'Loa', 'Loa Marshall nhỏ nhất.', 'Có quai đeo, IP67', NULL, NULL, '12 tháng', 4.5, 120),
+(147, 'Marshall Acton III', 'Loa', 'Loa để bàn bán chạy nhất.', 'Âm trường rộng hơn bản cũ', NULL, NULL, '12 tháng', 4.8, 150),
+(148, 'Harman Kardon Onyx Studio 7', 'Loa', 'Thiết kế hành tinh độc lạ.', 'Bass sâu, Pin 8h', NULL, NULL, '12 tháng', 4.7, 100),
+(149, 'Harman Kardon Go + Play 3', 'Loa', 'Sang trọng, công suất lớn.', 'Công suất 160W, Bluetooth 5.2', NULL, NULL, '12 tháng', 4.8, 40),
+(150, 'Sony SRS-XB100', 'Loa', 'Nhỏ nhưng có võ.', 'Nhỏ gọn, chống nước IP67', NULL, NULL, '12 tháng', 4.4, 80),
+(151, 'Loa thanh Samsung HW-C450', 'Loa', 'Nâng cấp âm thanh Tivi.', 'Loa siêu trầm không dây', NULL, NULL, '12 tháng', 4.3, 50),
+(152, 'Tai nghe Gaming HyperX Cloud II', 'Tai nghe', 'Huyền thoại tai nghe FPS.', 'Giả lập 7.1, Khung nhôm', NULL, NULL, '24 tháng', 4.8, 200),
+(153, 'Tai nghe Logitech G Pro X 2', 'Tai nghe', 'Tai nghe cho game thủ chuyên nghiệp.', 'Màng loa Graphene, Lightspeed', NULL, NULL, '24 tháng', 4.7, 30),
+(154, 'Tai nghe Razer BlackShark V2 X', 'Tai nghe', 'Âm thanh Esport giá rẻ.', 'Driver TriForce 50mm', NULL, NULL, '24 tháng', 4.4, 90),
+(155, 'Chuột Logitech G102 Lightsync', 'Phụ kiện', 'Chuột gaming quốc dân.', 'LED RGB, 8000 DPI', NULL, NULL, '24 tháng', 4.8, 2000),
+(156, 'Chuột Logitech G304 Wireless', 'Phụ kiện', 'Không dây, độ trễ thấp.', 'Pin AA 250 giờ', NULL, NULL, '24 tháng', 4.7, 500),
+(157, 'Chuột Razer Viper Mini', 'Phụ kiện', 'Siêu nhẹ, dành cho tay nhỏ.', 'Switch quang học, 61g', NULL, NULL, '24 tháng', 4.6, 300),
+(158, 'Bàn phím cơ Akko 3098B Multi-Mode', 'Phụ kiện', 'Bàn phím màu sắc đẹp, gõ sướng.', 'Switch Akko V3, PBT Keycap', NULL, NULL, '12 tháng', 4.7, 100),
+(159, 'Bàn phím cơ Keychron K2 Pro', 'Phụ kiện', 'Custom phím cơ dễ dàng.', 'QMK/VIA, Hotswap', NULL, NULL, '12 tháng', 4.8, 80),
+(160, 'Bàn phím Logitech K380', 'Phụ kiện', 'Phím Bluetooth mỏng nhẹ.', 'Kết nối 3 thiết bị', NULL, NULL, '12 tháng', 4.5, 400),
+(161, 'Sạc Anker 20W Nano', 'Phụ kiện', 'Sạc nhanh siêu nhỏ cho iPhone.', 'Công nghệ IQ3, Bảo vệ máy', NULL, NULL, '18 tháng', 4.9, 600),
+(162, 'Sạc Ugreen Nexode 65W GaN', 'Phụ kiện', 'Sạc được cho Laptop và ĐT.', '3 cổng sạc, Công nghệ GaN', NULL, NULL, '18 tháng', 4.8, 200),
+(163, 'Pin dự phòng Xiaomi Gen 3 20000mAh', 'Phụ kiện', 'Dung lượng khủng giá rẻ.', 'Sạc nhanh 18W', NULL, NULL, '12 tháng', 4.6, 300),
+(164, 'Pin dự phòng Anker MagGo 10000mAh', 'Phụ kiện', 'Sạc không dây nam châm.', 'Hít lưng iPhone tiện lợi', NULL, NULL, '18 tháng', 4.7, 100),
+(165, 'Webcam Logitech C270', 'Phụ kiện', 'Webcam học online giá rẻ.', 'HD 720p, Mic lọc ồn', NULL, NULL, '24 tháng', 4.4, 250),
+(166, 'Tay cầm PS5 DualSense', 'Phụ kiện', 'Cảm giác game chân thực.', 'Haptic Feedback, Adaptive Trigger', NULL, NULL, '12 tháng', 4.9, 150),
+(167, 'Màn hình Samsung Odyssey G5 27 inch', 'Màn hình', 'Màn hình cong chiến game.', '2K, 165Hz, 1ms', NULL, NULL, '24 tháng', 4.5, 80),
+(168, 'Màn hình Asus ProArt PA248QV', 'Màn hình', 'Chuyên đồ họa chuẩn màu.', 'Delta E < 2, 100% sRGB', NULL, NULL, '36 tháng', 4.7, 60),
+(169, 'Màn hình Dell UltraSharp U2422H', 'Màn hình', 'Ông vua màn hình văn phòng.', 'Thiết kế tràn viền, Cổng kết nối đa dạng', NULL, NULL, '36 tháng', 4.8, 100),
+(170, 'RAM PC Corsair Vengeance RGB RS 16GB', 'Linh kiện', 'RAM đẹp, hiệu năng cao.', 'DDR4 3200MHz', NULL, NULL, '36 tháng', 4.9, 200),
+(171, 'SSD Kingston NV2 500GB', 'Linh kiện', 'SSD Gen 4 giá rẻ.', 'Tốc độ 3500MB/s', NULL, NULL, '36 tháng', 4.6, 300),
+(172, 'CPU Intel Core i5 12400F', 'Linh kiện', 'CPU quốc dân cho Gaming.', '6 nhân 12 luồng', NULL, NULL, '36 tháng', 4.9, 400),
+(173, 'Card màn hình ASUS Dual RTX 3060', 'Linh kiện', 'Card đồ họa tầm trung tốt nhất.', 'VRAM 12GB, 2 Fan', NULL, NULL, '36 tháng', 4.8, 150),
+(174, 'Google Chromecast with Google TV 4K', 'Phụ kiện', 'Biến Tivi thường thành Smart TV.', 'Remote giọng nói tiếng Việt', NULL, NULL, '12 tháng', 4.7, 90);
 
 -- --------------------------------------------------------
 
@@ -478,6 +785,7 @@ CREATE TABLE `users` (
   `phone` varchar(20) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `email` longtext NOT NULL,
+  `role` varchar(20) NOT NULL DEFAULT 'user',
   `balance` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -485,12 +793,18 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `user_id`, `password`, `phone`, `address`, `email`, `balance`) VALUES
-(12, 'hai', 0, '$2y$10$JnaJZvl9KE9J/1aMTLJ/m.V6PuwJkofZjROwojycZB1mJj/kVoHyK', '0255115661', 'p25', 'ajsdjw@gmail.com', 0),
-(14, 'adminhai', 0, '$2y$10$6EZrlFmIWbiyxwA3lmdrlOR2drY1wwUqa1VDqDB2sl4rbDijbz0hG', '78878979', 'p25', 'qjsdjw@gmail.com', 0),
-(16, 'adminhai1', 0, '$2y$10$GIqXCD0XHChW/ZRUchBWOeJluhy1Isc4Emaqsb8XAHMy5GwQEEo/a', '7887897934', 'p25', 'qjsdjw@gmail.com', 0),
-(17, 'admin123', 0, '$2y$10$YZmhs0VOVF4F8Jhw3j9O9.0kk/A/PvjH5oqVFR2xeBtyur6D5mCBK', '89745', 'p24', 'ajdjw@gmail.com', 0),
-(18, 'hai2', 0, '$2y$10$u0SwD3ZBV8Ogd5W3NMmuHuX2zTbsZtlquLAeMZI0HnP01EwVm5fkS', '0347389473', 'nguyễn gia trí', 'dasdsa23@gmail.com', 0);
+INSERT INTO `users` (`id`, `username`, `user_id`, `password`, `phone`, `address`, `email`, `role`, `balance`) VALUES
+(12, 'hai', 0, '$2y$10$JnaJZvl9KE9J/1aMTLJ/m.V6PuwJkofZjROwojycZB1mJj/kVoHyK', '0255115661', 'p25', 'ajsdjw@gmail.com', 'user', 0),
+(14, 'adminhai', 0, '$2y$10$6EZrlFmIWbiyxwA3lmdrlOR2drY1wwUqa1VDqDB2sl4rbDijbz0hG', '78878979', 'p25', 'qjsdjw@gmail.com', 'admin', 0),
+(16, 'adminhai1', 0, '$2y$10$GIqXCD0XHChW/ZRUchBWOeJluhy1Isc4Emaqsb8XAHMy5GwQEEo/a', '7887897934', 'p25', 'qjsdjw@gmail.com', 'admin', 0),
+(17, 'admin123', 0, '$2y$10$YZmhs0VOVF4F8Jhw3j9O9.0kk/A/PvjH5oqVFR2xeBtyur6D5mCBK', '89745', 'p24', 'ajdjw@gmail.com', 'admin', 0),
+(18, 'hai2', 0, '$2y$10$u0SwD3ZBV8Ogd5W3NMmuHuX2zTbsZtlquLAeMZI0HnP01EwVm5fkS', '0347389473', 'nguyễn gia trí', 'dasdsa23@gmail.com', 'user', 0),
+(19, 'admin1648', 0, '$2y$10$YhTXCS4dxul1R8uzDTv9KuAo8yKDk3reXVMaQ2i5/3MuHwvGeSWZ6', '0347389473', 'nguyễn gia trí', 'nhathai24082005@gmail.com', 'admin', 0),
+(20, 'hairole1', 0, '$2y$10$QMR.jcBXN.3EsGHTE72f4OhPBHvGZkBRuQec96co6L0PK73ULjR6q', '0347389473', 'nguyễn gia trí', 'nhathai24082005@gmail.com', 'user', 0),
+(21, 'haiadmin', 0, '$2y$10$HT4hgjv9/ZaFSP214ulcxemPlM0JocpMPKncGkTA41t9rbwOs9sY6', '0347389473', 'nguyễn gia trí', 'nhathai24082005@gmail.com', 'user', 0),
+(22, 'admin hai', 0, '$2y$10$PMUop57VVnpkG.3GogXjduqti3sHBy222u08CxrxT5p0FHodgQG22', '0347389473', 'nguyễn gia trí', 'nhathai24082005@gmail.com', 'user', 0),
+(23, 'adminhai123', 0, '$2y$10$SnN4ZpiXDCL8jngrFvwGxutq24hc.p88blnjR4nMAfSwGVH6Rsr/.', '0347389473', 'nguyễn gia trí', 'nhathai24082005@gmail.com', 'user', 0),
+(24, 'hai12', 0, '$2y$10$KjlQCizWcQfZsMz.AFC1Z.ZIu7DSCELmNk13xJeREjdutyV5fx9Ju', '0347389473', 'nguyễn gia trí, p25, Bình Thạnh', 'dasdsa23@gmail.com', 'user', 0);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -562,13 +876,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `bien_the_san_pham`
 --
 ALTER TABLE `bien_the_san_pham`
-  MODIFY `id_bien_the` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id_bien_the` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
 
 --
 -- AUTO_INCREMENT cho bảng `chi_tiet_don_hang`
 --
 ALTER TABLE `chi_tiet_don_hang`
-  MODIFY `id_chi_tiet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_chi_tiet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT cho bảng `danh_gia_san_pham`
@@ -580,31 +894,31 @@ ALTER TABLE `danh_gia_san_pham`
 -- AUTO_INCREMENT cho bảng `don_hang`
 --
 ALTER TABLE `don_hang`
-  MODIFY `id_don_hang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_don_hang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `gio_hang`
 --
 ALTER TABLE `gio_hang`
-  MODIFY `id_gio_hang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_gio_hang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT cho bảng `hinh_anh_san_pham`
 --
 ALTER TABLE `hinh_anh_san_pham`
-  MODIFY `id_hinh_anh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id_hinh_anh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
 
 --
 -- AUTO_INCREMENT cho bảng `san_pham`
 --
 ALTER TABLE `san_pham`
-  MODIFY `id_san_pham` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id_san_pham` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

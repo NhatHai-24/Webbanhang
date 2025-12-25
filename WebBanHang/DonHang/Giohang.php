@@ -1,19 +1,15 @@
 <?php
-session_start();
+require_once __DIR__ . '/../auth.php';
+require_login();
 
-// 1. Kiểm tra đăng nhập
-if (!isset($_SESSION["user"])) {
-    header("Location: ../Login/Login.php");
-    exit();
-}
+$user = current_user();
+$user_id = (int)($user['id'] ?? 0);
+$username = htmlspecialchars($user['username'] ?? '');
 
 $conn = new mysqli("localhost", "root", "", "webbh");
 if ($conn->connect_error) {
     die("Kết nối thất bại: " . $conn->connect_error);
 }
-
-$user_id = (int)$_SESSION["user"]["id"];
-$username = htmlspecialchars($_SESSION["user"]["username"]);
 
 // Lấy thông tin chi tiết user để điền vào form thanh toán
 $sql_user = "SELECT * FROM users WHERE id = $user_id";

@@ -2,6 +2,8 @@
 
 session_start();
 $current_page = basename($_SERVER['PHP_SELF']);
+require_once __DIR__ . '/../auth.php';
+require_admin();
 
 // 1. Kiểm tra quyền Admin
 // Nếu không phải admin thì đá về trang login

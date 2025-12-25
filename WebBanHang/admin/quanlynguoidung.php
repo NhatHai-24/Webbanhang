@@ -2,6 +2,8 @@
 
 $current_page = 'quanlynguoidung';
 session_start();
+require_once __DIR__ . '/../auth.php';
+require_admin();
 if (!isset($_SESSION["user"]) || strpos(strtolower($_SESSION["user"]["username"]), "admin") === false) {
     header("Location: ../Login/Login.php");
     exit();

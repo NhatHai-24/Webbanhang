@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once __DIR__ . '/../auth.php';
+require_admin();
 // 1. Kiểm tra quyền Admin
 if (!isset($_SESSION["user"]) || stripos($_SESSION["user"]["username"], "admin") === false) {
     header("Location: ../Login/Login.php");

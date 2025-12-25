@@ -1,14 +1,13 @@
 <?php
 $current_page = 'trangchu';
-session_start();
-// Nếu đã đăng nhập: chỉ redirect admin sang trang quản trị
- if (isset($_SESSION["user"])) {
-     if (strpos(strtolower($_SESSION["user"]["username"]), "admin") !== false) {
-         header("Location: ../admin/admin.php");
-         exit();
-     }
-    
- }
+// Bỏ session_start() nếu auth.php đã gọi session_start
+require_once __DIR__ . '/../auth.php'; // thêm ở đầu file nếu chưa có
+
+// Thay chỗ kiểm tra username 'admin' chứa chuỗi bằng is_admin()
+if (is_admin()) {
+    header("Location: ../admin/admin.php");
+    exit();
+}
 // Kết nối đến cơ sở dữ liệu
 $conn = new mysqli("localhost", "root", "", "webbh");
 if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);
@@ -49,12 +48,13 @@ $result = $conn->query($sql);
         <li><a href="../chinhsachbaomat/chinhsachbaomat.php">Chính sách bảo mật</a></li>
         <li><a href="../LienHe/Lienhe.php">Liên hệ</a></li>
 
-        <?php if (!isset($_SESSION["user"])): ?>
-            <!-- Chưa đăng nhập -->
+        <?php if (!current_user()): ?>
             <li><a href="../Login/Login.php">Đăng nhập</a></li>
         <?php else: ?>
-            <!-- Đã đăng nhập -->
             <?php $username = htmlspecialchars($_SESSION["user"]["username"]); ?>
+            <?php if (is_admin()): ?>
+                <li><a href="../admin/admin.php">Quản trị</a></li>
+            <?php endif; ?>
             <li class="user-dropdown">
                 <a href="#" id="user-toggle"><?= $username ?> ⮟</a>
                 <ul class="dropdown-menu" style="display: none;">

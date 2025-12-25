@@ -1,6 +1,8 @@
 <?php
 $current_page = basename($_SERVER['PHP_SELF']);
 session_start();
+require_once __DIR__ . '/../auth.php';
+require_admin();
 
 // Kiểm tra quyền Admin
 if (!isset($_SESSION["user"]) || stripos($_SESSION["user"]["username"], "admin") === false) {

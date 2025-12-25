@@ -31,8 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Đăng ký
-    $stmt = $conn->prepare("INSERT INTO users (username, password, email, phone, address) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $username, $password, $email, $phone, $address);
+    $role = 'user'; // mặc định
+    $stmt = $conn->prepare("INSERT INTO users (username, password, phone, address, email, role) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param('ssssss', $username, $password, $phone, $address, $email, $role);
 
     if ($stmt->execute()) {
         $_SESSION["user"] = ["username" => $username];

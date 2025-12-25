@@ -3,6 +3,8 @@ $current_page = 'login';
 session_start();
 $loginError = "";
 
+require_once __DIR__ . '/../auth.php'; // thêm if chưa có
+
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["username"], $_POST["password"])) {
     $conn = new mysqli("localhost", "root", "", "webbh");
     if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);
@@ -10,23 +12,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["username"], $_POST["p
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+    // Thay SELECT để trả cả role:
+    $sql = "SELECT id, username, password, role FROM users WHERE username = ? LIMIT 1";
+    $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($user = $result->fetch_assoc()) {
-        if (password_verify($password, $user["password"])) {
-            $_SESSION["user"] = [
-                "id" => $user["id"],
-                "username" => $user["username"]
+        // Sau khi xác thực password thành công và $user chứa row từ DB
+        if (password_verify($password, $user['password'])) {
+            // tạo session id mới (bảo mật)
+            session_regenerate_id(true);
+
+            // chỉ lưu thông tin cần thiết
+            $_SESSION['user'] = [
+                'id' => (int)$user['id'],
+                'username' => $user['username'],
+                'role' => $user['role'] // 'admin' hoặc 'user'
             ];
-            
-            if (strpos(strtolower($user["username"]), "admin") !== false) {
-                header("Location: ../admin/admin.php");
-            } else {
-                header("Location: ../index/index.php");
-            }
+
+            header('Location: ../index/index.php');
             exit();
         } else {
             $loginError = "❌ Sai mật khẩu.";

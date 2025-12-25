@@ -1,14 +1,14 @@
 <?php
 session_start();
-if (!isset($_SESSION["user"])) {
-    header("Location: ../Login/Login.php");
-    exit();
-}
+require_once __DIR__ . '/../auth.php';
+require_login(); // bắt đăng nhập
+
+$user = current_user();
+$user_id = (int)($user['id'] ?? 0); // tránh undefined key
 
 $conn = new mysqli("localhost", "root", "", "webbh");
 if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);
 
-$user_id = (int)$_SESSION["user"]["id"];
 $username = htmlspecialchars($_SESSION["user"]["username"]);
 
 // --- SỬA ĐỔI: Lấy dữ liệu từ bảng 'don_hang' thay vì 'orders' ---

@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . '/../auth.php';
+
 $current_page = 'sanpham';
 
 $conn = new mysqli("localhost", "root", "", "webbh");
@@ -108,12 +109,15 @@ $conn->close();
         <li><a href="../chinhsachbaomat/chinhsachbaomat.php">Chính sách bảo mật</a></li>
         <li><a href="../LienHe/Lienhe.php">Liên hệ</a></li>
 
-        <?php if (!isset($_SESSION["user"])): ?>
+        <?php if (!current_user()): ?>
             <!-- Chưa đăng nhập -->
             <li><a href="../Login/Login.php">Đăng nhập</a></li>
         <?php else: ?>
             <!-- Đã đăng nhập -->
-            <?php $username = htmlspecialchars($_SESSION["user"]["username"]); ?>
+            <?php $username = htmlspecialchars(current_user()['username']); ?>
+            <?php if (is_admin()): ?>
+                <li><a href="../admin/admin.php">Quản trị</a></li>
+            <?php endif; ?>
             <li class="user-dropdown">
                 <a href="#" id="user-toggle"><?= $username ?> ⮟</a>
                 <ul class="dropdown-menu" style="display: none;">
@@ -121,7 +125,6 @@ $conn->close();
                     <li><a href="../DonHang/Giohang.php">Giỏ hàng của tôi</a></li>
                     <li><a href="../DonHang/DonHangCuaToi.php">Đơn hàng của tôi</a></li>
                     <li><a href="../Login/logout.php">Đăng xuất</a></li>
-                    
                 </ul>
             </li>
         <?php endif; ?>
