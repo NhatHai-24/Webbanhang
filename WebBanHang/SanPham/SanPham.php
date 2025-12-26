@@ -1,91 +1,107 @@
 <?php
 require_once __DIR__ . '/../auth.php';
 
-ini_set('memory_limit', '-1'); 
-
 $current_page = 'sanpham';
 
 $conn = new mysqli("localhost", "root", "", "webbh");
 if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);
 
-// 1. CÂU TRUY VẤN SQL
+$conn->set_charset("utf8");
+
+// --- 1. CẤU HÌNH PHÂN TRANG CƠ BẢN ---
+$limit = 52; 
+$page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+$offset = ($page - 1) * $limit;
+
+// --- 2. LOGIC SẮP XẾP ƯU TIÊN ---
+$sql_sort_priority = "
+    CASE 
+        WHEN sp.loai_san_pham = 'Điện thoại' THEN 1
+        WHEN sp.loai_san_pham = 'Laptop' THEN 2
+        WHEN sp.loai_san_pham = 'Tivi' THEN 3
+        WHEN sp.loai_san_pham = 'Loa' THEN 4
+        WHEN sp.loai_san_pham = 'Tai nghe' THEN 5
+        WHEN sp.loai_san_pham = 'Máy chơi game' THEN 6
+        WHEN sp.loai_san_pham = 'Máy in' THEN 7
+        WHEN sp.loai_san_pham = 'Phụ kiện' THEN 8
+        WHEN sp.loai_san_pham = 'Linh kiện' THEN 9
+        WHEN sp.loai_san_pham = 'Màn hình' THEN 10
+        WHEN sp.loai_san_pham = 'Máy tính bảng' THEN 11
+        WHEN sp.loai_san_pham = 'Quạt' THEN 12
+        WHEN sp.loai_san_pham = 'Đồng hồ' THEN 13
+        ELSE 99 
+    END
+";
+
+// --- 3. XỬ LÝ TÌM KIẾM & LỌC (Đoạn này bạn đang thiếu) ---
+$search_query = isset($_GET['q']) ? trim($_GET['q']) : '';
+$search_category = isset($_GET['cat']) ? $_GET['cat'] : 'all';
+
+// Tạo điều kiện WHERE
+$where_clauses = [];
+if (!empty($search_query)) {
+    $safe_search = $conn->real_escape_string($search_query);
+    $where_clauses[] = "sp.ten_san_pham LIKE '%$safe_search%'";
+}
+if ($search_category !== 'all') {
+    $safe_cat = $conn->real_escape_string($search_category);
+    $where_clauses[] = "sp.loai_san_pham = '$safe_cat'";
+}
+
+// Ghép các điều kiện lại thành chuỗi SQL
+$where_sql = "";
+if (count($where_clauses) > 0) {
+    $where_sql = "WHERE " . implode(" AND ", $where_clauses);
+}
+
+// --- 4. ĐẾM TỔNG SỐ SẢN PHẨM (Đã cập nhật để đếm theo tìm kiếm) ---
+$sql_count = "SELECT COUNT(*) as total FROM san_pham sp $where_sql";
+$result_count = $conn->query($sql_count);
+$row_count = $result_count->fetch_assoc();
+$total_products = $row_count['total'];
+$total_pages = ceil($total_products / $limit);
+
+// --- 5. TRUY VẤN LẤY DỮ LIỆU (TỐI ƯU HIỆU SUẤT) ---
 $sql = "SELECT 
             sp.id_san_pham, 
             sp.ten_san_pham, 
             sp.loai_san_pham, 
-            LEFT(sp.mo_ta, 150) AS mo_ta,
-            sp.bao_hanh, 
-            ha.url_hinh_anh,
-            MIN(btsp.gia_ban) AS gia_ban
+            SUBSTRING(sp.mo_ta, 1, 150) AS mo_ta,
+            sp.bao_hanh,
+            /* Subquery lấy ảnh đại diện */
+            (SELECT url_hinh_anh 
+             FROM hinh_anh_san_pham 
+             WHERE id_san_pham = sp.id_san_pham AND la_anh_dai_dien = TRUE 
+             LIMIT 1) AS url_hinh_anh,
+            /* Subquery lấy giá thấp nhất */
+            (SELECT MIN(gia_ban) 
+             FROM bien_the_san_pham 
+             WHERE id_san_pham = sp.id_san_pham) AS gia_ban
         FROM san_pham sp
-        LEFT JOIN hinh_anh_san_pham ha ON sp.id_san_pham = ha.id_san_pham AND ha.la_anh_dai_dien = TRUE
-        LEFT JOIN bien_the_san_pham btsp ON sp.id_san_pham = btsp.id_san_pham
-        GROUP BY sp.id_san_pham
-        ORDER BY sp.id_san_pham DESC"; 
+        $where_sql 
+        ORDER BY $sql_sort_priority ASC, sp.ten_san_pham ASC
+        LIMIT $limit OFFSET $offset";
 
+// Thực thi câu lệnh (Dòng này bị thiếu trong code của bạn)
 $result = $conn->query($sql);
-$groups = [];
+$display_groups = [];
 
-// 2. GOM NHÓM DỮ LIỆU
-while ($row = $result->fetch_assoc()) {
-    $cat = !empty($row['loai_san_pham']) ? $row['loai_san_pham'] : 'Các sản phẩm nổi bật';
-    $groups[$cat][] = $row;
-}
-
-// 3. SẮP XẾP NHÓM
-$priority = [
-    'Điện thoại' => 1,
-    'Laptop' => 2,
-    'Tivi' => 3,
-    'Loa' => 4,
-    'Tai nghe' => 5,
-    'Máy chơi game' => 6,
-    'Máy in' => 7,
-    'Phụ kiện' => 8,
-    'Linh kiện' => 9,
-    'Màn hình' => 10,
-    'Máy tính bảng' => 11,
-    'Quạt' => 12,
-    'Đồng hồ' => 13,
-    'Các sản phẩm nổi bật' => 99 
-];
-
-uksort($groups, function($a, $b) use ($priority) {
-    $posA = $priority[$a] ?? 100;
-    $posB = $priority[$b] ?? 100;
-    if ($posA == $posB) return strcmp($a, $b);
-    return $posA - $posB;
-});
-
-// --- XỬ LÝ PHÂN TRANG (SERVER-SIDE) ---
-
-// Cấu hình
-$limit = 52; // 50 sản phẩm mỗi trang
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-if ($page < 1) $page = 1;
-$start_from = ($page - 1) * $limit;
-
-// Làm phẳng danh sách để cắt trang
-$flat_list = [];
-foreach ($groups as $cat => $items) {
-    foreach ($items as $item) {
-        $item['temp_category'] = $cat; 
-        $flat_list[] = $item;
+// --- 6. GOM NHÓM DỮ LIỆU ĐỂ HIỂN THỊ ---
+if ($result) {
+    while ($row = $result->fetch_assoc()) {
+        $cat = !empty($row['loai_san_pham']) ? $row['loai_san_pham'] : 'Các sản phẩm nổi bật';
+        $display_groups[$cat][] = $row;
     }
 }
 
-$total_products = count($flat_list);
-$total_pages = ceil($total_products / $limit);
-
-// Cắt dữ liệu cho trang hiện tại
-$subset_list = array_slice($flat_list, $start_from, $limit);
-
-// Gom nhóm lại để hiển thị
-$display_groups = [];
-foreach ($subset_list as $item) {
-    $cat = $item['temp_category'];
-    unset($item['temp_category']); 
-    $display_groups[$cat][] = $item;
+// --- 7. LẤY DANH SÁCH DANH MỤC CHO DROPDOWN ---
+$sql_cat = "SELECT DISTINCT loai_san_pham FROM san_pham ORDER BY loai_san_pham ASC";
+$result_cat = $conn->query($sql_cat);
+$all_categories = []; 
+while ($c = $result_cat->fetch_assoc()) {
+    if (!empty($c['loai_san_pham'])) {
+        $all_categories[] = $c['loai_san_pham'];
+    }
 }
 
 $conn->close();
@@ -271,12 +287,12 @@ $conn->close();
                 <div class="filter-actions">
                     <div class="category-wrapper">
                         <label for="category-select">📂 Danh mục:</label>
-                        <select id="category-select" class="category-select">
+                       <select id="category-select" class="category-select">
                             <option value="all">Tất cả sản phẩm</option>
-                            <?php foreach (array_keys($groups) as $cat): ?>
+                            <?php foreach ($all_categories as $cat): ?> 
                                 <option value="<?= htmlspecialchars($cat) ?>"><?= htmlspecialchars($cat) ?></option>
                             <?php endforeach; ?>
-                        </select>
+                        </select>   
                     </div>
                     <button id="reset-btn" class="reset-btn">↺ Làm mới</button>
                 </div>
@@ -315,20 +331,29 @@ $conn->close();
             <?php endforeach; ?>
         <?php endif; ?>
 
-        <?php if ($total_pages > 1): ?>
+       <?php if ($total_pages > 1): ?>
         <div class="pagination-wrapper">
+            <?php
+            // Hàm này giúp tạo link mà vẫn giữ nguyên các tham số tìm kiếm (q, cat)
+            function get_page_url($page_num) {
+                $params = $_GET; // Lấy tất cả tham số hiện tại trên URL
+                $params['page'] = $page_num; // Thay đổi số trang
+                return '?' . http_build_query($params); // Tạo lại chuỗi URL mới
+            }
+            ?>
+
             <?php if ($page > 1): ?>
-                <a href="?page=<?= $page - 1 ?>" class="page-link">&lt;</a>
+                <a href="<?= get_page_url($page - 1) ?>" class="page-link">&lt;</a>
             <?php else: ?>
                 <span class="page-link" style="opacity: 0.5; cursor: default;">&lt;</span>
             <?php endif; ?>
 
             <?php
-            $range = 2; // Hiển thị 2 trang xung quanh trang hiện tại
+            $range = 2; 
             
             // Trang 1
             if ($page > $range + 1) {
-                echo '<a href="?page=1" class="page-link">1</a>';
+                echo '<a href="' . get_page_url(1) . '" class="page-link">1</a>';
                 if ($page > $range + 2) echo '<span class="page-dots">...</span>';
             }
 
@@ -337,19 +362,19 @@ $conn->close();
                 if ($i == $page) {
                     echo '<span class="page-link active">' . $i . '</span>';
                 } else {
-                    echo '<a href="?page=' . $i . '" class="page-link">' . $i . '</a>';
+                    echo '<a href="' . get_page_url($i) . '" class="page-link">' . $i . '</a>';
                 }
             }
 
             // Trang cuối
             if ($page < $total_pages - $range) {
                 if ($page < $total_pages - $range - 1) echo '<span class="page-dots">...</span>';
-                echo '<a href="?page=' . $total_pages . '" class="page-link">' . $total_pages . '</a>';
+                echo '<a href="' . get_page_url($total_pages) . '" class="page-link">' . $total_pages . '</a>';
             }
             ?>
 
             <?php if ($page < $total_pages): ?>
-                <a href="?page=<?= $page + 1 ?>" class="page-link">&gt;</a>
+                <a href="<?= get_page_url($page + 1) ?>" class="page-link">&gt;</a>
             <?php else: ?>
                 <span class="page-link" style="opacity: 0.5; cursor: default;">&gt;</span>
             <?php endif; ?>
@@ -401,60 +426,8 @@ $conn->close();
             }
         }
 
-        // Tìm kiếm (Client-side: Chỉ tìm trong 50 sản phẩm đang hiển thị)
-        function performSearch() {
-            let rawSearch = $searchInput.val() || '';
-            let searchTerm = normalizeText(rawSearch);
-            let selectedCategory = $categorySelect.val();
-            let visibleProducts = 0;
-
-            $groups.each(function () {
-                let $group = $(this);
-                let categoryName = $group.data('category');
-                let categoryMatches = selectedCategory === 'all' || categoryName === selectedCategory;
-                let hasVisibleProducts = false;
-
-                $group.find('.product-card').each(function () {
-                    let $card = $(this);
-                    let rawName = $card.find('h3').text() || $card.attr('data-product-name') || '';
-                    let productName = normalizeText(rawName);
-
-                    let searchMatches = (searchTerm === '') || productName.indexOf(searchTerm) !== -1;
-                    let shouldShow = searchMatches && categoryMatches;
-
-                    if (shouldShow) {
-                        $card.stop(true, true).removeClass('hidden').fadeIn(150);
-                        hasVisibleProducts = true;
-                        visibleProducts++;
-                    } else {
-                        $card.stop(true, true).addClass('hidden').fadeOut(80);
-                    }
-                });
-
-                if (hasVisibleProducts) {
-                    $group.show();
-                } else {
-                    $group.hide();
-                }
-            });
-
-            if (searchTerm || selectedCategory !== 'all') {
-                $searchResultInfo.text(visibleProducts === 0 ? '❌ Không tìm thấy sản phẩm phù hợp trên trang này' : '✓ Tìm thấy ' + visibleProducts + ' sản phẩm');
-            } else {
-                $searchResultInfo.text('');
-            }
-        }
-
-        $searchInput.on('keyup', performSearch);
-        $categorySelect.on('change', performSearch);
-        $resetBtn.on('click', function (e) {
-            e.preventDefault();
-            $searchInput.val('');
-            $categorySelect.val('all');
-            $searchResultInfo.text('');
-            $('.product-card').stop(true,true).removeClass('hidden').fadeIn(120);
-            $groups.show();
-        });
+        
+       
     });
 </script>
 
