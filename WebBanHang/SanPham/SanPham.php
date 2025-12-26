@@ -8,6 +8,30 @@ if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_erro
 
 $conn->set_charset("utf8");
 
+// --- BLOCK 1: API GỢI Ý TÌM KIẾM (AJAX) ---
+// Nếu có yêu cầu 'ajax_search', server sẽ trả về JSON rồi dừng luôn, không tải trang web
+if (isset($_GET['ajax_search']) && !empty($_GET['q'])) {
+    $conn = new mysqli("localhost", "root", "", "webbh");
+    $conn->set_charset("utf8");
+    
+    $keyword = $conn->real_escape_string($_GET['q']);
+    
+    // Chỉ lấy 10 tên sản phẩm duy nhất (đã gộp nhóm tên trùng) để gợi ý
+    $sql = "SELECT DISTINCT SUBSTRING_INDEX(ten_san_pham, ' - ', 1) as ten_goi_y 
+            FROM san_pham 
+            WHERE ten_san_pham LIKE '%$keyword%' 
+            LIMIT 10";
+            
+    $result = $conn->query($sql);
+    $suggestions = [];
+    while ($row = $result->fetch_assoc()) {
+        $suggestions[] = $row['ten_goi_y'];
+    }
+    
+    echo json_encode($suggestions); // Trả về dữ liệu dạng JSON
+    exit; // Dừng ngay lập tức, không chạy code phía dưới
+}
+
 // --- 1. CẤU HÌNH PHÂN TRANG CƠ BẢN ---
 $limit = 52; 
 $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
@@ -48,41 +72,69 @@ if ($search_category !== 'all') {
     $where_clauses[] = "sp.loai_san_pham = '$safe_cat'";
 }
 
+/// --- SỬA ĐỔI: Chỉ ẩn sản phẩm rác khi KHÔNG tìm kiếm ---
+// Nếu khách đang tìm (biến $search_query có chữ), ta cho hiện tất cả để khách tìm được chính xác
+if (empty($search_query)) {
+    $where_clauses[] = "sp.ten_san_pham NOT LIKE '%Mã kho%'"; 
+}
+// ----------------------------------------
+
+$where_sql = "";
+
 // Ghép các điều kiện lại thành chuỗi SQL
 $where_sql = "";
 if (count($where_clauses) > 0) {
     $where_sql = "WHERE " . implode(" AND ", $where_clauses);
 }
 
-// --- 4. ĐẾM TỔNG SỐ SẢN PHẨM (Đã cập nhật để đếm theo tìm kiếm) ---
-$sql_count = "SELECT COUNT(*) as total FROM san_pham sp $where_sql";
-$result_count = $conn->query($sql_count);
-$row_count = $result_count->fetch_assoc();
-$total_products = $row_count['total'];
-$total_pages = ceil($total_products / $limit);
+// --- 4. ĐẾM SỐ LƯỢNG (LOGIC ĐỘNG) ---
 
-// --- 5. TRUY VẤN LẤY DỮ LIỆU (TỐI ƯU HIỆU SUẤT) ---
+if (!empty($search_query)) {
+    // TRƯỜNG HỢP 1: ĐANG TÌM KIẾM -> Đếm từng sản phẩm (không gom nhóm)
+    $sql_count_unique = "SELECT COUNT(*) as total FROM san_pham sp $where_sql";
+} else {
+    // TRƯỜNG HỢP 2: TRANG CHỦ -> Đếm theo nhóm đã gộp (để khớp với hiển thị)
+    $sql_count_unique = "SELECT COUNT(*) as total FROM (
+                            SELECT id_san_pham 
+                            FROM san_pham sp 
+                            $where_sql 
+                            GROUP BY SUBSTRING_INDEX(sp.ten_san_pham, ' - ', 1)
+                        ) as sub";
+}
+
+$result_unique = $conn->query($sql_count_unique);
+$total_products_display = $result_unique ? $result_unique->fetch_assoc()['total'] : 0;
+$total_pages = ceil($total_products_display / $limit);
+
+// Đếm tổng kho (giữ nguyên để khoe thầy)
+$result_stock = $conn->query("SELECT COUNT(*) as total FROM san_pham");
+$total_stock_real = $result_stock->fetch_assoc()['total'];
+// --- 5. TRUY VẤN LẤY DỮ LIỆU (LINH HOẠT HIỂN THỊ) ---
+
+// Xác định cách gom nhóm:
+if (!empty($search_query)) {
+    // Nếu đang tìm kiếm: KHÔNG GOM NHÓM tên (để hiện cả các mã kho khác nhau)
+    // Dùng GROUP BY id để tránh trùng lặp do JOIN, nhưng vẫn hiện đủ các dòng sản phẩm khác nhau
+    $dynamic_group_by = "GROUP BY sp.id_san_pham";
+} else {
+    // Nếu xem bình thường: GOM NHÓM theo tên gốc (để ẩn bớt các dòng trùng lặp)
+    $dynamic_group_by = "GROUP BY SUBSTRING_INDEX(sp.ten_san_pham, ' - ', 1)";
+}
+
 $sql = "SELECT 
             sp.id_san_pham, 
             sp.ten_san_pham, 
             sp.loai_san_pham, 
             SUBSTRING(sp.mo_ta, 1, 150) AS mo_ta,
             sp.bao_hanh,
-            /* Subquery lấy ảnh đại diện */
-            (SELECT url_hinh_anh 
-             FROM hinh_anh_san_pham 
-             WHERE id_san_pham = sp.id_san_pham AND la_anh_dai_dien = TRUE 
-             LIMIT 1) AS url_hinh_anh,
-            /* Subquery lấy giá thấp nhất */
-            (SELECT MIN(gia_ban) 
-             FROM bien_the_san_pham 
-             WHERE id_san_pham = sp.id_san_pham) AS gia_ban
+            (SELECT url_hinh_anh FROM hinh_anh_san_pham WHERE id_san_pham = sp.id_san_pham AND la_anh_dai_dien = TRUE LIMIT 1) AS url_hinh_anh,
+            (SELECT MIN(gia_ban) FROM bien_the_san_pham WHERE id_san_pham = sp.id_san_pham) AS gia_ban
         FROM san_pham sp
         $where_sql 
+        $dynamic_group_by  /* <-- Biến này sẽ thay đổi tùy theo việc có tìm kiếm hay không */
         ORDER BY $sql_sort_priority ASC, sp.ten_san_pham ASC
         LIMIT $limit OFFSET $offset";
 
-// Thực thi câu lệnh (Dòng này bị thiếu trong code của bạn)
 $result = $conn->query($sql);
 $display_groups = [];
 
@@ -238,6 +290,43 @@ $conn->close();
             .filter-actions { justify-content: space-between; }
             .category-wrapper { flex: 1; }
         }
+
+         /* CSS cho hộp gợi ý tìm kiếm AJAX */
+.search-suggestions {
+    position: absolute;
+    top: 100%; /* Hiện ngay dưới ô input */
+    left: 0;
+    width: 100%;
+    background: #0f1724; /* Màu nền tối giống theme web */
+    border: 1px solid #35fdec; /* Viền màu neon */
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    display: none; /* Mặc định ẩn */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.suggestion-item {
+    padding: 12px 15px;
+    color: #cbd5e0;
+    cursor: pointer;
+    border-bottom: 1px solid #1a2332;
+    transition: all 0.2s;
+    text-align: left;
+}
+
+.suggestion-item:hover {
+    background-color: #1a2332;
+    color: #35fdec; /* Sáng lên khi di chuột vào */
+    padding-left: 20px; /* Hiệu ứng trượt nhẹ */
+}
+
+.suggestion-item strong {
+    color: #fff;
+    font-weight: bold;
+}
     </style>
 </head>
 <body>
@@ -275,30 +364,51 @@ $conn->close();
         <h2>Sản phẩm</h2>
         
         <div id="filter-bar">
-            <div class="filter-container">
-                <div class="search-wrapper">
-                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <path d="m21 21-4.35-4.35"></path>
-                    </svg>
-                    <input type="text" id="search-input" placeholder="Bạn muốn tìm sản phẩm gì?..." class="search-input">
-                </div>
-
-                <div class="filter-actions">
-                    <div class="category-wrapper">
-                        <label for="category-select">📂 Danh mục:</label>
-                       <select id="category-select" class="category-select">
-                            <option value="all">Tất cả sản phẩm</option>
-                            <?php foreach ($all_categories as $cat): ?> 
-                                <option value="<?= htmlspecialchars($cat) ?>"><?= htmlspecialchars($cat) ?></option>
-                            <?php endforeach; ?>
-                        </select>   
-                    </div>
-                    <button id="reset-btn" class="reset-btn">↺ Làm mới</button>
-                </div>
-            </div>
-            <div id="search-result-info" class="search-result-info"></div> 
+    <form action="SanPham.php" method="GET" class="filter-container" style="width: 100%;">
+        
+        <div class="search-wrapper">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            <input type="text" name="q" id="search-input" 
+                   value="<?= htmlspecialchars($search_query) ?>" 
+                   placeholder="Bạn muốn tìm sản phẩm gì?..." 
+                   class="search-input" autocomplete="off">
+            
+            <div id="suggestion-box" class="search-suggestions"></div>
         </div>
+
+            <div class="filter-actions">
+                <div class="category-wrapper">
+                    <label for="category-select">📂 Danh mục:</label>
+                    <select name="cat" id="category-select" class="category-select" onchange="this.form.submit()">
+                        <option value="all" <?= $search_category == 'all' ? 'selected' : '' ?>>Tất cả sản phẩm</option>
+                        <?php foreach ($all_categories as $cat): ?> 
+                            <option value="<?= htmlspecialchars($cat) ?>" <?= $search_category == $cat ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($cat) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>   
+                </div>
+                
+                <a href="SanPham.php" id="reset-btn" class="reset-btn" style="text-decoration: none; display:inline-flex; align-items:center;">
+                    ↺ Làm mới
+                </a>
+            </div>
+        </form>
+        
+        <?php if(!empty($search_query) || $search_category !== 'all'): ?>
+            <div id="search-result-info" class="search-result-info" style="width: 100%; margin-top: 10px; font-size: 16px;">
+    <?php if(!empty($search_query) || $search_category !== 'all'): ?>
+        Đang hiển thị kết quả cho: <strong><?= htmlspecialchars($search_query) ?></strong> 
+       (Tìm thấy <strong><?= number_format($total_products_display, 0, ',', '.') ?></strong> mẫu sản phẩm)
+    <?php else: ?>
+        🔥 Kho hàng đang có <strong><?= number_format($total_products, 0, ',', '.') ?></strong> sản phẩm sẵn sàng giao ngay!
+    <?php endif; ?>
+</div>
+        <?php endif; ?>
+    </div>
 
         <?php if (empty($display_groups)): ?>
             <div style="text-align:center; padding: 50px; color: #fff;">Không có sản phẩm nào ở trang này.</div>
@@ -382,6 +492,10 @@ $conn->close();
         <?php endif; ?>
     </div>
 
+    <div class="pagination-info" style="text-align: center; color: #aaa; margin-bottom: 10px;">
+    Đang xem trang <strong><?= $page ?></strong> trên tổng số <strong><?= number_format($total_pages, 0, ',', '.') ?></strong> trang
+</div>
+
     <div id="fox-footer">
         <p>© 2025 TECHNOVA. All rights reserved.</p>
         <p>Địa chỉ: 123 Đường Nguyễn Trãi, TP.HCM | Hotline: 0123 456 789 | Email: support@technova.vn</p>
@@ -428,6 +542,64 @@ $conn->close();
 
         
        
+    });
+
+    $(document).ready(function () {
+        const $input = $('#search-input');
+        const $box = $('#suggestion-box');
+        let timeout = null;
+
+        // Khi người dùng gõ phím
+        $input.on('keyup', function () {
+            let query = $(this).val();
+
+            // Xóa bộ đếm cũ (Debounce: Chỉ tìm khi ngừng gõ 300ms)
+            clearTimeout(timeout);
+
+            if (query.length < 2) { // Chỉ tìm khi gõ trên 1 ký tự
+                $box.hide();
+                return;
+            }
+
+            // Đợi 300ms mới gửi yêu cầu (để giảm tải cho server)
+            timeout = setTimeout(function() {
+                $.ajax({
+                    url: 'SanPham.php', // Gửi về chính file này
+                    type: 'GET',
+                    data: { ajax_search: 1, q: query }, // Gửi kèm cờ ajax_search
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.length > 0) {
+                            let html = '';
+                            data.forEach(function(item) {
+                                // Tô đậm từ khóa tìm kiếm
+                                let regex = new RegExp('(' + query + ')', 'gi');
+                                let highlight = item.replace(regex, '<strong>$1</strong>');
+                                html += `<div class="suggestion-item">${highlight}</div>`;
+                            });
+                            $box.html(html).show();
+                        } else {
+                            $box.hide();
+                        }
+                    }
+                });
+            }, 300);
+        });
+
+        // Khi click vào một dòng gợi ý
+        $(document).on('click', '.suggestion-item', function () {
+            let text = $(this).text();
+            $input.val(text); // Điền vào ô tìm kiếm
+            $box.hide();
+            $input.closest('form').submit(); // Tự động submit form luôn
+        });
+
+        // Click ra ngoài thì ẩn hộp gợi ý
+        $(document).on('click', function (e) {
+            if (!$(e.target).closest('.search-wrapper').length) {
+                $box.hide();
+            }
+        });
     });
 </script>
 
