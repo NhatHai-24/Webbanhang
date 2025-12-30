@@ -9,8 +9,7 @@ if (!isset($_SESSION["user"]) || strpos(strtolower($_SESSION["user"]["username"]
     exit();
 }
 $currentAdmin = $_SESSION["user"]["username"];
-$conn = new mysqli("localhost", "root", "", "webbh");
-if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);
+require_once __DIR__ . '/../config.php';
 
 // Thêm người dùng
 if (isset($_POST["add_user"])) {

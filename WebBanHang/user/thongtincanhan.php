@@ -6,10 +6,8 @@ if (!isset($_SESSION["user"])) {
 }
 
 require_once __DIR__ . '/../auth.php';
+require_once __DIR__ . '/../config.php';
 require_login();
-
-$conn = new mysqli("localhost", "root", "", "webbh");
-if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);
 
 $username = $_SESSION["user"]["username"];
 $user = $conn->query("SELECT * FROM users WHERE username = '$username'")->fetch_assoc();
@@ -98,8 +96,18 @@ if (isset($_POST["update"])) {
     <ul>
       <li><a href="../index/index.php">Trang chủ</a></li>
       <li><a href="../SanPham/SanPham.php">Sản phẩm</a></li>
-      <li><a href="../User/ThongTinCaNhan.php">Thông tin cá nhân</a></li>      
-      <li><a href="../Login/logout.php">Đăng xuất</a></li>
+      <li><a href="../Gioithieu/Gioithieu.php">Giới thiệu</a></li>
+      <li><a href="../chinhsachbaomat/chinhsachbaomat.php">Chính sách bảo mật</a></li>
+      <li><a href="../LienHe/LienHe.php">Liên hệ</a></li>
+      <li class="user-dropdown">
+        <a href="#" id="user-toggle"><?= htmlspecialchars($user["username"]) ?> ⮟</a>
+        <ul class="dropdown-menu">
+          <li><a href="../User/ThongTinCaNhan.php">Thông tin cá nhân</a></li>
+          <li><a href="../DonHang/Giohang.php">Giỏ hàng của tôi</a></li>
+          <li><a href="../DonHang/DonHangCuaToi.php">Đơn hàng của tôi</a></li>
+          <li><a href="../Login/logout.php">Đăng xuất</a></li>
+        </ul>
+      </li>
     </ul>
   </div>
 
@@ -139,5 +147,23 @@ if (isset($_POST["update"])) {
     </p>
   </div>
 </div>
+<script>
+// JS Dropdown
+document.getElementById('user-toggle').addEventListener('click', function(e) {
+    e.preventDefault();
+    var d = this.nextElementSibling;
+    d.style.display = (d.style.display === 'block') ? 'none' : 'block';
+});
+window.onclick = function(event) {
+    if (!event.target.matches('#user-toggle')) {
+        var dropdowns = document.getElementsByClassName("dropdown-menu");
+        for (var i = 0; i < dropdowns.length; i++) {
+            if (dropdowns[i].style.display === 'block') {
+                dropdowns[i].style.display = 'none';
+            }
+        }
+    }
+}
+</script>
 </body>
 </html>

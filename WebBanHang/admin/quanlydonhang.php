@@ -11,10 +11,7 @@ if (!isset($_SESSION["user"]) || strpos(strtolower($_SESSION["user"]["username"]
     exit();
 }
 
-$conn = new mysqli("localhost", "root", "", "webbh");
-if ($conn->connect_error) {
-    die("Kết nối thất bại: " . $conn->connect_error);
-}
+require_once __DIR__ . '/../config.php';
 
 // --- XỬ LÝ CẬP NHẬT TRẠNG THÁI ---
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["order_id"], $_POST["new_status"])) {
@@ -47,7 +44,7 @@ $sql = "SELECT
         FROM don_hang dh
         JOIN users u ON dh.id_nguoi_dung = u.id
         LEFT JOIN chi_tiet_don_hang ct ON dh.id_don_hang = ct.id_don_hang
-        GROUP BY dh.id_don_hang
+        GROUP BY dh.id_don_hang, dh.ngay_dat, dh.tong_tien, dh.trang_thai, dh.ho_ten_nguoi_nhan, dh.dia_chi_giao_hang, dh.sdt_nguoi_nhan, u.username
         ORDER BY dh.ngay_dat DESC";
 
 $result = $conn->query($sql);

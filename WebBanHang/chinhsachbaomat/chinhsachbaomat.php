@@ -1,9 +1,13 @@
 <?php
-$current_page = 'chinhsachbaomat'; ?>
+session_start();
+$current_page = 'chinhsachbaomat'; 
+?>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
-     <title>TECHNOVA - Chính sách bảo mật</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TECHNOVA - Chính sách bảo mật</title>
     <link rel="stylesheet" href="chinhsachbaomat.css" />
 </head>
 <body>
@@ -11,7 +15,6 @@ $current_page = 'chinhsachbaomat'; ?>
 <div id="fox">
     <!-- Header -->
 
-    <!-- Navigation -->
     <!-- Navigation -->
 <div id="fox-nav">
     <ul>
@@ -22,7 +25,6 @@ $current_page = 'chinhsachbaomat'; ?>
         <li><a href="../LienHe/Lienhe.php">Liên hệ</a></li>
 
         <?php 
-        session_start();
         if (!isset($_SESSION["user"])): ?>
             <!-- Chưa đăng nhập -->
             <li><a href="../Login/Login.php">Đăng nhập</a></li>
@@ -72,9 +74,9 @@ $current_page = 'chinhsachbaomat'; ?>
         <p>
             <a href="../index/index.php">Trang chủ</a> | 
             <a href="../SanPham/SanPham.php">Sản phẩm</a> | 
-            <a href="../Gioithieu/Gioithieu.html">Giới thiệu</a> | 
-            <a href="#">Chính sách bảo mật</a> |
-            <a href="../LienHe/Lienhe.html">Liên hệ</a>
+            <a href="../Gioithieu/Gioithieu.php">Giới thiệu</a> | 
+            <a href="../chinhsachbaomat/chinhsachbaomat.php">Chính sách bảo mật</a> |
+            <a href="../LienHe/LienHe.php">Liên hệ</a>
         </p>
         
     </div>

@@ -1,13 +1,11 @@
 <?php
 session_start();
 require_once __DIR__ . '/../auth.php';
+require_once __DIR__ . '/../config.php';
 require_login(); // bắt đăng nhập
 
 $user = current_user();
 $user_id = (int)($user['id'] ?? 0); // tránh undefined key
-
-$conn = new mysqli("localhost", "root", "", "webbh");
-if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);
 
 $username = htmlspecialchars($_SESSION["user"]["username"]);
 

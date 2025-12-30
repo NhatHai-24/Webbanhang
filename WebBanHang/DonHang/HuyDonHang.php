@@ -7,10 +7,7 @@ if (!isset($_SESSION["user"])) {
     exit();
 }
 
-$conn = new mysqli("localhost", "root", "", "webbh");
-if ($conn->connect_error) {
-    die("Kết nối thất bại: " . $conn->connect_error);
-}
+require_once __DIR__ . '/../config.php';
 
 $user_id = (int)$_SESSION["user"]["id"];
 

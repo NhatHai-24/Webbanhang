@@ -1,17 +1,15 @@
 <?php
 require_once __DIR__ . '/../auth.php';
+require_once __DIR__ . '/../config.php';
 
 $current_page = 'sanpham';
-
-$conn = new mysqli("localhost", "root", "", "webbh");
-if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);
 
 $conn->set_charset("utf8");
 
 // --- BLOCK 1: API GỢI Ý TÌM KIẾM (AJAX) ---
 // Nếu có yêu cầu 'ajax_search', server sẽ trả về JSON rồi dừng luôn, không tải trang web
 if (isset($_GET['ajax_search']) && !empty($_GET['q'])) {
-    $conn = new mysqli("localhost", "root", "", "webbh");
+    // $conn already available from config.php
     $conn->set_charset("utf8");
     
     $keyword = $conn->real_escape_string($_GET['q']);
@@ -94,12 +92,9 @@ if (!empty($search_query)) {
     $sql_count_unique = "SELECT COUNT(*) as total FROM san_pham sp $where_sql";
 } else {
     // TRƯỜNG HỢP 2: TRANG CHỦ -> Đếm theo nhóm đã gộp (để khớp với hiển thị)
-    $sql_count_unique = "SELECT COUNT(*) as total FROM (
-                            SELECT id_san_pham 
+    $sql_count_unique = "SELECT COUNT(DISTINCT SUBSTRING_INDEX(sp.ten_san_pham, ' - ', 1)) as total 
                             FROM san_pham sp 
-                            $where_sql 
-                            GROUP BY SUBSTRING_INDEX(sp.ten_san_pham, ' - ', 1)
-                        ) as sub";
+                            $where_sql";
 }
 
 $result_unique = $conn->query($sql_count_unique);
@@ -114,26 +109,39 @@ $total_stock_real = $result_stock->fetch_assoc()['total'];
 // Xác định cách gom nhóm:
 if (!empty($search_query)) {
     // Nếu đang tìm kiếm: KHÔNG GOM NHÓM tên (để hiện cả các mã kho khác nhau)
-    // Dùng GROUP BY id để tránh trùng lặp do JOIN, nhưng vẫn hiện đủ các dòng sản phẩm khác nhau
-    $dynamic_group_by = "GROUP BY sp.id_san_pham";
+    $sql = "SELECT 
+                sp.id_san_pham, 
+                sp.ten_san_pham, 
+                sp.loai_san_pham, 
+                SUBSTRING(sp.mo_ta, 1, 150) AS mo_ta,
+                sp.bao_hanh,
+                (SELECT url_hinh_anh FROM hinh_anh_san_pham WHERE id_san_pham = sp.id_san_pham AND la_anh_dai_dien = TRUE LIMIT 1) AS url_hinh_anh,
+                (SELECT MIN(gia_ban) FROM bien_the_san_pham WHERE id_san_pham = sp.id_san_pham) AS gia_ban
+            FROM san_pham sp
+            $where_sql 
+            ORDER BY $sql_sort_priority ASC, sp.ten_san_pham ASC
+            LIMIT $limit OFFSET $offset";
 } else {
     // Nếu xem bình thường: GOM NHÓM theo tên gốc (để ẩn bớt các dòng trùng lặp)
-    $dynamic_group_by = "GROUP BY SUBSTRING_INDEX(sp.ten_san_pham, ' - ', 1)";
+    // Sử dụng subquery để lấy id đầu tiên của mỗi nhóm
+    $sql = "SELECT 
+                sub.id_san_pham,
+                sp.ten_san_pham, 
+                sp.loai_san_pham, 
+                SUBSTRING(sp.mo_ta, 1, 150) AS mo_ta,
+                sp.bao_hanh,
+                (SELECT url_hinh_anh FROM hinh_anh_san_pham WHERE id_san_pham = sp.id_san_pham AND la_anh_dai_dien = TRUE LIMIT 1) AS url_hinh_anh,
+                (SELECT MIN(gia_ban) FROM bien_the_san_pham WHERE id_san_pham = sp.id_san_pham) AS gia_ban
+            FROM (
+                SELECT MIN(id_san_pham) AS id_san_pham, SUBSTRING_INDEX(ten_san_pham, ' - ', 1) AS ten_goc
+                FROM san_pham 
+                WHERE ten_san_pham NOT LIKE '%Mã kho%'
+                GROUP BY SUBSTRING_INDEX(ten_san_pham, ' - ', 1)
+            ) AS sub
+            JOIN san_pham sp ON sp.id_san_pham = sub.id_san_pham
+            ORDER BY $sql_sort_priority ASC, sp.ten_san_pham ASC
+            LIMIT $limit OFFSET $offset";
 }
-
-$sql = "SELECT 
-            sp.id_san_pham, 
-            sp.ten_san_pham, 
-            sp.loai_san_pham, 
-            SUBSTRING(sp.mo_ta, 1, 150) AS mo_ta,
-            sp.bao_hanh,
-            (SELECT url_hinh_anh FROM hinh_anh_san_pham WHERE id_san_pham = sp.id_san_pham AND la_anh_dai_dien = TRUE LIMIT 1) AS url_hinh_anh,
-            (SELECT MIN(gia_ban) FROM bien_the_san_pham WHERE id_san_pham = sp.id_san_pham) AS gia_ban
-        FROM san_pham sp
-        $where_sql 
-        $dynamic_group_by  /* <-- Biến này sẽ thay đổi tùy theo việc có tìm kiếm hay không */
-        ORDER BY $sql_sort_priority ASC, sp.ten_san_pham ASC
-        LIMIT $limit OFFSET $offset";
 
 $result = $conn->query($sql);
 $display_groups = [];
@@ -226,10 +234,66 @@ $conn->close();
             border: 1px solid #ccc;
         }
         .category-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #004a80;
-            margin: 40px 0 20px 10px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 50px 0 25px 20px;
+            padding: 12px 20px 12px 25px;
+            position: relative;
+            display: inline-block;
+            
+            /* Gradient text */
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .category-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 70%;
+            background: linear-gradient(180deg, #38bdf8, #818cf8, #c084fc);
+            border-radius: 3px;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.6),
+                        0 0 30px rgba(129, 140, 248, 0.4);
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+        
+        .category-title::after {
+            content: '';
+            position: absolute;
+            left: 25px;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                rgba(56, 189, 248, 0.6) 0%,
+                rgba(129, 140, 248, 0.4) 50%,
+                transparent 100%);
+            border-radius: 2px;
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(56, 189, 248, 0.6),
+                            0 0 30px rgba(129, 140, 248, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(56, 189, 248, 0.8),
+                            0 0 50px rgba(129, 140, 248, 0.6);
+            }
+        }
+        
+        .category-group {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         /* Filter bar styles */
         #filter-bar {
@@ -500,11 +564,11 @@ $conn->close();
         <p>© 2025 TECHNOVA. All rights reserved.</p>
         <p>Địa chỉ: 123 Đường Nguyễn Trãi, TP.HCM | Hotline: 0123 456 789 | Email: support@technova.vn</p>
         <p>
-            <a href="../index/index.html">Trang chủ</a> |
+            <a href="../index/index.php">Trang chủ</a> |
             <a href="../SanPham/SanPham.php">Sản phẩm</a> |
-            <a href="../Gioithieu/Gioithieu.html">Giới thiệu</a> |
-            <a href="../ChinhSachBaoMat/ChinhSachBaoMat.html">Chính sách bảo mật</a> |
-            <a href="../LienHe/LienHe.html">Liên hệ</a>
+            <a href="../Gioithieu/Gioithieu.php">Giới thiệu</a> |
+            <a href="../chinhsachbaomat/chinhsachbaomat.php">Chính sách bảo mật</a> |
+            <a href="../LienHe/Lienhe.php">Liên hệ</a>
         </p>
     </div>
 </div>

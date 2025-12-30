@@ -1,15 +1,11 @@
 <?php
 require_once __DIR__ . '/../auth.php';
+require_once __DIR__ . '/../config.php';
 require_login();
 
 $user = current_user();
 $user_id = (int)($user['id'] ?? 0);
 $username = htmlspecialchars($user['username'] ?? '');
-
-$conn = new mysqli("localhost", "root", "", "webbh");
-if ($conn->connect_error) {
-    die("Kết nối thất bại: " . $conn->connect_error);
-}
 
 // Lấy thông tin chi tiết user để điền vào form thanh toán
 $sql_user = "SELECT * FROM users WHERE id = $user_id";

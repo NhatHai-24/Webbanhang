@@ -6,9 +6,7 @@ if (!isset($_SESSION["user"])) {
     exit();
 }
 
-
-$conn = new mysqli("localhost", "root", "", "webbh");
-if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);
+require_once __DIR__ . '/../config.php';
 
 $username = $_SESSION["user"]["username"];
 $message = "";

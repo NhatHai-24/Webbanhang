@@ -70,7 +70,7 @@ ul { list-style: none; }
     display: none; z-index: 9999;
     border-radius: 0 0 8px 8px;
 }
-.user-dropdown:hover .dropdown-menu { display: block; }
+/* Dropdown mở bằng JS click, không dùng CSS hover */
 .user-dropdown .dropdown-menu li a {
     padding: 12px 20px; text-align: left;
     color: var(--text-primary); border-bottom: 1px solid var(--glass-border);

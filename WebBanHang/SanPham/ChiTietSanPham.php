@@ -6,20 +6,16 @@ function isUserLoggedIn() {
     return isset($_SESSION["user"]) && !empty($_SESSION["user"]["id"]);
 }
 
-$conn = new mysqli("localhost", "root", "", "webbh");
-if ($conn->connect_error) {
-    die("Kết nối thất bại: " . $conn->connect_error);
-}
+require_once __DIR__ . '/../config.php';
 
 $id = (int)($_GET['id_san_pham'] ?? 0);
 
 // Lấy thông tin sản phẩm
-$sql = "SELECT sp.*, ha.url_hinh_anh, MIN(btsp.gia_ban) AS gia_thap_nhat
+$sql = "SELECT sp.*, 
+        (SELECT url_hinh_anh FROM hinh_anh_san_pham WHERE id_san_pham = sp.id_san_pham AND la_anh_dai_dien = TRUE LIMIT 1) AS url_hinh_anh, 
+        (SELECT MIN(gia_ban) FROM bien_the_san_pham WHERE id_san_pham = sp.id_san_pham) AS gia_thap_nhat
         FROM san_pham sp
-        LEFT JOIN hinh_anh_san_pham ha ON sp.id_san_pham = ha.id_san_pham AND ha.la_anh_dai_dien = TRUE
-        LEFT JOIN bien_the_san_pham btsp ON sp.id_san_pham = btsp.id_san_pham
-        WHERE sp.id_san_pham = $id
-        GROUP BY sp.id_san_pham";
+        WHERE sp.id_san_pham = $id";
 $result = $conn->query($sql);
 $product = $result->fetch_assoc();
 
@@ -65,7 +61,7 @@ if (strpos($videoLink, 'watch?v=') !== false) {
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($product['ten_san_pham'] ?? 'Chi tiết sản phẩm') ?></title>
     <link rel="stylesheet" href="../index/index.css">
-    <link rel="stylesheet" href="chitTietSanPham.css">
+    <link rel="stylesheet" href="chiTietSanPham.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
     $(document).ready(function() {
@@ -92,7 +88,7 @@ if (strpos($videoLink, 'watch?v=') !== false) {
         <ul>
             <li><a href="../index/index.php">Trang chủ</a></li>
             <li><a href="../SanPham/SanPham.php" class="<?= ($current_page == 'sanpham') ? 'active' : '' ?>">Sản phẩm</a></li>
-            <li><a href="../Gioithieu/Gioithieu.html">Giới thiệu</a></li>
+            <li><a href="../Gioithieu/Gioithieu.php">Giới thiệu</a></li>
             <li><a href="../ChinhSachBaoMat/ChinhSachBaoMat.php">Chính sách bảo mật</a></li>
             <li><a href="../LienHe/LienHe.php">Liên hệ</a></li>
             <?php if (!isset($_SESSION["user"])): ?>

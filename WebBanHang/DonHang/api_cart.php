@@ -15,11 +15,7 @@ header('Content-Type: application/json');
 $user = current_user();
 $user_id = (int)$user['id'];
 
-$conn = new mysqli("localhost", "root", "", "webbh");
-if ($conn->connect_error) {
-    echo json_encode(['status' => 'error', 'message' => 'Lỗi kết nối DB']);
-    exit();
-}
+require_once __DIR__ . '/../config.php';
 
 $action = $_POST['action'] ?? '';
 

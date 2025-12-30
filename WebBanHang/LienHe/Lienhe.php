@@ -1,6 +1,8 @@
 <?php
+session_start();
 $current_page = 'lienhe';
- ?>
+?>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
@@ -18,10 +20,9 @@ $current_page = 'lienhe';
         <li><a href="../SanPham/SanPham.php">Sản phẩm</a></li>
         <li><a href="../Gioithieu/Gioithieu.php">Giới thiệu</a></li>
         <li><a href="../chinhsachbaomat/chinhsachbaomat.php">Chính sách bảo mật</a></li>
-        <li><a href="../LienHe/Lienhe.php" class="<?= ($current_page == 'lienhe') ? 'active' : '' ?>">Liên hệ</a></li>
+        <li><a href="../LienHe/LienHe.php" class="<?= ($current_page == 'lienhe') ? 'active' : '' ?>">Liên hệ</a></li>
 
         <?php
-        session_start(); 
         if (!isset($_SESSION["user"])): ?>
             <!-- Chưa đăng nhập -->
             <li><a href="../Login/Login.php">Đăng nhập</a></li>
@@ -68,11 +69,11 @@ $current_page = 'lienhe';
         <p>© 2025 TECHNOVA. All rights reserved.</p>
         <p>Địa chỉ: 123 Đường Nguyễn Trãi, TP.HCM | Hotline: 0123 456 789 | Email: support@technova.vn</p>
         <p>
-            <a href="../index/index.html">Trang chủ</a> |
+            <a href="../index/index.php">Trang chủ</a> |
             <a href="../SanPham/SanPham.php">Sản phẩm</a> |
-            <a href="../Gioithieu/Gioithieu.html">Giới thiệu</a> |
-            <a href="../ChinhSachBaoMat/ChinhSachBaoMat.html">Chính sách bảo mật</a> |
-            <a href="../LienHe/LienHe.html">Liên hệ</a>
+            <a href="../Gioithieu/Gioithieu.php">Giới thiệu</a> |
+            <a href="../ChinhSachBaoMat/ChinhSachBaoMat.php">Chính sách bảo mật</a> |
+            <a href="../LienHe/LienHe.php">Liên hệ</a>
         </p>
        
     </div>
