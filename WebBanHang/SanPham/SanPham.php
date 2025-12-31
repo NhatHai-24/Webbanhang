@@ -1,4 +1,5 @@
 <?php
+$start_time = microtime(true);
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../config.php';
 
@@ -460,6 +461,18 @@ $conn->close();
                     ↺ Làm mới
                 </a>
             </div>
+            <div style="text-align: center; margin-top: 10px; font-size: 13px; color: #555; border-top: 1px dashed #333; padding-top: 10px;">
+    <span style="color: #35fdec;">⚡ Server Processed:</span> 
+    <strong>
+        <?php 
+            $end_time = microtime(true);
+            $execution_time = ($end_time - $start_time) * 1000; // Đổi sang mili-giây
+            echo number_format($execution_time, 2); 
+        ?> ms
+    </strong>
+    <span style="margin: 0 5px;">|</span>
+    <span>Memory Used: <?= round(memory_get_usage() / 1024 / 1024, 2) ?> MB</span>
+</div>
         </form>
         
         <?php if(!empty($search_query) || $search_category !== 'all'): ?>
