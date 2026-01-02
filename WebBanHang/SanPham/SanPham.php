@@ -1,4 +1,5 @@
 <?php
+$start_time = microtime(true);
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../config.php';
 
@@ -165,6 +166,11 @@ while ($c = $result_cat->fetch_assoc()) {
 }
 
 $conn->close();
+
+// Tính toán thời gian xử lý và bộ nhớ (đo ngay sau khi query xong)
+$end_time = microtime(true);
+$execution_time = ($end_time - $start_time) * 1000; // Chuyển sang milliseconds
+$memory_used = memory_get_peak_usage(true) / 1024 / 1024; // Chuyển sang MB
 ?>
 
 <!DOCTYPE html>
@@ -176,6 +182,32 @@ $conn->close();
     <link rel="stylesheet" href="sanpham.css">
     <script src="../jquery-3.7.1.min.js"></script>
     <style>
+        /* --- CSS CHO THANH HIỂN THỊ PERFORMANCE --- */
+        .performance-bar {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 10px 20px;
+            background: rgba(15, 23, 36, 0.9);
+            border-top: 1px solid rgba(53, 253, 236, 0.2);
+            font-size: 13px;
+            color: #6c7a89;
+        }
+        .performance-bar .metric {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .performance-bar .metric-icon {
+            color: #35fdec;
+        }
+        .performance-bar .metric-value {
+            color: #fff;
+            font-weight: 600;
+        }
+        .performance-bar .metric-label {
+            color: #6c7a89;
+        }
         /* --- CSS CHO PHẦN PHÂN TRANG (MỚI) --- */
         .pagination-wrapper {
             display: flex;
@@ -472,7 +504,22 @@ $conn->close();
     <?php endif; ?>
 </div>
         <?php endif; ?>
+        
+        <!-- Thanh hiển thị Performance Metrics -->
+        <div class="performance-bar">
+            <div class="metric">
+                <span class="metric-icon">⚡</span>
+                <span class="metric-label">Server Processed:</span>
+                <span class="metric-value"><?= number_format($execution_time, 2) ?> ms</span>
+            </div>
+            <div class="metric">
+                <span class="metric-icon">💾</span>
+                <span class="metric-label">Memory Used:</span>
+                <span class="metric-value"><?= number_format($memory_used, 1) ?> MB</span>
+            </div>
+        </div>
     </div>
+
 
         <?php if (empty($display_groups)): ?>
             <div style="text-align:center; padding: 50px; color: #fff;">Không có sản phẩm nào ở trang này.</div>
@@ -559,6 +606,8 @@ $conn->close();
     <div class="pagination-info" style="text-align: center; color: #aaa; margin-bottom: 10px;">
     Đang xem trang <strong><?= $page ?></strong> trên tổng số <strong><?= number_format($total_pages, 0, ',', '.') ?></strong> trang
 </div>
+
+
 
     <div id="fox-footer">
         <p>© 2025 TECHNOVA. All rights reserved.</p>
