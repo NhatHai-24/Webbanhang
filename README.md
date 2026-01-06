@@ -1,71 +1,165 @@
-# Index vs No-Index
+## 🚀 Cài đặt nhanh
 
-Dự án này minh họa sự khác biệt **khổng lồ** về hiệu suất truy vấn giữa việc **Có Index** và **Không Index** trong MySQL.
+### Cách 1: Docker (Khuyên dùng)
 
-## 1. Cài đặt & Chạy dự án
-
-Bạn có thể chạy dự án bằng **XAMPP** hoặc **Docker**.
-
-### Cách 1: Sử dụng Docker (Khuyên dùng)
-
-Nếu máy bạn đã cài Docker, chỉ cần chạy lệnh sau:
+Yêu cầu: [Docker Desktop](https://www.docker.com/products/docker-desktop/) đã cài đặt.
 
 ```bash
+# Clone hoặc tải dự án về
+cd Webbanhang
+
+# Khởi động containers
 docker-compose up -d
+
+# Chờ khoảng 2-5 phút để import database
+# Kiểm tra logs nếu cần:
+docker logs -f webbanhang_mysql
 ```
 
-- **Website**: [http://localhost:8080](http://localhost:8080)
-- **phpMyAdmin**: [http://localhost:8081](http://localhost:8081)
-- **Database**: Tự động import `webbh` (Port 3307).
+**Truy cập:**
+| Dịch vụ | URL | Ghi chú |
+|---------|-----|---------|
+| Website | http://localhost:8080 | Trang chính |
+| phpMyAdmin | http://localhost:8081 | Quản lý database |
+| MySQL | localhost:3307 | User: `root` / Pass: `root` |
 
-### Cách 2: Sử dụng XAMPP
+**Lệnh Docker thường dùng:**
 
-1.  Copy thư mục dự án vào `C:\xampp\htdocs\Webbanhang`.
-2.  Khởi động **Apache** và **MySQL** trong XAMPP Control Panel.
-3.  Vào [http://localhost/phpmyadmin](http://localhost/phpmyadmin), tạo database tên `webbh`.
-4.  Import file `database/webbh.sql` vào database vừa tạo.
-5.  **(Tùy chọn)** Xem phần **Tối ưu MySQL** bên dưới để tăng tốc độ truy vấn.
-6.  Truy cập web: [http://localhost/Webbanhang](http://localhost/Webbanhang).
-
----
-
-## 2. Tối ưu MySQL (Tùy chọn)
-
-Để đạt tốc độ truy vấn tối đa (vài trăm ms):
-
-- **Docker**: Đã được tối ưu sẵn trong `docker/mysql/my.cnf`, không cần thao tác gì thêm.
-- **XAMPP**: Áp dụng thủ công theo hướng dẫn bên dưới.
-
-### Hướng dẫn cho XAMPP
-
-1. Dừng MySQL trong XAMPP Control Panel.
-2. Mở file `C:\xampp\mysql\bin\my.ini`.
-3. Copy nội dung từ `database/my_optimized_config.ini` vào thay thế.
-4. Khởi động lại MySQL.
+```bash
+docker-compose up -d      # Khởi động
+docker-compose down       # Dừng
+docker-compose down -v    # Dừng và xóa data (reset database)
+docker-compose logs -f    # Xem logs
+```
 
 ---
 
-## 3. Chuẩn bị Benchmark
+### Cách 2: XAMPP
 
-Trước khi đo lường, hãy đảm bảo database đã có dữ liệu.
+1. Cài đặt [XAMPP](https://www.apachefriends.org/)
+2. Copy thư mục dự án vào `C:\xampp\htdocs\Webbanhang`
+3. Giải nén file database:
+   ```bash
+   # Dùng Git Bash hoặc 7-Zip
+   gzip -d database/webbh.sql.gz
+   ```
+4. **(Tùy chọn)** Tối ưu MySQL: Copy `database/my_optimized.ini` → `C:\xampp\mysql\bin\my.ini`
+5. Khởi động **Apache** và **MySQL** trong XAMPP Control Panel
+6. Mở http://localhost/phpmyadmin → Tạo database `webbh`
+7. Import file `database/webbh.sql` (mất ~5-10 phút)
+8. Truy cập: http://localhost/Webbanhang
 
-1.  **Database**: `webbh`
-2.  **File kịch bản test** (nằm trong thư mục `database/`):
-    - `benchmark_no_index.sql`: Kịch bản **Chậm** (Không có Index).
-    - `benchmark_with_index.sql`: Kịch bản **Nhanh** (Có Index tối ưu).
+**Lưu ý:** Nếu import bị timeout, tăng các giá trị sau trong `php.ini`:
 
-## 4. Hướng dẫn Benchmark
+```ini
+max_execution_time = 3600
+upload_max_filesize = 1024M
+post_max_size = 1024M
+```
 
-Sử dụng **phpMyAdmin** hoặc **MySQL Workbench** để chạy các kịch bản sau:
+---
 
-### Kịch bản 1: Không có Index (Chậm)
+## 📁 Cấu trúc dự án
 
-1.  Mở file `database/benchmark_no_index.sql`.
-2.  Copy toàn bộ nội dung và chạy trong cửa sổ SQL.
-3.  Quan sát thời gian thực thi (Duration) của các câu query ở cuối.
+```
+Webbanhang/
+├── docker-compose.yml
+├── README.md
+│
+├── database/
+│   ├── webbh.sql.gz              # Database chính (69MB nén)
+│   ├── benchmark_with_index.sql  # Tạo index + test queries
+│   ├── benchmark_no_index.sql    # Xóa index + test queries
+│   ├── my_optimized.ini          # Config MySQL tối ưu cho XAMPP
+│   └── my_backup.ini             # Backup config gốc
+│
+├── docker/
+│   ├── mysql/my.cnf
+│   └── php/
+│       ├── Dockerfile
+│       └── php.ini
+│
+└── WebBanHang/                   # Source code PHP
+    ├── config.php
+    ├── auth.php
+    ├── index/
+    ├── SanPham/
+    ├── Login/
+    ├── DonHang/
+    ├── admin/
+    └── ...
+```
 
-### Kịch bản 2: Có Index (Nhanh)
+---
 
-1.  Mở file `database/benchmark_with_index.sql`.
-2.  Copy toàn bộ nội dung và chạy trong cửa sổ SQL.
-3.  Quan sát thời gian thực thi mới và so sánh với Kịch bản 1.
+## 📊 Benchmark Index
+
+Dự án này demo sự khác biệt hiệu suất giữa **có Index** và **không có Index** trong MySQL.
+
+### Cách thực hiện
+
+**Bước 1:** Mở phpMyAdmin → Chọn database `webbh`
+
+**Bước 2:** Chạy file `benchmark_no_index.sql`
+
+- Copy nội dung file vào tab SQL → Execute
+- Ghi lại thời gian từ `SHOW PROFILES`
+
+**Bước 3:** Chạy file `benchmark_with_index.sql`
+
+- Copy nội dung file vào tab SQL → Execute
+- Ghi lại thời gian từ `SHOW PROFILES`
+
+**Bước 4:** So sánh kết quả
+
+### Kết quả kỳ vọng (1 triệu+ sản phẩm)
+
+| Query                      | Không Index | Có Index | Cải thiện |
+| -------------------------- | ----------- | -------- | --------- |
+| Tìm kiếm `LIKE '%iPhone%'` | 5-15 giây   | 10-50ms  | ~100x     |
+| Lọc theo danh mục          | 2-5 giây    | 20-80ms  | ~50x      |
+| JOIN 3 bảng (trang SP)     | 10-30 giây  | 50-200ms | ~100x     |
+
+### Index được sử dụng
+
+| Index               | Bảng              | Mục đích          |
+| ------------------- | ----------------- | ----------------- |
+| `idx_sp_loai`       | san_pham          | Lọc theo danh mục |
+| `ft_sp_ten`         | san_pham          | Tìm kiếm fulltext |
+| `idx_bt_sp_gia`     | bien_the_san_pham | JOIN lấy giá      |
+| `idx_ha_sp_daidien` | hinh_anh_san_pham | Lấy ảnh đại diện  |
+| `idx_dg_sp`         | danh_gia_san_pham | Lấy đánh giá      |
+| `idx_dh_nguoidung`  | don_hang          | Lấy đơn hàng user |
+
+---
+
+## 🛠️ Công nghệ sử dụng
+
+| Thành phần | Công nghệ                     |
+| ---------- | ----------------------------- |
+| Backend    | PHP 8.2                       |
+| Database   | MySQL 8.0                     |
+| Frontend   | HTML, CSS, JavaScript, jQuery |
+| Container  | Docker, Docker Compose        |
+| Server     | Apache                        |
+
+---
+
+## 📝 Tính năng
+
+### Người dùng
+
+- ✅ Đăng ký / Đăng nhập / Đăng xuất
+- ✅ Xem danh sách sản phẩm (phân trang, tìm kiếm, lọc)
+- ✅ Xem chi tiết sản phẩm
+- ✅ Thêm vào giỏ hàng (AJAX)
+- ✅ Đặt hàng (COD / Chuyển khoản)
+- ✅ Xem lịch sử đơn hàng
+- ✅ Đánh giá sản phẩm
+
+### Admin
+
+- ✅ Quản lý sản phẩm (CRUD)
+- ✅ Quản lý người dùng
+- ✅ Quản lý đơn hàng
+- ✅ Thống kê doanh thu

@@ -15,7 +15,7 @@ services:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./database/webbh.sql:/docker-entrypoint-initdb.d/webbh.sql
+      - ./database/webbh.sql.gz:/docker-entrypoint-initdb.d/webbh.sql.gz
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/custom.cnf
     command: >
       --max_allowed_packet=1G

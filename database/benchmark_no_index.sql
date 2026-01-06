@@ -1,117 +1,95 @@
 -- BENCHMARK: KHÔNG CÓ INDEX (CHẬM)
--- Xóa tất cả index để so sánh hiệu suất
+-- Xóa các index để so sánh hiệu suất với benchmark_with_index.sql
+-- Dành cho database webbh (1 triệu+ sản phẩm)
 
--- ============================================================
--- PHẦN 1: XÓA TẤT CẢ CÁC INDEX BENCHMARK
--- ============================================================
+-- =====================
+-- PHẦN 1: XÓA INDEX
+-- =====================
 
--- 1. BẢNG san_pham
-DROP INDEX IF EXISTS idx_sp_loai ON san_pham;
-DROP INDEX IF EXISTS idx_sp_ten ON san_pham;
-DROP INDEX IF EXISTS idx_sp_loai_ten ON san_pham;
-DROP INDEX IF EXISTS idx_sp_diem ON san_pham;
+-- Bảng san_pham
+ALTER TABLE san_pham DROP INDEX IF EXISTS idx_sp_loai;
 ALTER TABLE san_pham DROP INDEX IF EXISTS ft_sp_ten;
 
--- 2. BẢNG bien_the_san_pham
-DROP INDEX IF EXISTS idx_bt_gia ON bien_the_san_pham;
-DROP INDEX IF EXISTS idx_bt_sp_gia ON bien_the_san_pham;
-DROP INDEX IF EXISTS idx_bt_mau ON bien_the_san_pham;
-DROP INDEX IF EXISTS idx_bt_tonkho ON bien_the_san_pham;
-DROP INDEX IF EXISTS idx_bt_sku ON bien_the_san_pham;
+-- Bảng bien_the_san_pham
+ALTER TABLE bien_the_san_pham DROP INDEX IF EXISTS idx_bt_sp_gia;
 
--- 3. BẢNG hinh_anh_san_pham    
-DROP INDEX IF EXISTS idx_ha_sp_daidien ON hinh_anh_san_pham;
-DROP INDEX IF EXISTS idx_ha_sp_thutu ON hinh_anh_san_pham;
+-- Bảng hinh_anh_san_pham
+ALTER TABLE hinh_anh_san_pham DROP INDEX IF EXISTS idx_ha_sp_daidien;
 
--- 4. BẢNG danh_gia_san_pham
-DROP INDEX IF EXISTS idx_dg_sp ON danh_gia_san_pham;
-DROP INDEX IF EXISTS idx_dg_ngay ON danh_gia_san_pham;
-DROP INDEX IF EXISTS idx_dg_sp_diem ON danh_gia_san_pham;
+-- Bảng danh_gia_san_pham
+ALTER TABLE danh_gia_san_pham DROP INDEX IF EXISTS idx_dg_sp;
 
--- 5. BẢNG don_hang
-DROP INDEX IF EXISTS idx_dh_nguoidung ON don_hang;
-DROP INDEX IF EXISTS idx_dh_trangthai ON don_hang;
-DROP INDEX IF EXISTS idx_dh_ngaydat ON don_hang;
-DROP INDEX IF EXISTS idx_dh_user_trangthai ON don_hang;
+-- Bảng don_hang
+ALTER TABLE don_hang DROP INDEX IF EXISTS idx_dh_nguoidung;
 
--- 6. BẢNG chi_tiet_don_hang
-DROP INDEX IF EXISTS idx_ctdh_sp ON chi_tiet_don_hang;
-DROP INDEX IF EXISTS idx_ctdh_bienthe ON chi_tiet_don_hang;
-DROP INDEX IF EXISTS idx_ctdh_sp_soluong ON chi_tiet_don_hang;
+-- Cập nhật thống kê
+ANALYZE TABLE san_pham, bien_the_san_pham, hinh_anh_san_pham;
 
--- 7. BẢNG gio_hang
-DROP INDEX IF EXISTS idx_gh_nguoidung ON gio_hang;
-DROP INDEX IF EXISTS idx_gh_sp ON gio_hang;
-DROP INDEX IF EXISTS idx_gh_user_sp ON gio_hang;
 
--- 8. BẢNG users
-DROP INDEX IF EXISTS idx_users_role ON users;
-DROP INDEX IF EXISTS idx_users_email ON users;
-DROP INDEX IF EXISTS idx_users_phone ON users;
-
--- ============================================================
--- PHẦN 2: CHẠY TEST QUERIES (KHÔNG CÓ INDEX - SẼ CHẬM)
--- ============================================================
+-- =====================
+-- PHẦN 2: TEST QUERIES
+-- =====================
 SET profiling = 1;
-FLUSH STATUS;
 
--- ----- NHÓM 1: TÌM KIẾM SẢN PHẨM (Full Table Scan) -----
-
--- Test 1.1: Tìm kiếm LIKE (Full Table Scan - RẤT CHẬM)
+-- Test 1: Tìm kiếm LIKE (chậm vì full table scan)
 SELECT SQL_NO_CACHE id_san_pham, ten_san_pham 
-FROM san_pham WHERE ten_san_pham LIKE '%iPhone%';
+FROM san_pham 
+WHERE ten_san_pham LIKE '%iPhone%';
 
--- Test 1.2: Lọc theo danh mục (Full Table Scan)
+-- Test 2: Lọc theo danh mục (chậm)
 SELECT SQL_NO_CACHE id_san_pham, ten_san_pham 
-FROM san_pham WHERE loai_san_pham = 'Điện thoại';
+FROM san_pham 
+WHERE loai_san_pham = 'Điện thoại';
 
--- Test 1.3: JOIN nhiều bảng (Full Table Scan trên cả 2 bảng)
-SELECT SQL_NO_CACHE sp.id_san_pham, sp.ten_san_pham, MIN(bt.gia_ban) AS gia
+-- Test 3: Query trang sản phẩm (JOIN 3 bảng - rất chậm)
+SELECT SQL_NO_CACHE 
+    sp.id_san_pham, sp.ten_san_pham, sp.loai_san_pham,
+    ha.url_hinh_anh, bt.gia_ban
 FROM san_pham sp
-JOIN bien_the_san_pham bt ON sp.id_san_pham = bt.id_san_pham
+LEFT JOIN hinh_anh_san_pham ha ON ha.id_san_pham = sp.id_san_pham AND ha.la_anh_dai_dien = 1
+LEFT JOIN bien_the_san_pham bt ON bt.id_san_pham = sp.id_san_pham
 WHERE sp.loai_san_pham = 'Laptop'
-GROUP BY sp.id_san_pham;
+ORDER BY sp.id_san_pham DESC
+LIMIT 52;
 
--- Test 1.4: Lọc theo khoảng giá (Full Table Scan)
-SELECT SQL_NO_CACHE sp.id_san_pham, sp.ten_san_pham, bt.gia_ban
+-- Test 4: Tìm kiếm + phân trang (chậm)
+SELECT SQL_NO_CACHE 
+    sp.id_san_pham, sp.ten_san_pham, sp.loai_san_pham, 
+    LEFT(sp.mo_ta, 150) AS mo_ta, sp.bao_hanh,
+    ha.url_hinh_anh, bt.gia_ban
 FROM san_pham sp
-JOIN bien_the_san_pham bt ON sp.id_san_pham = bt.id_san_pham
-WHERE bt.gia_ban BETWEEN 5000000 AND 15000000
-ORDER BY bt.gia_ban ASC;
+LEFT JOIN hinh_anh_san_pham ha ON ha.id_san_pham = sp.id_san_pham AND ha.la_anh_dai_dien = 1
+LEFT JOIN bien_the_san_pham bt ON bt.id_san_pham = sp.id_san_pham
+WHERE sp.ten_san_pham LIKE '%Samsung%'
+ORDER BY sp.loai_san_pham, sp.id_san_pham
+LIMIT 52 OFFSET 0;
 
--- ----- NHÓM 2: ĐƠN HÀNG (Full Table Scan) -----
-
--- Test 2.1: Lấy đơn hàng của user
+-- Test 5: Lấy đơn hàng của user
 SELECT SQL_NO_CACHE * FROM don_hang 
 WHERE id_nguoi_dung = 12 
 ORDER BY ngay_dat DESC;
 
--- Test 2.2: Lọc đơn hàng theo trạng thái
-SELECT SQL_NO_CACHE * FROM don_hang 
-WHERE trang_thai = 'Cho_xac_nhan';
-
--- Test 2.3: Thống kê sản phẩm bán chạy
-SELECT SQL_NO_CACHE id_san_pham, ten_san_pham, SUM(so_luong) AS tong_ban
-FROM chi_tiet_don_hang
-GROUP BY id_san_pham, ten_san_pham
-ORDER BY tong_ban DESC
-LIMIT 10;
-
--- ----- NHÓM 3: ĐÁNH GIÁ (Full Table Scan) -----
-
--- Test 3.1: Lấy đánh giá của sản phẩm
+-- Test 6: Lấy đánh giá sản phẩm
 SELECT SQL_NO_CACHE * FROM danh_gia_san_pham 
 WHERE id_san_pham = 14
 ORDER BY ngay_danh_gia DESC;
 
--- Test 3.2: Sản phẩm được đánh giá cao nhất
-SELECT SQL_NO_CACHE id_san_pham, ten_san_pham, diem_danh_gia_trung_binh
-FROM san_pham
-WHERE diem_danh_gia_trung_binh > 0
-ORDER BY diem_danh_gia_trung_binh DESC
-LIMIT 10;
-
--- ============================================================
--- PHẦN 3: XEM KẾT QUẢ PROFILING
--- ============================================================
+-- Xem kết quả
 SHOW PROFILES;
+
+
+-- ===========================================
+-- HƯỚNG DẪN BENCHMARK
+-- ===========================================
+-- Bước 1: Chạy file này -> ghi lại thời gian từ SHOW PROFILES
+-- Bước 2: Chạy benchmark_with_index.sql -> ghi lại thời gian
+-- Bước 3: So sánh kết quả
+--
+-- Kỳ vọng (với 1M+ sản phẩm):
+-- +---------------------------+--------------+------------+
+-- | Query                     | Không Index  | Có Index   |
+-- +---------------------------+--------------+------------+
+-- | Tìm kiếm LIKE             | 5-15 giây    | 10-50ms    |
+-- | Lọc theo danh mục         | 2-5 giây     | 20-80ms    |
+-- | JOIN 3 bảng               | 10-30 giây   | 50-200ms   |
+-- +---------------------------+--------------+------------+
