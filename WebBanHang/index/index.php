@@ -9,20 +9,16 @@ if (is_admin()) {
     exit();
 }
 // Kết nối đến cơ sở dữ liệu
-$conn = new mysqli("localhost", "root", "", "webbh");
-if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);
+require_once __DIR__ . '/../config.php';
 
 // Lấy 6 sản phẩm nổi bật (hoặc điều kiện tùy chọn)
 $sql = "SELECT 
             sp.id_san_pham,
             sp.ten_san_pham,
             sp.mo_ta,
-            ha.url_hinh_anh,
-            MIN(bt.gia_ban) AS gia_ban
+            (SELECT url_hinh_anh FROM hinh_anh_san_pham WHERE id_san_pham = sp.id_san_pham AND la_anh_dai_dien = 1 LIMIT 1) AS url_hinh_anh,
+            (SELECT MIN(gia_ban) FROM bien_the_san_pham WHERE id_san_pham = sp.id_san_pham) AS gia_ban
         FROM san_pham sp
-        LEFT JOIN bien_the_san_pham bt ON sp.id_san_pham = bt.id_san_pham
-        LEFT JOIN hinh_anh_san_pham ha ON sp.id_san_pham = ha.id_san_pham AND ha.la_anh_dai_dien = 1
-        GROUP BY sp.id_san_pham
         ORDER BY sp.id_san_pham DESC
         LIMIT 6";
 $result = $conn->query($sql);
@@ -140,11 +136,11 @@ $result = $conn->query($sql);
     <p>© 2025 TECHNOVA. All rights reserved.</p>
     <p>Địa chỉ: 123 Đường Nguyễn Trãi, TP.HCM | Hotline: 0123 456 789 | Email: support@technova.vn</p>
     <p>
-            <a href="../index/index.html">Trang chủ</a> |
+            <a href="../index/index.php">Trang chủ</a> |
             <a href="../SanPham/SanPham.php">Sản phẩm</a> |
-            <a href="../Gioithieu/Gioithieu.html">Giới thiệu</a> |
-            <a href="../ChinhSachBaoMat/ChinhSachBaoMat.html">Chính sách bảo mật</a> |
-            <a href="../LienHe/LienHe.html">Liên hệ</a>
+            <a href="../Gioithieu/Gioithieu.php">Giới thiệu</a> |
+            <a href="../ChinhSachBaoMat/ChinhSachBaoMat.php">Chính sách bảo mật</a> |
+            <a href="../LienHe/LienHe.php">Liên hệ</a>
         </p>
     </p>
        

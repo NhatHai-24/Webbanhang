@@ -4,10 +4,9 @@ session_start();
 $loginError = "";
 
 require_once __DIR__ . '/../auth.php'; // thêm if chưa có
+require_once __DIR__ . '/../config.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["username"], $_POST["password"])) {
-    $conn = new mysqli("localhost", "root", "", "webbh");
-    if ($conn->connect_error) die("Kết nối thất bại: " . $conn->connect_error);
 
     $username = $_POST["username"];
     $password = $_POST["password"];

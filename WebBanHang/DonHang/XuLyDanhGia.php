@@ -8,10 +8,7 @@ if (!isset($_SESSION["user"])) {
 }
 
 // Kết nối cơ sở dữ liệu
-$conn = new mysqli("localhost", "root", "", "webbh");
-if ($conn->connect_error) {
-    die("Kết nối thất bại: " . $conn->connect_error);
-}
+require_once __DIR__ . '/../config.php';
 
 // Lấy và xử lý dữ liệu từ form
 $idSanPham = isset($_POST['id_san_pham']) ? (int)$_POST['id_san_pham'] : 0;

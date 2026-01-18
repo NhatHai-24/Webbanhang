@@ -10,10 +10,7 @@ if (!isset($_SESSION["user"]) || stripos($_SESSION["user"]["username"], "admin")
     exit();
 }
 
-$conn = new mysqli("localhost", "root", "", "webbh");
-if ($conn->connect_error) {
-    die("Kết nối thất bại: " . $conn->connect_error);
-}
+require_once __DIR__ . '/../config.php';
 
 // 1. Tổng sản phẩm (Lấy từ bảng san_pham)
 $totalProduct = $conn->query("SELECT COUNT(*) FROM san_pham")->fetch_row()[0];
@@ -31,7 +28,7 @@ $queryRevenue = "
     SELECT DATE_FORMAT(ngay_dat, '%Y-%m') AS month, SUM(tong_tien) AS revenue
     FROM don_hang
     WHERE trang_thai = 'Da_giao'
-    GROUP BY month
+    GROUP BY DATE_FORMAT(ngay_dat, '%Y-%m')
     ORDER BY month DESC
     LIMIT 12
 ";
