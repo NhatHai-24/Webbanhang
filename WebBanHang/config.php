@@ -22,13 +22,15 @@ if ($isDocker) {
     // Lấy thông tin từ biến môi trường, nếu không có thì dùng giá trị mặc định
     define('DB_HOST', getenv('DB_HOST') ?: 'mysql');           // Tên host database (container MySQL)
     define('DB_NAME', getenv('DB_NAME') ?: 'webbh');           // Tên cơ sở dữ liệu
-    define('DB_USER', getenv('DB_USER') ?: 'webbh_user');      // Tên người dùng database
-    define('DB_PASSWORD', getenv('DB_PASSWORD') ?: 'webbh_password'); // Mật khẩu database
+    define('DB_USER', getenv('DB_USER') ?: 'root');            // Tên người dùng database
+    // Xử lý đặc biệt cho password: empty string là giá trị hợp lệ
+    $dbPassword = getenv('DB_PASSWORD');
+    define('DB_PASSWORD', $dbPassword !== false ? $dbPassword : ''); // Mật khẩu database (có thể rỗng)
 } else {
-    define('DB_HOST', 'localhost');  // Host mặc định của XAMPP
-    define('DB_NAME', 'webbh');      // Tên cơ sở dữ liệu
-    define('DB_USER', 'root');       // Tài khoản mặc định XAMPP
-    define('DB_PASSWORD', '');       // XAMPP mặc định không có mật khẩu
+    define('DB_HOST', 'localhost');           // Host mặc định của XAMPP
+    define('DB_NAME', 'webbh');               // Tên cơ sở dữ liệu
+    define('DB_USER', 'technova_user');       // User mới (không dùng root)
+    define('DB_PASSWORD', 'TechNova@2026');   // Password của user mới
 }
 
 // Khởi tạo kết nối đến database sử dụng mysqli

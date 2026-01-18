@@ -1,5 +1,5 @@
 <?php
-// Trang hiển thị sản phẩm - TỐI ƯU 5-100ms (KHÔNG CACHE)
+// Trang hiển thị sản phẩm - TỐI ƯU HIỆU SUẤT
 $start_time = microtime(true);
 require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../config.php';
@@ -7,19 +7,19 @@ require_once __DIR__ . '/../config.php';
 $current_page = 'sanpham';
 $conn->set_charset("utf8");
 
+// Kiểm tra FULLTEXT index 1 LẦN DUY NHẤT (tái sử dụng cho cả AJAX và tìm kiếm chính)
+$has_fulltext = false;
+$check_ft = $conn->query("SHOW INDEX FROM san_pham WHERE Index_type = 'FULLTEXT' AND Column_name = 'ten_san_pham'");
+if ($check_ft && $check_ft->num_rows > 0) {
+    $has_fulltext = true;
+}
+
 // Xử lý AJAX gợi ý tìm kiếm
 if (isset($_GET['ajax_search']) && !empty($_GET['q'])) {
     $keyword = $conn->real_escape_string($_GET['q']);
     
-    // Kiểm tra FULLTEXT index có tồn tại không
-    $has_ft = false;
-    $check = $conn->query("SHOW INDEX FROM san_pham WHERE Index_type = 'FULLTEXT' AND Column_name = 'ten_san_pham'");
-    if ($check && $check->num_rows > 0) {
-        $has_ft = true;
-    }
-    
     // Dùng FULLTEXT nếu có index và từ khóa >= 3 ký tự
-    if ($has_ft && mb_strlen($keyword) >= 3) {
+    if ($has_fulltext && mb_strlen($keyword) >= 3) {
         $sql = "SELECT ten_san_pham as ten_goi_y 
                 FROM san_pham 
                 WHERE MATCH(ten_san_pham) AGAINST('$keyword*' IN BOOLEAN MODE) 
@@ -55,13 +55,6 @@ $offset = ($page - 1) * $limit;
 $search_query = isset($_GET['q']) ? trim($_GET['q']) : '';
 $search_category = isset($_GET['cat']) ? $_GET['cat'] : 'all';
 
-// Kiểm tra xem có FULLTEXT index không (để chọn cách tìm kiếm phù hợp)
-$has_fulltext = false;
-$check_ft = $conn->query("SHOW INDEX FROM san_pham WHERE Index_type = 'FULLTEXT' AND Column_name = 'ten_san_pham'");
-if ($check_ft && $check_ft->num_rows > 0) {
-    $has_fulltext = true;
-}
-
 // Xây dựng điều kiện WHERE
 $where_clauses = [];
 
@@ -94,22 +87,17 @@ if (empty($search_query) && $search_category === 'all') {
 
 $total_pages = ceil($total_products / $limit);
 
-// Query lấy danh sách sản phẩm (dùng LEFT JOIN thay vì subquery)
+// Query lấy danh sách sản phẩm (TỐI ƯU: dùng subquery thay vì JOIN gây duplicate)
 $sql = "SELECT 
             sp.id_san_pham, 
             sp.ten_san_pham, 
             sp.loai_san_pham, 
             LEFT(sp.mo_ta, 150) AS mo_ta, 
             sp.bao_hanh,
-            ha.url_hinh_anh, 
-            bt.gia_ban
+            (SELECT url_hinh_anh FROM hinh_anh_san_pham WHERE id_san_pham = sp.id_san_pham AND la_anh_dai_dien = 1 LIMIT 1) AS url_hinh_anh,
+            (SELECT MIN(gia_ban) FROM bien_the_san_pham WHERE id_san_pham = sp.id_san_pham) AS gia_ban
         FROM san_pham sp
-        LEFT JOIN hinh_anh_san_pham ha 
-            ON ha.id_san_pham = sp.id_san_pham AND ha.la_anh_dai_dien = 1
-        LEFT JOIN bien_the_san_pham bt 
-            ON bt.id_san_pham = sp.id_san_pham
         $where_sql
-        ORDER BY sp.loai_san_pham, sp.id_san_pham
         LIMIT $limit OFFSET $offset";
 
 $result = $conn->query($sql);
@@ -241,15 +229,12 @@ $memory_used = memory_get_peak_usage(true) / 1024 / 1024;
                     <a href="SanPham.php" class="reset-btn">↺ Làm mới</a>
                 </div>
                 
-                <div class="performance-info">
-                    ⚡ <strong><?= number_format($execution_time, 2) ?> ms</strong> | 
-                     <strong><?= number_format($total_products, 0, ',', '.') ?></strong> sản phẩm
-                </div>
             </form>
             
             <?php if(!empty($search_query) || $search_category !== 'all'): ?>
                 <div class="search-result-info">
                     Tìm thấy <strong><?= number_format($total_products, 0, ',', '.') ?></strong> sản phẩm
+                    <span style="color: #888; margin-left: 10px;">⏱ <?= number_format($execution_time, 2) ?>ms</span>
                 </div>
             <?php endif; ?>
         </div>
